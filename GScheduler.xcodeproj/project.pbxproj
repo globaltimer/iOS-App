@@ -16,6 +16,7 @@
 		4402239D1DF3691200774C30 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4402239C1DF3691200774C30 /* TableViewCell.swift */; };
 		440223A51DF3A28F00774C30 /* CityListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440223A41DF3A28F00774C30 /* CityListTableViewController.swift */; };
 		440223A71DF3B8D200774C30 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440223A61DF3B8D200774C30 /* City.swift */; };
+		440223AA1DF4033900774C30 /* memo in Resources */ = {isa = PBXBuildFile; fileRef = 440223A91DF4033900774C30 /* memo */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		440223A11DF3732000774C30 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		440223A41DF3A28F00774C30 /* CityListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityListTableViewController.swift; sourceTree = "<group>"; };
 		440223A61DF3B8D200774C30 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		440223A91DF4033900774C30 /* memo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = memo; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,11 +72,11 @@
 				4402238A1DF3689A00774C30 /* ViewController.swift */,
 				4402239A1DF368EC00774C30 /* AddCityViewController.swift */,
 				440223A41DF3A28F00774C30 /* CityListTableViewController.swift */,
-				4402239C1DF3691200774C30 /* TableViewCell.swift */,
 				4402238C1DF3689A00774C30 /* Main.storyboard */,
 				4402238F1DF3689A00774C30 /* Assets.xcassets */,
 				440223911DF3689A00774C30 /* LaunchScreen.storyboard */,
 				440223941DF3689A00774C30 /* Info.plist */,
+				440223A91DF4033900774C30 /* memo */,
 			);
 			path = GScheduler;
 			sourceTree = "<group>";
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				440223A61DF3B8D200774C30 /* City.swift */,
+				4402239C1DF3691200774C30 /* TableViewCell.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 			files = (
 				440223931DF3689A00774C30 /* LaunchScreen.storyboard in Resources */,
 				440223901DF3689A00774C30 /* Assets.xcassets in Resources */,
+				440223AA1DF4033900774C30 /* memo in Resources */,
 				4402238E1DF3689A00774C30 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

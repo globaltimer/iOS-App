@@ -3,7 +3,7 @@ import UIKit
 import RealmSwift
 
 
-class AddCityViewController: UIViewController, CityListTVCdelegate {
+class AddCityViewController: UIViewController {
     
     let GMT: Date = Date()
     
@@ -14,7 +14,7 @@ class AddCityViewController: UIViewController, CityListTVCdelegate {
     
     
     // 次の画面から逆流してくる、選択された都市名
-    var selectedCity: City? = nil
+    var selectedCity: StoredCity? = nil
     
     @IBOutlet weak var selectedCityLabel: UILabel!
     @IBOutlet weak var selectedCityTimeLabel: UILabel!
@@ -73,15 +73,17 @@ class AddCityViewController: UIViewController, CityListTVCdelegate {
             return
         }
         
-        let storedCityNo = try! Realm().objects(StoredCity.self).count
+//        let storedCityNo = try! Realm().objects(StoredCity.self).count
 
         try! realm.write {
             
-            let city = StoredCity(id: storedCityNo+1, name: selectedCity.name, timeZone: selectedCity.timeZone)
-                        
-            self.realm.add(city, update: true)
+//            let city = StoredCity(id: storedCityNo+1, name: selectedCity.name, timeZone: selectedCity.timeZone)
+//                        
+//            self.realm.add(city, update: true)
             
-            print("\(city.name) was saved!")
+            selectedCity.isSelected = true
+            
+            print("\(selectedCity.name) was enrolled!")
         }
         
         //Navigation Controllerを取得
@@ -94,10 +96,10 @@ class AddCityViewController: UIViewController, CityListTVCdelegate {
     
     
     
-    // delegate method
-    func modalDidFinished(selectedCity: City) {
-        self.selectedCity = selectedCity
-    }
+//    // delegate method
+//    func modalDidFinished(selectedCity: City) {
+//        self.selectedCity = selectedCity
+//    }
     
     
     //

@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     let realm = try! Realm()
     
-    let cities = try! Realm().objects(StoredCity.self).sorted(byProperty: "id", ascending: true)
+    let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byProperty: "id", ascending: true)
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -27,7 +27,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.dataSource = self
         
         // 初回起動時のみ
-        if cities.count == 0 {
+        if try! Realm().objects(StoredCity.self).count == 0 {
         
             print("初回起動だと 判定された！！！")
             
@@ -90,11 +90,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if editingStyle == .delete {
             
-            // データベースから削除する
+            let delatingCity = cities[indexPath.row]
+            
+            //
             try! realm.write {
-                self.realm.delete(self.cities[indexPath.row])
-                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                delatingCity.isSelected = false
             }
+            
+            tableView.deleteRows(at: [indexPath], with: .fade)
+
         }
     }
     
