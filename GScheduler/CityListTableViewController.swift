@@ -1,15 +1,16 @@
 
 import UIKit
 
-
+// ちなもうこのデリゲートメソッド使ってないから消せ。ちくしょう、delegateの設定の仕方がわからねえ...
 protocol CityListTVCdelegate {
     func modalDidFinished(selectedCity: City)
 }
 
 
-class CityListTableViewController: UITableViewController {
+class CityListTableViewController: UITableViewController, UISearchBarDelegate {
     
     
+    @IBOutlet weak var searchBar: UISearchBar!
     
     let cities = [
                   City(name: "Vancouver", timeZone: "PST"),
@@ -26,6 +27,8 @@ class CityListTableViewController: UITableViewController {
                   City(name: "London",    timeZone: "GMT")
                  ]
     
+    var requiredCities: [City] = []
+    
     
     var delegate: CityListTVCdelegate?
     
@@ -33,6 +36,9 @@ class CityListTableViewController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        //
+        searchBar.delegate = self
+        
 
     }
 
@@ -58,8 +64,6 @@ class CityListTableViewController: UITableViewController {
         // modal時にしか効かないっぽい？ので、これはダメ
 //        self.dismiss(animated: true, completion: nil)
         
-        
-        
         //Navigation Controllerを取得
         let nav = self.navigationController!
         
@@ -73,5 +77,38 @@ class CityListTableViewController: UITableViewController {
         nav.popViewController(animated: true)
     }
     
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        print("hoge---")
+        
+        requiredCities = []
+        
+        requiredCities.append(contentsOf: [cities[0], cities[1], cities[3]])
+        
+        tableView.reloadData()
+        
+    }
+    
    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
