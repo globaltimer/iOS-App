@@ -12,6 +12,10 @@
 		4402238E1DF3689A00774C30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4402238C1DF3689A00774C30 /* Main.storyboard */; };
 		440223901DF3689A00774C30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4402238F1DF3689A00774C30 /* Assets.xcassets */; };
 		440223931DF3689A00774C30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440223911DF3689A00774C30 /* LaunchScreen.storyboard */; };
+		4402239B1DF368EC00774C30 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4402239A1DF368EC00774C30 /* AddCityViewController.swift */; };
+		4402239D1DF3691200774C30 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4402239C1DF3691200774C30 /* TableViewCell.swift */; };
+		440223A51DF3A28F00774C30 /* CityListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440223A41DF3A28F00774C30 /* CityListTableViewController.swift */; };
+		440223A71DF3B8D200774C30 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440223A61DF3B8D200774C30 /* City.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,12 @@
 		4402238F1DF3689A00774C30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		440223921DF3689A00774C30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		440223941DF3689A00774C30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4402239A1DF368EC00774C30 /* AddCityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
+		4402239C1DF3691200774C30 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		440223A01DF3732000774C30 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		440223A11DF3732000774C30 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		440223A41DF3A28F00774C30 /* CityListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityListTableViewController.swift; sourceTree = "<group>"; };
+		440223A61DF3B8D200774C30 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +50,7 @@
 			children = (
 				440223871DF3689A00774C30 /* GScheduler */,
 				440223861DF3689A00774C30 /* Products */,
+				4402239F1DF3731D00774C30 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +67,25 @@
 			children = (
 				440223881DF3689A00774C30 /* AppDelegate.swift */,
 				4402238A1DF3689A00774C30 /* ViewController.swift */,
+				440223A61DF3B8D200774C30 /* City.swift */,
+				4402239A1DF368EC00774C30 /* AddCityViewController.swift */,
+				440223A41DF3A28F00774C30 /* CityListTableViewController.swift */,
+				4402239C1DF3691200774C30 /* TableViewCell.swift */,
 				4402238C1DF3689A00774C30 /* Main.storyboard */,
 				4402238F1DF3689A00774C30 /* Assets.xcassets */,
 				440223911DF3689A00774C30 /* LaunchScreen.storyboard */,
 				440223941DF3689A00774C30 /* Info.plist */,
 			);
 			path = GScheduler;
+			sourceTree = "<group>";
+		};
+		4402239F1DF3731D00774C30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				440223A01DF3732000774C30 /* Realm.framework */,
+				440223A11DF3732000774C30 /* RealmSwift.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,6 +98,7 @@
 				440223811DF3689A00774C30 /* Sources */,
 				440223821DF3689A00774C30 /* Frameworks */,
 				440223831DF3689A00774C30 /* Resources */,
+				4402239E1DF372BB00774C30 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -132,13 +157,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4402239E1DF372BB00774C30 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		440223811DF3689A00774C30 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				4402238B1DF3689A00774C30 /* ViewController.swift in Sources */,
+				4402239D1DF3691200774C30 /* TableViewCell.swift in Sources */,
+				440223A71DF3B8D200774C30 /* City.swift in Sources */,
+				4402239B1DF368EC00774C30 /* AddCityViewController.swift in Sources */,
 				440223891DF3689A00774C30 /* AppDelegate.swift in Sources */,
+				440223A51DF3A28F00774C30 /* CityListTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +257,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = "";
 			};
 			name = Debug;
 		};
@@ -251,6 +299,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -260,6 +309,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L798W4XTQ6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = GScheduler/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.masa.GScheduler;
@@ -273,6 +326,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L798W4XTQ6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = GScheduler/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.masa.GScheduler;
@@ -300,6 +357,7 @@
 				440223991DF3689A00774C30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  GScheduler
-//
-//  Created by mas.t on 2016/12/03.
-//  Copyright © 2016年 masa. All rights reserved.
-//
 
 import UIKit
 
