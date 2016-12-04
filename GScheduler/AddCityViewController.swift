@@ -1,16 +1,18 @@
 
 import UIKit
+import RealmSwift
 
 
 class AddCityViewController: UIViewController, CityListTVCdelegate {
     
     let GMT: Date = Date()
     
+    let realm = try! Realm()
+    
     // 子を持つ
     // let cityListTVC = CityListTableViewController()
     
     
-
     // 次の画面から逆流してくる、選択された都市名
     var selectedCity: City? = nil
     
@@ -64,7 +66,23 @@ class AddCityViewController: UIViewController, CityListTVCdelegate {
 
     @IBAction func addButtonTouched(_ sender: AnyObject) {
         
-        print("hoge")
+        guard let selectedCity = selectedCity else {
+            
+            print("city not set")
+            
+            return
+        }
+        
+        let storedCityNo = try! Realm().objects(StoredCity.self).count
+
+        try! realm.write {
+            
+            let city = StoredCity(id: storedCityNo+1, name: selectedCity.name, timeZone: selectedCity.timeZone)
+                        
+            self.realm.add(city, update: true)
+            
+            print("\(city.name) was saved!")
+        }
         
         //Navigation Controllerを取得
         let nav = self.navigationController!

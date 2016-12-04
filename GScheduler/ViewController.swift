@@ -1,24 +1,26 @@
 
 import UIKit
-import Realm
+import RealmSwift
 
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    // 逆流してくる値
-    var reverseStr: String?
-    
-    
+
     // GMT標準時刻
     let GMT: Date = Date()
     
-    let cities = [City(name: "Vancouver", timeZone: "PST"),
-                  City(name: "Tokyo",     timeZone: "JST"),
-                  City(name: "Venice",    timeZone: "CET"),
-                  City(name: "London",    timeZone: "GMT"),
-                  ]
+    //let cities = [City(name: "Vancouver", timeZone: "PST"),
+//                  City(name: "Tokyo",     timeZone: "JST"),
+//                  City(name: "Venice",    timeZone: "CET"),
+//                  City(name: "London",    timeZone: "GMT"),
+//                  ]
     
-
+    
+    let realm = try! Realm()
+    
+    let cities = try! Realm().objects(StoredCity.self).sorted(byProperty: "id", ascending: true)
+    
+    
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -29,16 +31,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         tableView.delegate = self
         tableView.dataSource = self
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        //
         tableView.reloadData()
+        
+        print(cities)
         
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return cities.count
         
     }
@@ -67,6 +76,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
+    // セルが削除が可能なことを伝えるメソッド
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath)-> UITableViewCellEditingStyle {
+        return .delete
+    }
+    
+    
+    // セルをdeleteするときの処理
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            // データベースから削除する
+            try! realm.write {
+                self.realm.delete(self.cities[indexPath.row])
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
+    }
+    
     
     // フォーマッタの初期設定
     func setConfigToFormatter(fm: inout DateFormatter, cellIdx: Int) {
@@ -80,13 +108,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    
-    func modalDidFinished(modalText: String){
-        
-        self.reverseStr = modalText
-        
-    }
-    
+ 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }

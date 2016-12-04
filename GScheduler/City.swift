@@ -10,7 +10,7 @@ struct City {
 }
 
 
-class Task: Object {
+class StoredCity: Object {
     
     // 管理用 ID。プライマリーキー
     dynamic var id = 0
@@ -25,4 +25,24 @@ class Task: Object {
     override static func primaryKey() -> String? {
         return "id"
     }
+
+    // こうはできない
+    convenience init(id: Int, name: String, timeZone: String) {
+    
+        self.init()
+        
+        self.id = id
+        self.name = name
+        self.timeZone = timeZone
+        
+    }
+    
 }
+
+
+
+
+
+
+
+

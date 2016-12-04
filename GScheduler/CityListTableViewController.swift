@@ -1,5 +1,6 @@
 
 import UIKit
+import RealmSwift
 
 // ちなもうこのデリゲートメソッド使ってないから消せ。ちくしょう、delegateの設定の仕方がわからねえ...
 protocol CityListTVCdelegate {
@@ -29,8 +30,9 @@ class CityListTableViewController: UITableViewController, UISearchBarDelegate {
     
     var requiredCities: [City] = []
     
-    
     var delegate: CityListTVCdelegate?
+    
+    let realm = try! Realm()
     
 
     override func viewDidLoad() {
@@ -86,7 +88,9 @@ class CityListTableViewController: UITableViewController, UISearchBarDelegate {
         let InfoVc = nav.viewControllers[nav.viewControllers.count-2] as! AddCityViewController
         
         if (searchBar.text?.characters.count)! > 0 {
+                        
             InfoVc.selectedCity = requiredCities[indexPath.row]
+            
         } else {
             InfoVc.selectedCity = cities[indexPath.row]
         }

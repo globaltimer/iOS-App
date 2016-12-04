@@ -61,6 +61,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="WORLD CLOCK" id="x9Z-Fo-c3w">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="xk1-YV-EOQ"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="och-Tg-VkG">
                             <connections>
                                 <segue destination="bY3-9W-dN7" kind="show" id="zAu-gx-nA4"/>
