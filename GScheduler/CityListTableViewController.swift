@@ -45,13 +45,27 @@ class CityListTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        if (searchBar.text?.characters.count)! > 0 {
+            return requiredCities.count
+        }
+        
         return cities.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        if (searchBar.text?.characters.count)! > 0 {
+            
+            cell.textLabel?.text = requiredCities[indexPath.row].name
+            
+            return cell
+            
+        }
         
         cell.textLabel?.text = cities[indexPath.row].name
 
