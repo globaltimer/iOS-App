@@ -65,9 +65,9 @@
 		440223871DF3689A00774C30 /* GScheduler */ = {
 			isa = PBXGroup;
 			children = (
+				440223A81DF3E05600774C30 /* Model */,
 				440223881DF3689A00774C30 /* AppDelegate.swift */,
 				4402238A1DF3689A00774C30 /* ViewController.swift */,
-				440223A61DF3B8D200774C30 /* City.swift */,
 				4402239A1DF368EC00774C30 /* AddCityViewController.swift */,
 				440223A41DF3A28F00774C30 /* CityListTableViewController.swift */,
 				4402239C1DF3691200774C30 /* TableViewCell.swift */,
@@ -86,6 +86,14 @@
 				440223A11DF3732000774C30 /* RealmSwift.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		440223A81DF3E05600774C30 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				440223A61DF3B8D200774C30 /* City.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

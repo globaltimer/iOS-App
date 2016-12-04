@@ -17,14 +17,14 @@ class CityListTableViewController: UITableViewController, UISearchBarDelegate {
                   City(name: "Tokyo",     timeZone: "JST"),
                   City(name: "Venice",    timeZone: "CET"),
                   City(name: "London",    timeZone: "GMT"),
-                  City(name: "Vancouver", timeZone: "PST"),
-                  City(name: "Tokyo",     timeZone: "JST"),
-                  City(name: "Venice",    timeZone: "CET"),
-                  City(name: "London",    timeZone: "GMT"),
-                  City(name: "Vancouver", timeZone: "PST"),
-                  City(name: "Tokyo",     timeZone: "JST"),
-                  City(name: "Venice",    timeZone: "CET"),
-                  City(name: "London",    timeZone: "GMT")
+                  City(name: "Varcerona", timeZone: "PST"),
+                  City(name: "New York",  timeZone: "JST"),
+                  City(name: "China",     timeZone: "CET"),
+                  City(name: "Hoe",       timeZone: "GMT"),
+                  City(name: "China2",    timeZone: "PST"),
+                  City(name: "itaky",     timeZone: "JST"),
+                  City(name: "spain",     timeZone: "CET"),
+                  City(name: "america",   timeZone: "GMT")
                  ]
     
     var requiredCities: [City] = []
@@ -85,7 +85,11 @@ class CityListTableViewController: UITableViewController, UISearchBarDelegate {
         // ここが "2"の理由がわからねえ。。。
         let InfoVc = nav.viewControllers[nav.viewControllers.count-2] as! AddCityViewController
         
-        InfoVc.selectedCity = cities[indexPath.row]
+        if (searchBar.text?.characters.count)! > 0 {
+            InfoVc.selectedCity = requiredCities[indexPath.row]
+        } else {
+            InfoVc.selectedCity = cities[indexPath.row]
+        }
         
         //閉じる
         nav.popViewController(animated: true)
@@ -98,7 +102,12 @@ class CityListTableViewController: UITableViewController, UISearchBarDelegate {
         
         requiredCities = []
         
-        requiredCities.append(contentsOf: [cities[0], cities[1], cities[3]])
+        let searchWord = searchBar.text
+        
+        // requiredCities = cities.filter{ $0.name.contains(searchWord!)} //$0が最初の引数を意味する。
+
+        // 小文字・大文字を無視して検索
+        requiredCities = cities.filter{ $0.name.lowercased().contains((searchWord?.lowercased())!) }
         
         tableView.reloadData()
         

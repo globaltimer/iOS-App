@@ -15,7 +15,6 @@ class AddCityViewController: UIViewController, CityListTVCdelegate {
     var selectedCity: City? = nil
     
     @IBOutlet weak var selectedCityLabel: UILabel!
-    
     @IBOutlet weak var selectedCityTimeLabel: UILabel!
     
     
@@ -63,6 +62,19 @@ class AddCityViewController: UIViewController, CityListTVCdelegate {
     }
     
 
+    @IBAction func addButtonTouched(_ sender: AnyObject) {
+        
+        print("hoge")
+        
+        //Navigation Controllerを取得
+        let nav = self.navigationController!
+        
+        //閉じる
+        nav.popViewController(animated: true)
+        
+    }
+    
+    
     
     // delegate method
     func modalDidFinished(selectedCity: City) {

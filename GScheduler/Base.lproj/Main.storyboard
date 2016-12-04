@@ -121,7 +121,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add!"/>
                                 <connections>
-                                    <action selector="addButtonClicked:" destination="bY3-9W-dN7" eventType="touchUpInside" id="WBb-XO-25Z"/>
+                                    <action selector="addButtonTouched:" destination="bY3-9W-dN7" eventType="touchUpInside" id="56N-pZ-EPR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FO2-bl-zJa">
