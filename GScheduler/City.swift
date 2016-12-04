@@ -18,6 +18,8 @@ class StoredCity: Object {
     dynamic var name = ""
     
     dynamic var timeZone = ""
+    
+    dynamic var isSelected = false
 
     /**
      id をプライマリーキーとして設定
@@ -26,14 +28,15 @@ class StoredCity: Object {
         return "id"
     }
 
-    // こうはできない
-    convenience init(id: Int, name: String, timeZone: String) {
+    // Realmオブジェクトにイニシャライザを設定するには、この書き方でないとダメ
+    convenience init(id: Int, name: String, timeZone: String, isSelected: Bool = false) {
     
         self.init()
         
         self.id = id
         self.name = name
         self.timeZone = timeZone
+        self.isSelected = isSelected
         
     }
     

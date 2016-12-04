@@ -9,12 +9,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // GMT標準時刻
     let GMT: Date = Date()
     
-    //let cities = [City(name: "Vancouver", timeZone: "PST"),
-//                  City(name: "Tokyo",     timeZone: "JST"),
-//                  City(name: "Venice",    timeZone: "CET"),
-//                  City(name: "London",    timeZone: "GMT"),
-//                  ]
-    
     
     let realm = try! Realm()
     
@@ -31,6 +25,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         tableView.delegate = self
         tableView.dataSource = self
+        
+        // 初回起動時のみ
+        if cities.count == 0 {
+        
+            print("初回起動だと 判定された！！！")
+            
+            initialEnrollCities()
+            
+        }
         
     }
     
@@ -111,6 +114,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
  
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
+    }
+    
+    
+    // 初回アプリ起動時に1回のみ、すべての都市をデータベースに登録
+    func initialEnrollCities() {
+        
+        let citySeed = [
+            (name: "Vancouver", timeZone: "PST"),
+            (name: "Tokyo",     timeZone: "JST"),
+            (name: "Venice",    timeZone: "CET"),
+            (name: "London",    timeZone: "GMT")
+        ]
+        
+        var cities: [StoredCity] = []
+        
+        for (idx, value) in citySeed.enumerated() {
+            
+            cities.append(StoredCity(id: idx, name: value.name, timeZone: value.timeZone))
+            
+        }
+        
+        try! realm.write {
+            
+            for city in cities {
+                
+                self.realm.add(city, update: true)
+                
+                print("\(city.name) was saved!")
+            }
+        }
     }
         
 }
