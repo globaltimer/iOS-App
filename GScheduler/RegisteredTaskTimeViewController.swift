@@ -7,7 +7,7 @@ class RegisteredTaskTimeViewController: UIViewController, UITableViewDelegate, U
     
 
     // GMT標準時刻
-    let GMT: Date = Date()
+    var GMT: Date = Date()
     
     let realm = try! Realm()
     
@@ -71,7 +71,17 @@ class RegisteredTaskTimeViewController: UIViewController, UITableViewDelegate, U
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
         print("hoge")
+        
+        // ここで基準となるDateを切り替える(テーブルに反映させるために)
+        GMT = task[row].date
+        
+        tableView.reloadData()
+        
+        
+        
+        
     }
     
     

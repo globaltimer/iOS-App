@@ -85,11 +85,11 @@
             </objects>
             <point key="canvasLocation" x="1076" y="138.98050974512745"/>
         </scene>
-        <!--Item-->
+        <!--Task Clock-->
         <scene sceneID="ANy-6q-u42">
             <objects>
                 <navigationController id="gK4-b3-w1b" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="wSz-xc-L2A"/>
+                    <tabBarItem key="tabBarItem" title="Task Clock" image="star" id="wSz-xc-L2A"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5sn-hF-s0J">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -374,11 +374,11 @@
             </objects>
             <point key="canvasLocation" x="-487" y="572"/>
         </scene>
-        <!--Item-->
+        <!--World Clock-->
         <scene sceneID="DtI-jG-16q">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9v2-8B-EtM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="esS-AA-sk8"/>
+                    <tabBarItem key="tabBarItem" title="World Clock" image="search" id="esS-AA-sk8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Cn1-tx-k0k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -394,4 +394,8 @@
             <point key="canvasLocation" x="335" y="139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="search" width="30" height="30"/>
+        <image name="star" width="30" height="30"/>
+    </resources>
 </document>
