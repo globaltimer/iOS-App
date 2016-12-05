@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,28 +23,36 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uLX-zH-seL">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="150" id="lv0-dU-KM4" customClass="TableViewCell" customModule="GScheduler" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="150"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="100" id="lv0-dU-KM4" customClass="TableViewCell" customModule="GScheduler" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lv0-dU-KM4" id="QyA-2b-Fvj">
-                                            <frame key="frameInset" width="375" height="149"/>
+                                            <frame key="frameInset" width="375" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDd-Kx-nML">
-                                                    <frame key="frameInset" minX="8" minY="29" width="140" height="60"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDd-Kx-nML">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="140" id="8lw-w9-QDn"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQa-fm-gFN">
-                                                    <frame key="frameInset" minX="227" minY="29" width="140" height="60"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQa-fm-gFN">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cDd-Kx-nML" firstAttribute="top" secondItem="QyA-2b-Fvj" secondAttribute="topMargin" constant="11" id="2PY-tS-nZx"/>
+                                                <constraint firstItem="cDd-Kx-nML" firstAttribute="baseline" secondItem="ZQa-fm-gFN" secondAttribute="baseline" id="2Zs-z1-dQn"/>
+                                                <constraint firstItem="cDd-Kx-nML" firstAttribute="firstBaseline" secondItem="ZQa-fm-gFN" secondAttribute="firstBaseline" id="8ZV-NE-KuF"/>
+                                                <constraint firstItem="cDd-Kx-nML" firstAttribute="leading" secondItem="QyA-2b-Fvj" secondAttribute="leadingMargin" id="SpZ-FE-pwy"/>
+                                                <constraint firstItem="cDd-Kx-nML" firstAttribute="centerY" secondItem="QyA-2b-Fvj" secondAttribute="centerY" id="ekL-r3-WYa"/>
+                                                <constraint firstItem="ZQa-fm-gFN" firstAttribute="leading" secondItem="cDd-Kx-nML" secondAttribute="trailing" constant="79" id="qe3-df-ifV"/>
+                                                <constraint firstItem="ZQa-fm-gFN" firstAttribute="trailing" secondItem="QyA-2b-Fvj" secondAttribute="trailingMargin" id="zeG-Ya-L0q"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="cityNameLabel" destination="cDd-Kx-nML" id="QtG-Fo-Jib"/>
@@ -61,7 +71,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="WORLD CLOCK" id="x9Z-Fo-c3w">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="xk1-YV-EOQ"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="och-Tg-VkG">
                             <connections>
                                 <segue destination="bY3-9W-dN7" kind="show" id="zAu-gx-nA4"/>

@@ -26,6 +26,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.delegate = self
         tableView.dataSource = self
         
+        // 編集ボタンを左上に配置
+        navigationItem.leftBarButtonItem = editButtonItem
+        
+        
         // 初回起動時のみ
         if try! Realm().objects(StoredCity.self).count == 0 {
         
@@ -46,6 +50,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         print(cities)
         
+    }
+    
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        
+        super.setEditing(editing, animated: animated)
+        tableView.isEditing = editing
     }
     
     
@@ -81,9 +92,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // セルが削除が可能なことを伝えるメソッド
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath)-> UITableViewCellEditingStyle {
-        return .delete
+
+//        return .delete
+        if tableView.isEditing {
+            return .delete
+        } else {
+            return .none
+        }
+        
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    // 並び替え可能なセルの指定(今回は"すべて")
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
     // セルをdeleteするときの処理
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -118,7 +144,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
  
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 100
     }
     
     
