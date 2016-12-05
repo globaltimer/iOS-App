@@ -7,7 +7,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
 
     // GMT標準時刻
-    let GMT: Date = Date()
+    let GMT = Date()
     
     
     let realm = try! Realm()
