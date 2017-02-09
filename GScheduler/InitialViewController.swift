@@ -113,7 +113,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     override func viewDidAppear(_ animated: Bool) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: IndexPath(row: 10, section: 0)) as! InitialTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: IndexPath(row: 0, section: 0)) as! InitialTableViewCell
         
         print(cell.cityNameLabel.text as Any)
     }
