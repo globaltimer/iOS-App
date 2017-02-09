@@ -8,28 +8,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // Override point for customization after application launch.
         
         // フォント
+//        let megrim = "Megrim"
+        let megrim = "Quicksand"
         
-        let megrim = "Megrim"
         
 //        UILabel.appearance().font = UIFont(name: megrim, size: 14)
         
         
-        UITabBar.appearance().tintColor = UIColor(red: 0.63, green: 0.15, blue: 0.83, alpha: 1.0)
+        //UITabBar.appearance().backgroundColor = UIColor.blue
         
+        // タブバーのアイコン
+        UITabBar.appearance().tintColor = UIColor.blue
+        
+        
+        // タブバーのテキストのラベル
         UITabBarItem.appearance().setTitleTextAttributes(
             [ NSFontAttributeName: UIFont(name: megrim, size: 12) as Any,
               NSForegroundColorAttributeName: UIColor(red:0.13, green:0.55, blue:0.83, alpha:1.0) as Any
             ]
             , for: .normal)
         
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black,
+        
+        // ナビゲーションバーのタイトル
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0),
              NSFontAttributeName: UIFont(name: megrim, size: 18) as Any
         ]
         
+        // ナビゲーションバーのボタン
+//        UINavigationBar.appearance().tintColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         
+        // 右のボタンはなぜかきかないため、SBで直接指定している
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: megrim, size: 18) as Any,
+            NSForegroundColorAttributeName: UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0),
+        ], for: .normal)
+            
+        
+        // ナビゲーションバーの背景色
+        UINavigationBar.appearance().barTintColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+
         
         return true
     }

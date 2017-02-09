@@ -14,6 +14,9 @@
         <array key="Megrim.ttf">
             <string>Megrim</string>
         </array>
+        <array key="Quicksand-Regular.ttf">
+            <string>Quicksand-Regular</string>
+        </array>
     </customFonts>
     <scenes>
         <!--WORLD CLOCK-->
@@ -42,20 +45,20 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDd-Kx-nML">
                                                     <rect key="frame" x="8" y="19" width="150" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Megrim" family="Megrim" pointSize="30"/>
+                                                    <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBJ-dF-zdX">
                                                     <rect key="frame" x="8" y="67" width="150" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Megrim" family="Megrim" pointSize="13"/>
+                                                    <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQa-fm-gFN">
-                                                    <rect key="frame" x="197" y="15" width="115" height="69"/>
-                                                    <fontDescription key="fontDescription" name="Megrim" family="Megrim" pointSize="44"/>
+                                                    <rect key="frame" x="201" y="15" width="111" height="69"/>
+                                                    <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="44"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -76,7 +79,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="uLX-zH-seL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="bq4-YT-XDZ"/>
                             <constraint firstItem="uLX-zH-seL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ed7-uS-1O2"/>
@@ -85,9 +88,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="WORLD CLOCK" id="x9Z-Fo-c3w">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="och-Tg-VkG">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="och-Tg-VkG">
+                            <color key="tintColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="PBX-Rm-5fY" kind="show" id="Czc-9N-pQB"/>
+                                <segue destination="8gq-5f-Iqa" kind="show" id="uua-MQ-p7M"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -297,10 +301,10 @@
             </objects>
             <point key="canvasLocation" x="1808.8" y="948.57571214392806"/>
         </scene>
-        <!--City List Table View Controller-->
+        <!--Table View Controller-->
         <scene sceneID="xUY-lh-nwe">
             <objects>
-                <tableViewController id="PBX-Rm-5fY" customClass="CityListTableViewController" customModule="GScheduler" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="PBX-Rm-5fY" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="aYG-BV-BdU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -319,14 +323,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aL5-ak-jRb">
-                                            <rect key="frame" x="8" y="8" width="249" height="37"/>
+                                            <rect key="frame" x="8" y="8" width="249" height="27"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wik-Lz-mPq">
-                                            <rect key="frame" x="8" y="45" width="249" height="21"/>
+                                            <rect key="frame" x="8" y="41" width="249" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -351,7 +355,78 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VLV-bA-dJK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1867.5" y="137.32394366197184"/>
+            <point key="canvasLocation" x="1786.875" y="-655.9859154929577"/>
+        </scene>
+        <!--City List Table View Controller-->
+        <scene sceneID="mV4-sN-KfF">
+            <objects>
+                <viewController id="8gq-5f-Iqa" customClass="CityListTableViewController" customModule="GScheduler" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qyh-Dz-BPH"/>
+                        <viewControllerLayoutGuide type="bottom" id="gUT-BK-2LH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="N2y-vg-IBm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="KJc-Ag-CXg">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="shY-eV-x1W">
+                                <rect key="frame" x="0.0" y="108" width="320" height="411"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="100" id="yl9-KZ-Bp7" customClass="NeoCell" customModule="GScheduler" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yl9-KZ-Bp7" id="09Z-fm-ZxJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EhF-Y8-Cqo">
+                                                    <rect key="frame" x="8" y="8" width="280" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxk-MD-uvC">
+                                                    <rect key="frame" x="8" y="56" width="280" height="35"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cityNameLabel" destination="EhF-Y8-Cqo" id="Neu-aR-Gbl"/>
+                                            <outlet property="diffGMTLabel" destination="bxk-MD-uvC" id="XZv-gZ-egN"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="KJc-Ag-CXg" firstAttribute="leading" secondItem="N2y-vg-IBm" secondAttribute="leading" id="7BI-MB-7YB"/>
+                            <constraint firstItem="shY-eV-x1W" firstAttribute="top" secondItem="KJc-Ag-CXg" secondAttribute="bottom" id="94p-ny-fbg"/>
+                            <constraint firstAttribute="trailing" secondItem="KJc-Ag-CXg" secondAttribute="trailing" id="JIF-3Z-c4Q"/>
+                            <constraint firstAttribute="trailing" secondItem="shY-eV-x1W" secondAttribute="trailing" id="a8U-7Z-u0V"/>
+                            <constraint firstItem="gUT-BK-2LH" firstAttribute="top" secondItem="shY-eV-x1W" secondAttribute="bottom" id="jQ6-Qp-uh5"/>
+                            <constraint firstItem="shY-eV-x1W" firstAttribute="leading" secondItem="N2y-vg-IBm" secondAttribute="leading" id="vMi-JX-qEQ"/>
+                            <constraint firstItem="KJc-Ag-CXg" firstAttribute="top" secondItem="Qyh-Dz-BPH" secondAttribute="bottom" id="vci-Hq-j8g"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="KJc-Ag-CXg" id="0bp-0m-VfO"/>
+                        <outlet property="tableView" destination="shY-eV-x1W" id="Igk-eO-h49"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BNW-N1-n4B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1882.5" y="137.32394366197184"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="W6z-Mt-jJu">

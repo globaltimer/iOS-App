@@ -3,10 +3,13 @@ import UIKit
 import RealmSwift
 
 
-class CityListTableViewController: UITableViewController, UISearchBarDelegate {
-    
-    @IBOutlet weak var searchBar: UISearchBar!
+//class CityListTableViewController: UITableViewController, UISearchBarDelegate {
 
+class CityListTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+        
     let realm = try! Realm()
     let cities = try! Realm().objects(StoredCity.self).sorted(byKeyPath: "id", ascending: true)
     var filteredCities: [StoredCity] = []
@@ -15,17 +18,20 @@ class CityListTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         //
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         searchBar.delegate = self
     }
 
     
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
     }
     
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if (searchBar.text?.characters.count)! > 0 {
             return filteredCities.count
@@ -35,9 +41,9 @@ class CityListTableViewController: UITableViewController, UISearchBarDelegate {
     }
 
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! AddCityViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NeoCell    // as! AddCityViewCell
         
         if (searchBar.text?.characters.count)! > 0 {
             
@@ -48,13 +54,18 @@ class CityListTableViewController: UITableViewController, UISearchBarDelegate {
         }
         
         cell.cityNameLabel.text = cities[indexPath.row].name
+        cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        
         cell.diffGMTLabel.text = "こんにちは"
+        cell.diffGMTLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
+        
+        cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
 
         return cell
     }
     
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // modal時にしか効かないっぽい？ので、これはダメ
 //        self.dismiss(animated: true, completion: nil)
@@ -75,12 +86,6 @@ class CityListTableViewController: UITableViewController, UISearchBarDelegate {
         }
         
         
-        // Realmに保存
-//        guard let selectedCity = selectedCity else {
-//            print("city not set")
-//            return
-//        }
-        
         try! realm.write {
             
             if (searchBar.text?.characters.count)! == 0 {
@@ -100,40 +105,27 @@ class CityListTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     
-    //セクション
-    //let sectionIndex: [String] = ["A", "M", "Q", "Z"]
-    
-//    func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
-//        return sectionIndex as [AnyObject]!
-//    }
-
-    
-    
     //var sections : [(index: Int, length :Int, title: String)] = Array()
     var sections = ["1", "2", "3"]
     
 
     /// セクションのタイトルを返す
-    override func tableView(_ tableView: UITableView,
-                            titleForHeaderInSection section: Int) -> String {
+     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section]
-        
     }
     
-    override func sectionIndexTitles(
+     func sectionIndexTitles(
         for tableView: UITableView) -> [String]? {
         //return sections.map { $0.title }
         return ["A", "B", "C", "D"]
     }
     
     
-    override func tableView(_ tableView: UITableView,
+     func tableView(_ tableView: UITableView,
                             sectionForSectionIndexTitle title: String,
                             at index: Int) -> Int {
         return index
     }
-    
-    
     
     
     
@@ -151,7 +143,7 @@ class CityListTableViewController: UITableViewController, UISearchBarDelegate {
         filteredCities = cities.filter{ $0.name.lowercased().contains((searchWord?.lowercased())!) }
         
         tableView.reloadData()
-        
     }
 }
+
 

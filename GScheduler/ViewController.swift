@@ -34,6 +34,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //
         print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
 
         
         tableView.delegate = self
@@ -103,17 +104,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // 2017/1/25修正
         cell.cityNameLabel.text = cities[indexPath.row].name
+        cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        
         cell.DayYearLabel.text  = formatter2.string(from: GMT)
+        cell.DayYearLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
+        
         cell.timeLabel.text     = formatter.string(from: GMT)
+        cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        
+        
         
         cell.timeLabel.kern(kerningValue: 2)
 
         
         
         if indexPath.row % 2 == 0 {
-            cell.backgroundColor = UIColor(hue: 0.61, saturation: 0.09, brightness: 0.99, alpha: 1.0)
+//            cell.backgroundColor = UIColor(hue: 0.61, saturation: 0.09, brightness: 0.99, alpha: 1.0)
+            cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
+
         } else {
-            cell.backgroundColor = UIColor.white
+//            cell.backgroundColor = UIColor.white
+            cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         }
         
         return cell
@@ -206,22 +217,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             (name: "Venice",    timeZone: "CET"),
             (name: "London",    timeZone: "GMT"),
             //
-            (name: "Vuver", timeZone: "PST"),
-            (name: "Tofdfkyo",     timeZone: "JST"),
-            (name: "Venfasdice",    timeZone: "CET"),
-            (name: "Longsfadon",    timeZone: "GMT"),
-            (name: "Vafgfsdancouver", timeZone: "PST"),
-            (name: "Tofaskyo",     timeZone: "JST"),
-            (name: "Vengsice",    timeZone: "CET"),
-            (name: "Lon  svggsdfdon",    timeZone: "GMT"),
-            (name: "Vansdscouver", timeZone: "PST"),
-            (name: "Tosgrekyo",     timeZone: "JST"),
-            (name: "Vegsfnice",    timeZone: "CET"),
-            (name: "Lovndon",    timeZone: "GMT"),
-            (name: "V456ancouver", timeZone: "PST"),
-            (name: "To56vkyo",     timeZone: "JST"),
-            (name: "Vevegfdvnice",    timeZone: "CET"),
-            (name: "Losaghvwendon",    timeZone: "GMT")
+//            (name: "Vuver", timeZone: "PST"),
+//            (name: "Tofdfkyo",     timeZone: "JST"),
+//            (name: "Venfasdice",    timeZone: "CET"),
+//            (name: "Longsfadon",    timeZone: "GMT"),
+//            (name: "Vafgfsdancouver", timeZone: "PST"),
+//            (name: "Tofaskyo",     timeZone: "JST"),
+//            (name: "Vengsice",    timeZone: "CET"),
+//            (name: "Lon  svggsdfdon",    timeZone: "GMT"),
+//            (name: "Vansdscouver", timeZone: "PST"),
+//            (name: "Tosgrekyo",     timeZone: "JST"),
+//            (name: "Vegsfnice",    timeZone: "CET"),
+//            (name: "Lovndon",    timeZone: "GMT"),
+//            (name: "V456ancouver", timeZone: "PST"),
+//            (name: "To56vkyo",     timeZone: "JST"),
+//            (name: "Vevegfdvnice",    timeZone: "CET"),
+//            (name: "Losaghvwendon",    timeZone: "GMT")
         ]
         
         var cities: [StoredCity] = []
