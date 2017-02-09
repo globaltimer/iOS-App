@@ -4,47 +4,93 @@ import RealmSwift
 
 class InitialViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    /* UI Components */
+    @IBOutlet weak var cityNameLabel:  UILabel!
+    @IBOutlet weak var MDYLabel:       UILabel!
+    @IBOutlet weak var timeLabel:      UILabel!
+    @IBOutlet weak var timeAheadLabel: UILabel!
+    
+    @IBOutlet weak var tableView:      UITableView!
+    
+    
     // GMT標準時刻
     var GMT = Date()
     
     let realm = try! Realm()
+    // 全都市リスト --> ユーザーにより追加された都市のみ抽出
     let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "id", ascending: true)
     
-    @IBOutlet weak var tableView: UITableView!
-    
-    @IBAction func LaunchTabVC(_ sender: AnyObject) {
-        
-        let nex = self.storyboard!.instantiateViewController(withIdentifier: "TabBar")
-        self.present(nex, animated: true, completion: nil)
-        
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        //return true
-        return false
-    }
-    
-    
 
+    
+    // 昔、ここにボタンがあったときは、こんなメソッドをセットしていました...
+//    @IBAction func LaunchTabVC(_ sender: AnyObject) {
+//        let nex = self.storyboard!.instantiateViewController(withIdentifier: "TabBar")
+//        self.present(nex, animated: true, completion: nil)
+//    }
+    
+    // ステータスバーの表示 / 非表示 の切り替え
+//    override var prefersStatusBarHidden: Bool {
+//        //return true
+//        return false
+//    }
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         //
         tableView.delegate = self
         tableView.dataSource = self
+        //
+        print("何度でも呼ばれるぜ！！")
         
         // 編集ボタンを左上に配置
         //navigationItem.leftBarButtonItem = editButtonItem
         
-        
         // 初回起動時のみ
-        if try! Realm().objects(StoredCity.self).count == 0 {
-            
+        if cities.count == 0 {
             print("初回起動だと 判定された！！！")
-            
             initialEnrollCities()
             
+            // empty用データでlabelを満たす
+            cityNameLabel.text = ""
+            MDYLabel.text = ""
+            timeLabel.text = ""
         }
+        
+        // 初回起動時でなければ、テーブルビューの先頭の都市データを表示
+        else {
+        
+            var formatter = DateFormatter()
+            // 左欄、日付と西暦を表示させるためのフォーマッタ
+            var formatter2 = DateFormatter()
+            
+            // フォーマッタの初期設定
+            setConfigToFormatter(fm: &formatter, cellIdx: 0)
+            setConfigToFormatter2(fm: &formatter2, cellIdx: 0)
+            
+            
+            // 1/25追記
+            formatter.dateFormat = "HH:mm"
+            
+            formatter2.dateStyle = .medium
+            formatter2.timeStyle = .none
+            
+            cityNameLabel.text = cities[0].name.uppercased()
+            
+//            cityNameLabel.text = tableView.cellForRow(at: 
+            
+            
+            cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+            
+            MDYLabel.text = formatter2.string(from: GMT)
+            MDYLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+            
+            timeLabel.text = formatter.string(from: GMT)
+            timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        }
+        
+        
     }
     
     
@@ -58,6 +104,9 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
+    // -MARK: TableView
+    
+    // テーブルを編集可能にするメソッド
 //    override func setEditing(_ editing: Bool, animated: Bool) {
 //        
 //        super.setEditing(editing, animated: animated)
@@ -90,8 +139,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! InitialTableViewCell
         
-        //        cell.cityNameLabel.text = cities[indexPath.row].name
-        //        cell.timeLabel.text = formatter.string(from: GMT)
         
         // 2017/1/25修正
         cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
@@ -103,20 +150,9 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.timeLabel.text = formatter.string(from: GMT)
         cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
-        
-        if indexPath.row % 2 == 0 {
-            cell.backgroundColor = UIColor(hue: 0.61, saturation: 0.09, brightness: 0.99, alpha: 1.0)
-        } else {
-            cell.backgroundColor = UIColor.white
-        }
-        
+        cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
+
         return cell
-        
-        
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! InitialTableViewCell
-//        cell.cityNameLabel.text = "hoge"
-//        return cell
-        
     }
     
     
@@ -149,14 +185,11 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             
             let delatingCity = cities[indexPath.row]
             
-            //
             try! realm.write {
-                
                 delatingCity.isSelected = false
             }
             
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
         }
     }
     
@@ -183,6 +216,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
+    // -MARK: Initial Setting
+    
     // 初回アプリ起動時に1回のみ、すべての都市をデータベースに登録
     func initialEnrollCities() {
         
@@ -196,13 +231,10 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         var cities: [StoredCity] = []
         
         for (idx, value) in citySeed.enumerated() {
-            
             cities.append(StoredCity(id: idx, name: value.name, timeZone: value.timeZone))
-            
         }
         
         try! realm.write {
-            
             for city in cities {
                 self.realm.add(city, update: true)
                 print("\(city.name) was saved!")
@@ -210,7 +242,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
 }
-
 
 
 

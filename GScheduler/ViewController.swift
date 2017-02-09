@@ -33,12 +33,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         
         //
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
-        
-
-        
+        //print(Realm.Configuration.defaultConfiguration.fileURL!)
+        //
         tableView.delegate = self
         tableView.dataSource = self
+        //
+        print("何度でも呼ばれるぜ！！")
         
         // 編集ボタンを左上に配置
         navigationItem.leftBarButtonItem = editButtonItem

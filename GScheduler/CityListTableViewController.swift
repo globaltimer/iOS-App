@@ -22,6 +22,7 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.dataSource = self
         
         searchBar.delegate = self
+        //
     }
 
     
