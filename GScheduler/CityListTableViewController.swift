@@ -23,6 +23,7 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         
         searchBar.delegate = self
         //
+        searchBar.showsCancelButton = true
     }
 
     
@@ -144,6 +145,13 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         filteredCities = cities.filter{ $0.name.lowercased().contains((searchWord?.lowercased())!) }
         
         tableView.reloadData()
+    }
+    
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        tableView.reloadData()
+        self.view.endEditing(true)
     }
 }
 

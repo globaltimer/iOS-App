@@ -7,9 +7,7 @@ class InitialTableViewCell: UITableViewCell {
     @IBOutlet weak var yearAndMonthLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
-    override func didMoveToWindow() {
-        print("UIView/didMoveToWindow/新しいWindowに対してaddSubviewされた時")
-        
-        
-    }
+//    override func didMoveToWindow() {
+//        print("UIView/didMoveToWindow/新しいWindowに対してaddSubviewされた時")
+//    }
 }

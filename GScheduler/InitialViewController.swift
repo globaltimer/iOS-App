@@ -116,6 +116,9 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: IndexPath(row: 0, section: 0)) as! InitialTableViewCell
         
         print(cell.cityNameLabel.text as Any)
+        
+        
+        let pickerView = UIPickerView()
     }
     
     
