@@ -577,7 +577,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="tintColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="74p-8S-Muv" firstAttribute="leading" secondItem="36u-r0-mrr" secondAttribute="leading" id="3It-l6-EqH"/>
                             <constraint firstAttribute="trailing" secondItem="VrO-yG-K4S" secondAttribute="trailing" id="5fV-6G-WBX"/>

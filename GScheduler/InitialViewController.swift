@@ -77,10 +77,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             formatter2.timeStyle = .none
             
             cityNameLabel.text = cities[0].name.uppercased()
-            
-//            cityNameLabel.text = tableView.cellForRow(at: 
-            
-            
             cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
             
             MDYLabel.text = formatter2.string(from: GMT)
@@ -90,6 +86,11 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         }
         
+//        let customCell1 = tableView.dequeueReusableCell(withIdentifier: "Cell", for: IndexPath(row: 0, section: 0)) as! InitialTableViewCell
+//        
+//            
+//        print(customCell1.cityNameLabel.text)
+
         
     }
     
@@ -101,6 +102,20 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         GMT = Date()
         tableView.reloadData()
         print(cities)
+        
+        // self.timeLabel.text = formatter.string(from: GMT)
+        
+        
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: IndexPath(row: 0, section: 0)) as! InitialTableViewCell
+//        
+//        print(cell.cityNameLabel.text as Any)
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: IndexPath(row: 10, section: 0)) as! InitialTableViewCell
+        
+        print(cell.cityNameLabel.text as Any)
     }
     
     
