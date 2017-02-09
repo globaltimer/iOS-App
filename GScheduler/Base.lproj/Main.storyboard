@@ -57,7 +57,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQa-fm-gFN">
-                                                    <rect key="frame" x="204" y="15" width="108" height="69"/>
+                                                    <rect key="frame" x="201" y="15" width="111" height="69"/>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="44"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -103,11 +103,11 @@
             </objects>
             <point key="canvasLocation" x="1223" y="951"/>
         </scene>
-        <!--Task Clock-->
+        <!--Set  Time-->
         <scene sceneID="ANy-6q-u42">
             <objects>
                 <navigationController id="gK4-b3-w1b" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Task Clock" image="star" selectedImage="search" id="wSz-xc-L2A"/>
+                    <tabBarItem key="tabBarItem" title="Set  Time" image="menu" selectedImage="menu" id="wSz-xc-L2A"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5sn-hF-s0J">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -446,7 +446,7 @@
             </objects>
             <point key="canvasLocation" x="-487" y="572"/>
         </scene>
-        <!--Initial View Controller-->
+        <!--WORLD CLOCK-->
         <scene sceneID="ytu-jT-yha">
             <objects>
                 <viewController storyboardIdentifier="Initial" id="WOX-4z-qbf" customClass="InitialViewController" customModule="GScheduler" customModuleProvider="target" sceneMemberID="viewController">
@@ -459,14 +459,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunny.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="PMz-JC-w3c">
-                                <rect key="frame" x="0.0" y="64" width="320" height="330"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="250"/>
                                 <color key="backgroundColor" red="0.88000846740000005" green="1" blue="0.40411795189999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="330" id="LnV-MX-SCt"/>
+                                    <constraint firstAttribute="height" constant="250" id="LnV-MX-SCt"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="74p-8S-Muv">
-                                <rect key="frame" x="0.0" y="394" width="320" height="125"/>
+                                <rect key="frame" x="0.0" y="314" width="320" height="205"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="100" id="6Wv-FN-ewx" customClass="InitialTableViewCell" customModule="GScheduler" customModuleProvider="target">
@@ -478,7 +478,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qi6-TU-Wa9">
                                                     <rect key="frame" x="8" y="8" width="150" height="40"/>
-                                                    <fontDescription key="fontDescription" name="Megrim" family="Megrim" pointSize="28"/>
+                                                    <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="24"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -487,16 +487,16 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="dc2-Kd-KpA"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Megrim" family="Megrim" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yay-eE-d6k">
-                                                    <rect key="frame" x="182" y="-19" width="130" height="110"/>
+                                                    <rect key="frame" x="182" y="-25" width="130" height="116"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="130" id="TAo-2I-T4D"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Megrim" family="Megrim" pointSize="44"/>
+                                                    <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="44"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -524,36 +524,23 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jan 24, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZe-Rj-iTV">
-                                <rect key="frame" x="116.5" y="111" width="88.5" height="18.5"/>
+                                <rect key="frame" x="116" y="111" width="89" height="19"/>
                                 <fontDescription key="fontDescription" name="Megrim" family="Megrim" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23:00 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HIM-Qo-XnG">
-                                <rect key="frame" x="127.5" y="141.5" width="68" height="18.5"/>
+                                <rect key="frame" x="126.5" y="142" width="68" height="19"/>
                                 <fontDescription key="fontDescription" name="Megrim" family="Megrim" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tokyo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJs-MM-Tey">
-                                <rect key="frame" x="137.5" y="168" width="47.5" height="18.5"/>
+                                <rect key="frame" x="136.5" y="169" width="48" height="19"/>
                                 <fontDescription key="fontDescription" name="Megrim" family="Megrim" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVS-2a-HUb">
-                                <rect key="frame" x="16" y="72" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="hlR-uM-xcy"/>
-                                    <constraint firstAttribute="width" constant="50" id="xph-cJ-jyh"/>
-                                </constraints>
-                                <state key="normal" image="plus.png">
-                                    <color key="titleColor" red="1" green="0.48625471780000001" blue="0.99387405529999995" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="LaunchTabVC:" destination="WOX-4z-qbf" eventType="touchUpInside" id="4Ae-4s-ObG"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -564,9 +551,7 @@
                             <constraint firstItem="HIM-Qo-XnG" firstAttribute="top" secondItem="gZe-Rj-iTV" secondAttribute="bottom" constant="12" id="DI3-2a-M0u"/>
                             <constraint firstItem="xJs-MM-Tey" firstAttribute="top" secondItem="HIM-Qo-XnG" secondAttribute="bottom" constant="8" symbolic="YES" id="FYe-w8-UfF"/>
                             <constraint firstItem="HIM-Qo-XnG" firstAttribute="centerX" secondItem="xJs-MM-Tey" secondAttribute="centerX" id="Q9R-0H-l7B"/>
-                            <constraint firstItem="aVS-2a-HUb" firstAttribute="leading" secondItem="36u-r0-mrr" secondAttribute="leadingMargin" id="Sc8-VR-qdc"/>
                             <constraint firstAttribute="trailing" secondItem="74p-8S-Muv" secondAttribute="trailing" id="i7M-QP-Gny"/>
-                            <constraint firstItem="aVS-2a-HUb" firstAttribute="top" secondItem="dCV-Pn-HfW" secondAttribute="bottom" constant="8" id="jDF-om-Nrh"/>
                             <constraint firstItem="gZe-Rj-iTV" firstAttribute="top" secondItem="dCV-Pn-HfW" secondAttribute="bottom" constant="47" id="lys-6I-NBV"/>
                             <constraint firstItem="gZe-Rj-iTV" firstAttribute="centerX" secondItem="HIM-Qo-XnG" secondAttribute="centerX" id="m2a-ZN-GQn"/>
                             <constraint firstItem="74p-8S-Muv" firstAttribute="top" secondItem="PMz-JC-w3c" secondAttribute="bottom" id="oLm-1c-5iv"/>
@@ -574,20 +559,20 @@
                             <constraint firstItem="PMz-JC-w3c" firstAttribute="leading" secondItem="36u-r0-mrr" secondAttribute="leading" id="zha-W6-WCs"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="gpZ-6y-Y1o"/>
+                    <navigationItem key="navigationItem" title="WORLD CLOCK" id="gpZ-6y-Y1o"/>
                     <connections>
                         <outlet property="tableView" destination="74p-8S-Muv" id="dmi-g1-hhf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4JO-W7-8jH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1223" y="138"/>
+            <point key="canvasLocation" x="1222.5" y="137.32394366197184"/>
         </scene>
-        <!--World Clock-->
+        <!--Time Now-->
         <scene sceneID="DtI-jG-16q">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9v2-8B-EtM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="World Clock" image="search" id="esS-AA-sk8"/>
+                    <tabBarItem key="tabBarItem" title="Time Now" image="clock" selectedImage="clock" id="esS-AA-sk8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Cn1-tx-k0k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -604,9 +589,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="plus.png" width="512" height="512"/>
-        <image name="search" width="30" height="30"/>
-        <image name="star" width="30" height="30"/>
+        <image name="clock" width="24" height="24"/>
+        <image name="menu" width="24" height="24"/>
         <image name="sunny.jpg" width="1280" height="1024"/>
     </resources>
 </document>

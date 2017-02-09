@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //UITabBar.appearance().backgroundColor = UIColor.blue
         
-        // タブバーのアイコン
-        UITabBar.appearance().tintColor = UIColor.blue
+        // タブバーのアイコン(フォーカス(=選択された状態)時)
+        UITabBar.appearance().tintColor =  UIColor(red:0.13, green:0.55, blue:0.83, alpha:1.0)
         
         
         // タブバーのテキストのラベル

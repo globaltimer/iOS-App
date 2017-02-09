@@ -20,7 +20,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     override var prefersStatusBarHidden: Bool {
-        return true
+        //return true
+        return false
     }
     
     
@@ -33,7 +34,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.dataSource = self
         
         // 編集ボタンを左上に配置
-        navigationItem.leftBarButtonItem = editButtonItem
+        //navigationItem.leftBarButtonItem = editButtonItem
         
         
         // 初回起動時のみ
@@ -57,11 +58,12 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        
-        super.setEditing(editing, animated: animated)
-        tableView.isEditing = editing
-    }
+//    override func setEditing(_ editing: Bool, animated: Bool) {
+//        
+//        super.setEditing(editing, animated: animated)
+//        //tableView.isEditing = editing
+//        tableView.isEditing = false
+//    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -92,9 +94,14 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         //        cell.timeLabel.text = formatter.string(from: GMT)
         
         // 2017/1/25修正
-        cell.cityNameLabel.text = cities[indexPath.row].name
-        cell.yearAndMonthLabel.text  = formatter2.string(from: GMT)
-        cell.timeLabel.text     = formatter.string(from: GMT)
+        cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
+        cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        
+        cell.yearAndMonthLabel.text = formatter2.string(from: GMT)
+        cell.yearAndMonthLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
+        
+        cell.timeLabel.text = formatter.string(from: GMT)
+        cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
         
         if indexPath.row % 2 == 0 {
@@ -184,23 +191,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             (name: "Tokyo",     timeZone: "JST"),
             (name: "Venice",    timeZone: "CET"),
             (name: "London",    timeZone: "GMT"),
-            
-            (name: "Vuver", timeZone: "PST"),
-            (name: "Tofdfkyo",     timeZone: "JST"),
-            (name: "Venfasdice",    timeZone: "CET"),
-            (name: "Longsfadon",    timeZone: "GMT"),
-            (name: "Vafgfsdancouver", timeZone: "PST"),
-            (name: "Tofaskyo",     timeZone: "JST"),
-            (name: "Vengsice",    timeZone: "CET"),
-            (name: "Lon  svggsdfdon",    timeZone: "GMT"),
-            (name: "Vansdscouver", timeZone: "PST"),
-            (name: "Tosgrekyo",     timeZone: "JST"),
-            (name: "Vegsfnice",    timeZone: "CET"),
-            (name: "Lovndon",    timeZone: "GMT"),
-            (name: "V456ancouver", timeZone: "PST"),
-            (name: "To56vkyo",     timeZone: "JST"),
-            (name: "Vevegfdvnice",    timeZone: "CET"),
-            (name: "Losaghvwendon",    timeZone: "GMT")
         ]
         
         var cities: [StoredCity] = []
