@@ -57,7 +57,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQa-fm-gFN">
-                                                    <rect key="frame" x="201" y="15" width="111" height="69"/>
+                                                    <rect key="frame" x="204" y="15" width="108" height="69"/>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="44"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -101,7 +101,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1074.375" y="138.38028169014083"/>
+            <point key="canvasLocation" x="1223" y="951"/>
         </scene>
         <!--Task Clock-->
         <scene sceneID="ANy-6q-u42">
@@ -113,7 +113,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="XO8-cQ-MTl" kind="relationship" relationship="rootViewController" id="l1v-rg-SJA"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="0R9-ys-OfG"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dd5-Gj-G1v" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -133,7 +133,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bI1-Ia-lNm">
-                                <rect key="frame" x="0.0" y="181" width="320" height="338"/>
+                                <rect key="frame" x="0.0" y="137" width="320" height="431"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="100" id="7V3-PO-Sdl" customClass="RegisteredTaskTableViewCell" customModule="GScheduler" customModuleProvider="target">
@@ -179,7 +179,7 @@
                                 </prototypes>
                             </tableView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ueo-rM-02q">
-                                <rect key="frame" x="0.0" y="64" width="320" height="118"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="211"/>
                                 <color key="backgroundColor" red="1" green="0.97502461168015964" blue="0.13531332053865686" alpha="1" colorSpace="calibratedRGB"/>
                             </pickerView>
                         </subviews>
@@ -209,7 +209,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9v0-ww-rZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1074.375" y="948.59154929577471"/>
+            <point key="canvasLocation" x="926" y="1728"/>
         </scene>
         <!--Task Register View Controller-->
         <scene sceneID="xs6-TP-1fi">
@@ -299,7 +299,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZdY-zG-Wsm" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="bbF-ho-XBe"/>
             </objects>
-            <point key="canvasLocation" x="1808.8" y="948.57571214392806"/>
+            <point key="canvasLocation" x="1686" y="1728"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="xUY-lh-nwe">
@@ -426,7 +426,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BNW-N1-n4B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1882.5" y="137.32394366197184"/>
+            <point key="canvasLocation" x="2031" y="950"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="W6z-Mt-jJu">
@@ -459,14 +459,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunny.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="PMz-JC-w3c">
-                                <rect key="frame" x="0.0" y="20" width="320" height="330"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="330"/>
                                 <color key="backgroundColor" red="0.88000846740000005" green="1" blue="0.40411795189999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="330" id="LnV-MX-SCt"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="74p-8S-Muv">
-                                <rect key="frame" x="0.0" y="350" width="320" height="218"/>
+                                <rect key="frame" x="0.0" y="394" width="320" height="125"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="100" id="6Wv-FN-ewx" customClass="InitialTableViewCell" customModule="GScheduler" customModuleProvider="target">
@@ -524,25 +524,25 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jan 24, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZe-Rj-iTV">
-                                <rect key="frame" x="116" y="67" width="89" height="19"/>
+                                <rect key="frame" x="116.5" y="111" width="88.5" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Megrim" family="Megrim" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23:00 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HIM-Qo-XnG">
-                                <rect key="frame" x="127" y="98" width="68" height="19"/>
+                                <rect key="frame" x="127.5" y="141.5" width="68" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Megrim" family="Megrim" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tokyo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJs-MM-Tey">
-                                <rect key="frame" x="137" y="125" width="48" height="19"/>
+                                <rect key="frame" x="137.5" y="168" width="47.5" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Megrim" family="Megrim" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVS-2a-HUb">
-                                <rect key="frame" x="16" y="28" width="50" height="50"/>
+                                <rect key="frame" x="16" y="72" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="hlR-uM-xcy"/>
                                     <constraint firstAttribute="width" constant="50" id="xph-cJ-jyh"/>
@@ -574,13 +574,14 @@
                             <constraint firstItem="PMz-JC-w3c" firstAttribute="leading" secondItem="36u-r0-mrr" secondAttribute="leading" id="zha-W6-WCs"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="gpZ-6y-Y1o"/>
                     <connections>
                         <outlet property="tableView" destination="74p-8S-Muv" id="dmi-g1-hhf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4JO-W7-8jH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-489.375" y="-164.78873239436621"/>
+            <point key="canvasLocation" x="1223" y="138"/>
         </scene>
         <!--World Clock-->
         <scene sceneID="DtI-jG-16q">
@@ -594,7 +595,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="0P8-3z-vc5"/>
+                        <segue destination="WOX-4z-qbf" kind="relationship" relationship="rootViewController" id="dAF-mg-k8b"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hiD-qN-fEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
