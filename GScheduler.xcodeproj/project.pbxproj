@@ -11,7 +11,6 @@
 		4402238B1DF3689A00774C30 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4402238A1DF3689A00774C30 /* ViewController.swift */; };
 		4402238E1DF3689A00774C30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4402238C1DF3689A00774C30 /* Main.storyboard */; };
 		440223931DF3689A00774C30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440223911DF3689A00774C30 /* LaunchScreen.storyboard */; };
-		4402239B1DF368EC00774C30 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4402239A1DF368EC00774C30 /* AddCityViewController.swift */; };
 		4402239D1DF3691200774C30 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4402239C1DF3691200774C30 /* TableViewCell.swift */; };
 		440223A51DF3A28F00774C30 /* CityListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440223A41DF3A28F00774C30 /* CityListTableViewController.swift */; };
 		440223A71DF3B8D200774C30 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440223A61DF3B8D200774C30 /* City.swift */; };
@@ -39,7 +38,6 @@
 		4402238D1DF3689A00774C30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		440223921DF3689A00774C30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		440223941DF3689A00774C30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4402239A1DF368EC00774C30 /* AddCityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
 		4402239C1DF3691200774C30 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		440223A01DF3732000774C30 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		440223A11DF3732000774C30 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 			isa = PBXGroup;
 			children = (
 				4402238A1DF3689A00774C30 /* ViewController.swift */,
-				4402239A1DF368EC00774C30 /* AddCityViewController.swift */,
 				440223A41DF3A28F00774C30 /* CityListTableViewController.swift */,
 			);
 			name = "1st Tab";
@@ -277,7 +274,6 @@
 				44DA6E1D1DF53F3F00417140 /* TaskRegisterViewController.swift in Sources */,
 				449259B11E4C2904006B9AAD /* NeoCell.swift in Sources */,
 				44DA6E151DF52D4900417140 /* RegisteredTaskTimeViewController.swift in Sources */,
-				4402239B1DF368EC00774C30 /* AddCityViewController.swift in Sources */,
 				440223891DF3689A00774C30 /* AppDelegate.swift in Sources */,
 				44DA6E191DF53A5700417140 /* Task.swift in Sources */,
 				448ABC301E397F350005958C /* InitialTableViewCell.swift in Sources */,

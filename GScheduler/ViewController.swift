@@ -103,7 +103,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         // 2017/1/25修正
-        cell.cityNameLabel.text = cities[indexPath.row].name
+        cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
         cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
         cell.DayYearLabel.text  = formatter2.string(from: GMT)
