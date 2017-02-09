@@ -43,9 +43,3 @@ class StoredCity: Object {
 }
 
 
-
-
-
-
-
-

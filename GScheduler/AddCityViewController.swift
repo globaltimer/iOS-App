@@ -13,9 +13,9 @@ class AddCityViewController: UIViewController {
     // let cityListTVC = CityListTableViewController()
     
     
-    // 次の画面から逆流してくる、選択された都市名
+//    // 次の画面から逆流してくる、選択された都市名
     var selectedCity: StoredCity? = nil
-    
+//
     @IBOutlet weak var selectedCityLabel: UILabel!
     @IBOutlet weak var selectedCityTimeLabel: UILabel!
     

@@ -5,10 +5,32 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         // Override point for customization after application launch.
+        
+        // フォント
+        
+        let megrim = "Megrim"
+        
+//        UILabel.appearance().font = UIFont(name: megrim, size: 14)
+        
+        
+        UITabBar.appearance().tintColor = UIColor(red: 0.63, green: 0.15, blue: 0.83, alpha: 1.0)
+        
+        UITabBarItem.appearance().setTitleTextAttributes(
+            [ NSFontAttributeName: UIFont(name: megrim, size: 12) as Any,
+              NSForegroundColorAttributeName: UIColor(red:0.13, green:0.55, blue:0.83, alpha:1.0) as Any
+            ]
+            , for: .normal)
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black,
+             NSFontAttributeName: UIFont(name: megrim, size: 18) as Any
+        ]
+        
+        
+        
         return true
     }
 

@@ -11,9 +11,9 @@ class RegisteredTaskTimeViewController: UIViewController, UITableViewDelegate, U
     
     let realm = try! Realm()
     
-    let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byProperty: "id", ascending: true)
+    let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "id", ascending: true)
     
-    let task = try! Realm().objects(Task.self).sorted(byProperty: "id", ascending: true)
+    let task = try! Realm().objects(Task.self).sorted(byKeyPath: "id", ascending: true)
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -79,9 +79,6 @@ class RegisteredTaskTimeViewController: UIViewController, UITableViewDelegate, U
         
         tableView.reloadData()
         
-        
-        
-        
     }
     
     
@@ -112,12 +109,10 @@ class RegisteredTaskTimeViewController: UIViewController, UITableViewDelegate, U
             cell.backgroundColor = UIColor(hue: 0.61, saturation: 0.09, brightness: 0.99, alpha: 1.0)
             
         } else {
-            cell.backgroundColor = UIColor.cyan
+            cell.backgroundColor = UIColor.white
         }
         
-        
         return cell
-        
     }
     
     
@@ -132,8 +127,4 @@ class RegisteredTaskTimeViewController: UIViewController, UITableViewDelegate, U
         fm.timeZone = TimeZone(abbreviation: timeZone)
         
     }
-    
-    
-
-
 }
