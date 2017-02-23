@@ -11,7 +11,9 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var searchBar: UISearchBar!
         
     let realm = try! Realm()
+    
     let cities = try! Realm().objects(StoredCity.self).sorted(byKeyPath: "id", ascending: true)
+    
     var filteredCities: [StoredCity] = []
     
 
@@ -145,14 +147,20 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
                 
                 let id = indexPath.row
                 
-                realm.create(StoredCity.self, value: ["id": id, "isSelected": true], update: true)
+                let orderNo = realm.objects(StoredCity.self).filter("isSelected == true").count
+                
+                realm.create(StoredCity.self, value: ["id": id, "isSelected": true, "orderNo": orderNo], update: true)
+                
                 print("\(cities[indexPath.row].name) was enrolled!")
                 
             } else {  // フィルタされた状態でセルがクリックされた場合
                 
                 let id = filteredCities[indexPath.row].id
                 
-                realm.create(StoredCity.self, value: ["id": id, "isSelected": true], update: true)
+                let orderNo = realm.objects(StoredCity.self).filter("isSelected == true").count
+                
+                
+                realm.create(StoredCity.self, value: ["id": id, "isSelected": true, "orderNo": orderNo], update: true)
                 
                 print("\(filteredCities[indexPath.row].name) was enrolled!")
                 

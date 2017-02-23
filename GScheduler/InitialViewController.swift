@@ -37,7 +37,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     // 全都市リスト --> ユーザーにより追加された都市のみ抽出
 //    let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "id", ascending: true)
 
-    let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
+    var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
 
     
     // 昔、ここにボタンがあったときは、こんなメソッドをセットしていました...
@@ -123,6 +123,9 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewWillAppear(animated)
         //
         GMT = Date()
+        
+        cities = realm.objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
+        
         tableView.reloadData()
         //tableView.hoge(vc: self)
         
