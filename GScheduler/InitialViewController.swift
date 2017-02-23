@@ -77,43 +77,39 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         // 編集ボタンを左上に配置
         //navigationItem.leftBarButtonItem = editButtonItem
         
+        // フォーマッタの設定
+        setConfigToFormatter(fm: &formatter, cellIdx: 0)
+        setConfigToFormatter2(fm: &formatter2, cellIdx: 0)
+        
+        formatter.dateFormat = "HH:mm"
+        
+        formatter2.dateStyle = .medium
+        formatter2.timeStyle = .none
+        
+        
         // 初回起動時のみ
         if cities.count == 0 {
+            
             print("初回起動だと 判定された！！！")
             initialEnrollCities()
             
             // empty用データでlabelを満たす
-            cityNameLabel.text = ""
-            MDYLabel.text = ""
-            timeLabel.text = ""
+//            cityNameLabel.text = ""
+//            MDYLabel.text = ""
+//            timeLabel.text = ""
         }
         
         // 初回起動時でなければ、テーブルビューの先頭の都市データを表示
         else {
-        
-            var formatter = DateFormatter()
-            // 左欄、日付と西暦を表示させるためのフォーマッタ
-            var formatter2 = DateFormatter()
             
-            // フォーマッタの初期設定
-            setConfigToFormatter(fm: &formatter, cellIdx: 0)
-            setConfigToFormatter2(fm: &formatter2, cellIdx: 0)
-            
-            
-            // 1/25追記
-            formatter.dateFormat = "HH:mm"
-            
-            formatter2.dateStyle = .medium
-            formatter2.timeStyle = .none
-            
-            cityNameLabel.text = cities[0].name.uppercased()
-            cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-            
-            MDYLabel.text = formatter2.string(from: GMT)
-            MDYLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-            
-            timeLabel.text = formatter.string(from: GMT)
-            timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+//            cityNameLabel.text = cities[0].name.uppercased()
+//            cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+//            
+//            MDYLabel.text = formatter2.string(from: GMT)
+//            MDYLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+//            
+//            timeLabel.text = formatter.string(from: GMT)
+//            timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         }
         
 //        let customCell1 = tableView.dequeueReusableCell(withIdentifier: "Cell", for: IndexPath(row: 0, section: 0)) as! InitialTableViewCell
@@ -137,13 +133,28 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         tableView.reloadData()
         
-        // self.timeLabel.text = formatter.string(from: GMT)
-       
         if !cities.isEmpty {
-            self.cityNameLabel.text  = cities[0].name
-            self.MDYLabel.text       = cities[0].name
-            self.timeLabel.text      = cities[0].name
-            self.timeAheadLabel.text = cities[0].name
+            
+            print("フォーマットしろや")
+            
+            cityNameLabel.text = cities[0].name.uppercased()
+            cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+            
+            var tmpFormat = DateFormatter()
+            setConfigToFormatter2(fm: &tmpFormat, cellIdx: 0)
+            tmpFormat.dateStyle = .medium
+            tmpFormat.timeStyle = .none
+            
+            let GMT = Date()
+            
+            MDYLabel.text = tmpFormat.string(from: GMT)
+            MDYLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+            
+            tmpFormat.dateFormat = "HH:mm"
+            
+            timeLabel.text = tmpFormat.string(from: GMT)
+            timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+            
         }
         
 
@@ -245,15 +256,15 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     func setConfigToFormatter(fm: inout DateFormatter, cellIdx: Int) {
         // タイムゾーン
         let timeZone = cities[cellIdx].timeZone
-        fm.dateFormat = "MM/dd HH:mm"
         fm.timeZone = TimeZone(abbreviation: timeZone)
+        
+        fm.dateFormat = "MM/dd HH:mm"
     }
     
     // フォーマッタの初期設定
     func setConfigToFormatter2(fm: inout DateFormatter, cellIdx: Int) {
         // タイムゾーン
         let timeZone = cities[cellIdx].timeZone
-        //fm.dateFormat = "YYYY / MM / dd"
         fm.timeZone = TimeZone(abbreviation: timeZone)
     }
     
