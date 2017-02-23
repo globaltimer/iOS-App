@@ -244,13 +244,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if editingStyle == .delete {
             
-            // let deletingCity = cities[indexPath.row]
-            
             try! realm.write {
                 
-                // deletingCity.isSelected = false
-                
                 for city in cities {
+                    
                     if city.orderNo < indexPath.row {
                         // 何もなし
                         print("\(city.name)は なにもなし！")
@@ -277,6 +274,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         fm.dateFormat = "MM/dd HH:mm"
         fm.timeZone = TimeZone(abbreviation: timeZone)
     }
+    
     
     // フォーマッタの初期設定
     func setConfigToFormatter2(fm: inout DateFormatter, cellIdx: Int) {

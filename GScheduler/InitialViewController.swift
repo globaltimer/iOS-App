@@ -34,6 +34,13 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     
     let realm = try! Realm()
     
+    /* フォーマッタ */
+    var formatter = DateFormatter()
+    // 左欄、日付と西暦を表示させるためのフォーマッタ
+    var formatter2 = DateFormatter()
+    
+    
+    
     // 全都市リスト --> ユーザーにより追加された都市のみ抽出
 //    let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "id", ascending: true)
 
@@ -122,23 +129,24 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         super.viewWillAppear(animated)
         //
+        print("こいや")
+        //
         GMT = Date()
         
         cities = realm.objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
         
         tableView.reloadData()
-        //tableView.hoge(vc: self)
-        
-        print("こいや")
-        
-        
         
         // self.timeLabel.text = formatter.string(from: GMT)
+       
+        if !cities.isEmpty {
+            self.cityNameLabel.text  = cities[0].name
+            self.MDYLabel.text       = cities[0].name
+            self.timeLabel.text      = cities[0].name
+            self.timeAheadLabel.text = cities[0].name
+        }
         
-        
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: IndexPath(row: 0, section: 0)) as! InitialTableViewCell
-//        
-//        print(cell.cityNameLabel.text as Any)
+
     }
     
 
@@ -161,9 +169,9 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var formatter = DateFormatter()
-        // 左欄、日付と西暦を表示させるためのフォーマッタ
-        var formatter2 = DateFormatter()
+//        var formatter = DateFormatter()
+//        // 左欄、日付と西暦を表示させるためのフォーマッタ
+//        var formatter2 = DateFormatter()
         
         // フォーマッタの初期設定
         setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
