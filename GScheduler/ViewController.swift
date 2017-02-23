@@ -63,12 +63,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         GMT = Date()
         tableView.reloadData()
-        print(cities)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //
+        // ビュー消滅時、編集モードを解除しているけど、ボタンの設定が解除されない
+        tableView.isEditing = false
     }
     
     
     override func setEditing(_ editing: Bool, animated: Bool) {
-        
         super.setEditing(editing, animated: animated)
         tableView.isEditing = editing
     }
@@ -113,7 +118,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
         
-        
+    
         cell.timeLabel.kern(kerningValue: 2)
 
         

@@ -2,6 +2,22 @@
 import UIKit
 import RealmSwift
 
+extension UITableView {
+    
+    func hoge(vc: InitialViewController) {
+        
+        print("ほげほげ！黒魔術")
+        self.reloadData()
+        //
+        let yearAndMonthLabel = (self.cellForRow(at: IndexPath(row: 0, section: 0)) as! InitialTableViewCell).yearAndMonthLabel.text
+        
+        let timelabel = (self.cellForRow(at: IndexPath(row: 0, section: 0)) as! InitialTableViewCell).timeLabel.text
+        
+        vc.MDYLabel.text = yearAndMonthLabel
+        vc.timeLabel.text = timelabel
+    }
+}
+
 class InitialViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     /* UI Components */
@@ -100,8 +116,12 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewWillAppear(animated)
         //
         GMT = Date()
-        tableView.reloadData()
-        print(cities)
+        //tableView.reloadData()
+        tableView.hoge(vc: self)
+        
+        print("こいや")
+        
+        
         
         // self.timeLabel.text = formatter.string(from: GMT)
         
