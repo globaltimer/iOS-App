@@ -147,7 +147,14 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
                 
                 let id = indexPath.row
                 
-                let orderNo = realm.objects(StoredCity.self).filter("isSelected == true").count
+                let orderNo: Int
+                
+                // もしまだユーザーによってaddされていなければ、orderNo付与
+                if realm.object(ofType: StoredCity.self, forPrimaryKey: id)?.orderNo == -1 {
+                    orderNo = realm.objects(StoredCity.self).filter("isSelected == true").count
+                } else { // 既にaddされている都市がまた選ばれたら、OrderNoはそのまま
+                    orderNo = (realm.object(ofType: StoredCity.self, forPrimaryKey: id)?.orderNo)!
+                }
                 
                 realm.create(StoredCity.self, value: ["id": id, "isSelected": true, "orderNo": orderNo], update: true)
                 
@@ -172,28 +179,35 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     
+    
+    
+    //////////////////
+    // インデックス  ///
+    //////////////////
+    
+    
     //var sections : [(index: Int, length :Int, title: String)] = Array()
     var sections = ["1", "2", "3"]
     
 
     /// セクションのタイトルを返す
-     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section]
     }
     
-     func sectionIndexTitles(
+    func sectionIndexTitles(
         for tableView: UITableView) -> [String]? {
         //return sections.map { $0.title }
         return ["A", "B", "C", "D"]
     }
     
-    
-     func tableView(_ tableView: UITableView,
-                            sectionForSectionIndexTitle title: String,
-                            at index: Int) -> Int {
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title:String, at index: Int) -> Int {
         return index
     }
     
+    
+    
+    ////////
     
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
