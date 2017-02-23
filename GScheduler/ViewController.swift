@@ -174,7 +174,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
-        print("こんにちは")
+        if sourceIndexPath == destinationIndexPath {
+            print("とんだ罠だったな")
+            return
+        }
+        
         
         try! realm.write {
             
@@ -184,23 +188,55 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let indexFrom = sourceIndexPath.row
             let indexTo   = destinationIndexPath.row
             
-
-            let cities = realm.objects(StoredCity.self)
-            
             for city in cities {
+                
+                // case1: from > to(上に行く場合)
+                if indexFrom > indexTo {
+                    
+                    // なにも処理せず次のセルの判定へ
+                    if indexFrom < city.orderNo {
+                        print("\(city.name)はスルーで。")
+                        continue
+                    }
+                    
+                    // もうひとつ、
+                    if city.orderNo < indexTo {
+                        print("\(city.name)はスルーで。")
+                        continue
+                    }
+                    
+                }
+                
+                // case2: from < to(下に行く場合)
+                if indexFrom < indexTo {
+                    // なにも処理せず次のセルの判定へ
+                    if indexFrom > city.orderNo {
+                        print("\(city.name)はスルーで。")
+                        continue
+                    }
+                    
+                    // もうひとつ、
+                    if indexTo < city.orderNo {
+                        print("\(city.name)はスルーで。")
+                        continue
+                    }
+
+                }
+                
+                let tmp = city.orderNo
                 
                 if city.orderNo < indexFrom {
                     city.orderNo += 1
-                }
-                
-                else if city.orderNo > indexFrom {
+                } else if city.orderNo > indexFrom {
                     city.orderNo -= 1
-                }
-                
-                else if city.orderNo == indexFrom {
+                } else if city.orderNo == indexFrom {
                     city.orderNo = indexTo
                 }
+                
+                print("\(city.name)は、\(tmp)から \(city.orderNo)に 移動しました")
             }
+            
+            print("")
         }
     }
     
