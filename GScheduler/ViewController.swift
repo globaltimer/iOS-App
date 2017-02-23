@@ -124,8 +124,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.timeLabel.text     = formatter.string(from: GMT)
         cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
-        
-    
         cell.timeLabel.kern(kerningValue: 2)
 
         
@@ -246,12 +244,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if editingStyle == .delete {
             
-            let delatingCity = cities[indexPath.row]
-            //
+            // let deletingCity = cities[indexPath.row]
+            
             try! realm.write {
                 
-                delatingCity.isSelected = false
+                // deletingCity.isSelected = false
                 
+                for city in cities {
+                    if city.orderNo < indexPath.row {
+                        // 何もなし
+                        print("\(city.name)は なにもなし！")
+                    } else if city.orderNo > indexPath.row {
+                        city.orderNo -= 1
+                        print("\(city.name)の orderNoが \(city.orderNo)に なった！")
+                    } else if city.orderNo == indexPath.row {
+                        city.orderNo = -1
+                        city.isSelected = false
+                        print("\(city.name)が 削除！")
+                    }
+                }
             }
             
             tableView.deleteRows(at: [indexPath], with: .fade)
