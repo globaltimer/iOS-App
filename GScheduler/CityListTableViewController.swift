@@ -142,14 +142,20 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         try! realm.write {
             
             if (searchBar.text?.characters.count)! == 0 {
+                
                 let id = indexPath.row
+                
                 realm.create(StoredCity.self, value: ["id": id, "isSelected": true], update: true)
                 print("\(cities[indexPath.row].name) was enrolled!")
-            } else {
+                
+            } else {  // フィルタされた状態でセルがクリックされた場合
                 
                 let id = filteredCities[indexPath.row].id
+                
                 realm.create(StoredCity.self, value: ["id": id, "isSelected": true], update: true)
-                print("\(cities[indexPath.row].name) was enrolled!")
+                
+                print("\(filteredCities[indexPath.row].name) was enrolled!")
+                
             }
         }
         

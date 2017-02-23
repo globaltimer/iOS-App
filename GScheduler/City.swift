@@ -14,12 +14,11 @@ class StoredCity: Object {
     
     // 管理用 ID。プライマリーキー
     dynamic var id = 0
-
     dynamic var name = ""
-    
     dynamic var timeZone = ""
-    
     dynamic var isSelected = false
+    
+    dynamic var orderNo = -1
 
     /**
      id をプライマリーキーとして設定

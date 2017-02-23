@@ -9,12 +9,12 @@ extension UITableView {
         print("ほげほげ！黒魔術")
         self.reloadData()
         //
-        let yearAndMonthLabel = (self.cellForRow(at: IndexPath(row: 0, section: 0)) as! InitialTableViewCell).yearAndMonthLabel.text
+        //let yearAndMonthLabel = (self.cellForRow(at: IndexPath(row: 0, section: 0)) as! InitialTableViewCell).yearAndMonthLabel.text
         
-        let timelabel = (self.cellForRow(at: IndexPath(row: 0, section: 0)) as! InitialTableViewCell).timeLabel.text
+        //let timelabel = (self.cellForRow(at: IndexPath(row: 0, section: 0)) as! InitialTableViewCell).timeLabel.text
         
-        vc.MDYLabel.text = yearAndMonthLabel
-        vc.timeLabel.text = timelabel
+//        vc.MDYLabel.text = yearAndMonthLabel
+        //vc.timeLabel.text = timelabel
     }
 }
 
@@ -33,9 +33,11 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     var GMT = Date()
     
     let realm = try! Realm()
-    // 全都市リスト --> ユーザーにより追加された都市のみ抽出
-    let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "id", ascending: true)
     
+    // 全都市リスト --> ユーザーにより追加された都市のみ抽出
+//    let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "id", ascending: true)
+
+    let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
 
     
     // 昔、ここにボタンがあったときは、こんなメソッドをセットしていました...
@@ -59,6 +61,11 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.dataSource = self
         //
         print("何度でも呼ばれるぜ！！")
+        //
+        ///Users/<username>/Library/Developer/CoreSimulator/Devices/<simulator-uuid>/data/Containers/Data/Application/<application-uuid>/Documents/default.realm
+
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
         
         // 編集ボタンを左上に配置
         //navigationItem.leftBarButtonItem = editButtonItem
@@ -116,8 +123,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewWillAppear(animated)
         //
         GMT = Date()
-        //tableView.reloadData()
-        tableView.hoge(vc: self)
+        tableView.reloadData()
+        //tableView.hoge(vc: self)
         
         print("こいや")
         
@@ -131,16 +138,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
 //        print(cell.cityNameLabel.text as Any)
     }
     
-    
-    override func viewDidAppear(_ animated: Bool) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: IndexPath(row: 0, section: 0)) as! InitialTableViewCell
-        
-        print(cell.cityNameLabel.text as Any)
-        
-        
-        let pickerView = UIPickerView()
-    }
-    
+
     
     // -MARK: TableView
     
@@ -269,7 +267,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         var cities: [StoredCity] = []
         
         for (idx, value) in citySeed.enumerated() {
-            cities.append(StoredCity(id: idx, name: value.name, timeZone: value.timeZone))
+            cities.append(StoredCity(id: idx, name: value.name, timeZone: value.timeZone, isSelected: false))
         }
         
         try! realm.write {

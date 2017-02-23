@@ -17,7 +17,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var GMT = Date()
     
     let realm = try! Realm()
-    let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "id", ascending: true)
+//    let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "id", ascending: true)
+
+    let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
     
     
     // 次の画面から逆流してくる、選択された都市名
@@ -47,7 +49,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // 初回起動時のみ
         if try! Realm().objects(StoredCity.self).count == 0 {
             print("初回起動だと 判定された！！！")
-            initialEnrollCities()
+            // initialEnrollCities()
         }
     }
     
@@ -169,6 +171,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         print("こんにちは")
         
+        try! realm.write {
+            
+            print("ターゲットのセル: \(sourceIndexPath.row)")
+            print("移動先: \(destinationIndexPath.row)")
+            
+            let indexFrom = sourceIndexPath.row
+            let indexTo   = destinationIndexPath.row
+            
+
+            let cities = realm.objects(StoredCity.self)
+            
+            for city in cities {
+                
+                if city.orderNo < indexFrom {
+                    city.orderNo += 1
+                }
+                
+                else if city.orderNo > indexFrom {
+                    city.orderNo -= 1
+                }
+                
+                else if city.orderNo == indexFrom {
+                    city.orderNo = indexTo
+                }
+            }
+        }
     }
     
     
@@ -178,15 +206,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if editingStyle == .delete {
             
             let delatingCity = cities[indexPath.row]
-            
             //
             try! realm.write {
                 
                 delatingCity.isSelected = false
+                
             }
             
             tableView.deleteRows(at: [indexPath], with: .fade)
-
         }
     }
     
@@ -210,51 +237,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
-    }
-    
-    
-    // 初回アプリ起動時に1回のみ、すべての都市をデータベースに登録
-    func initialEnrollCities() {
-        
-        let citySeed = [
-            (name: "Vancouver", timeZone: "PST"),
-            (name: "Tokyo",     timeZone: "JST"),
-            (name: "Venice",    timeZone: "CET"),
-            (name: "London",    timeZone: "GMT"),
-            //
-//            (name: "Vuver", timeZone: "PST"),
-//            (name: "Tofdfkyo",     timeZone: "JST"),
-//            (name: "Venfasdice",    timeZone: "CET"),
-//            (name: "Longsfadon",    timeZone: "GMT"),
-//            (name: "Vafgfsdancouver", timeZone: "PST"),
-//            (name: "Tofaskyo",     timeZone: "JST"),
-//            (name: "Vengsice",    timeZone: "CET"),
-//            (name: "Lon  svggsdfdon",    timeZone: "GMT"),
-//            (name: "Vansdscouver", timeZone: "PST"),
-//            (name: "Tosgrekyo",     timeZone: "JST"),
-//            (name: "Vegsfnice",    timeZone: "CET"),
-//            (name: "Lovndon",    timeZone: "GMT"),
-//            (name: "V456ancouver", timeZone: "PST"),
-//            (name: "To56vkyo",     timeZone: "JST"),
-//            (name: "Vevegfdvnice",    timeZone: "CET"),
-//            (name: "Losaghvwendon",    timeZone: "GMT")
-        ]
-        
-        var cities: [StoredCity] = []
-        
-        for (idx, value) in citySeed.enumerated() {
-            
-            cities.append(StoredCity(id: idx, name: value.name, timeZone: value.timeZone))
-            
-        }
-        
-        try! realm.write {
-            
-            for city in cities {
-                self.realm.add(city, update: true)
-                print("\(city.name) was saved!")
-            }
-        }
     }
 }
 
