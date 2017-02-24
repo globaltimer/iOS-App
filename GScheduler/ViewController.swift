@@ -12,7 +12,6 @@ extension UILabel {
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-
     // GMT標準時刻
     var GMT = Date()
     
@@ -21,14 +20,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
     
-    
-    // 次の画面から逆流してくる、選択された都市名
-    //var selectedCity: StoredCity? = nil
-    
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var timeLabel: UILabel!
-    
     
     override func viewDidLoad() {
         
@@ -39,12 +32,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         tableView.delegate = self
         tableView.dataSource = self
-        //
-        print("何度でも呼ばれるぜ！！")
         
         // 編集ボタンを左上に配置
         navigationItem.leftBarButtonItem = editButtonItem
-        //        
         
         // 初回起動時のみ
         if try! Realm().objects(StoredCity.self).count == 0 {
@@ -65,8 +55,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         GMT = Date()
         
-        print("きてんだよおら")
-        
         cities = realm.objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
         
         tableView.reloadData()
@@ -81,7 +69,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     override func setEditing(_ editing: Bool, animated: Bool) {
+        
         super.setEditing(editing, animated: animated)
+        
         tableView.isEditing = editing
     }
     
@@ -164,19 +154,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return true
     }
     
-    
     // 並び替え可能なセルの指定(今回は"すべて")
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
+    // セルの並び替えが発動した時の処理
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
         if sourceIndexPath == destinationIndexPath {
             print("とんだ罠だったな")
             return
         }
-        
         
         try! realm.write {
             
@@ -237,6 +226,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("")
         }
     }
+    
+    
+    
+//    - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
+
+//    func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+    
+   editrow
     
     
     // セルをdeleteするときの処理
