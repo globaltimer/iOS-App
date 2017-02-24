@@ -21,6 +21,16 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.dataSource = self
         
         searchBar.delegate = self
+        
+        searchBar.barTintColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        
+        for subView in searchBar.subviews {
+            for secondSubView in subView.subviews {
+                if secondSubView.isKind(of: UITextField.self) {
+                    secondSubView.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0).withAlphaComponent(1)
+                }
+            }
+        }
     }
     
 
@@ -44,17 +54,7 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if (searchBar.text?.characters.count)! > 0 {
-            return filteredCities.count
-        }
-        
-        return cities.count
-    }
-
-    
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NeoCell    // as! AddCityViewCell
         
@@ -182,24 +182,47 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     // インデックス  ///
     //////////////////
     
-    
-    //var sections : [(index: Int, length :Int, title: String)] = Array()
-    var sections = ["1", "2", "3"]
-    
-
-    /// セクションのタイトルを返す
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if (searchBar.text?.characters.count)! > 0 {
+            return filteredCities.count
+        }
+        
+        return cities.count
+    }
+    
+    var sections = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+    
     
     func sectionIndexTitles(
         for tableView: UITableView) -> [String]? {
         //return sections.map { $0.title }
-        return ["A", "B", "C", "D"]
+        print("はげとる")
+        return ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     }
     
+    /// セクションのタイトルを返す
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        print("セクションのタイトル: \(sections[section])")
+        
+        return sections[section]
+    }
+    
+    
+    
+    // インデックスリストをタップ時のコールバック
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title:String, at index: Int) -> Int {
-        return index
+        
+        print("おら！！")
+        
+//        return 15
+        
+         return index
     }
     
     
