@@ -33,23 +33,8 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-
-    // テキストフィールド入力開始前に呼ばれる
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.showsCancelButton = true
-        return true
-    }
     
-    // キャンセルボタンが押された時に呼ばれる
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
-        self.view.endEditing(true)
-        searchBar.text = ""
-        self.tableView.reloadData()
-    }
-
-    
-     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
     
@@ -183,7 +168,7 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     //////////////////
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return sections.count // 26
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -195,11 +180,11 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         return cities.count
     }
     
-    var sections = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+    var sections = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     
-    func sectionIndexTitles(
-        for tableView: UITableView) -> [String]? {
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        
         //return sections.map { $0.title }
         print("はげとる")
         return ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -219,16 +204,13 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title:String, at index: Int) -> Int {
         
         print("おら！！")
-        
-//        return 15
-        
-         return index
+
+        return index
     }
-    
-    
     
     ////////
     
+    // MARK: search bar
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
@@ -244,6 +226,21 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         filteredCities = cities.filter{ $0.name.lowercased().contains((searchWord?.lowercased())!) }
         
         tableView.reloadData()
+    }
+    
+    
+    // テキストフィールド入力開始前に呼ばれる
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.showsCancelButton = true
+        return true
+    }
+    
+    // キャンセルボタンが押された時に呼ばれる
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        self.view.endEditing(true)
+        searchBar.text = ""
+        self.tableView.reloadData()
     }
     
     
