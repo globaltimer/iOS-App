@@ -20,13 +20,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
     
+    // ピンされたcityのセル番号
+    var pinedCityCell = 0
+    
+    
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var timeLabel: UILabel!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
         //
         //print(Realm.Configuration.defaultConfiguration.fileURL!)
         //
@@ -119,10 +123,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
         
-        if indexPath.row == 0 {
+        if indexPath.row == pinedCityCell {
             let a = "\u{1F4CC} "
             cell.cityNameLabel.text = a + cities[indexPath.row].name.uppercased()
-
         }
         
         
@@ -148,18 +151,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("hoge")
-    }
+
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        print("おらおら")
+
+        // ピン都市を更新
+        pinedCityCell = indexPath.row
+        
+//        let cell = tableView.cellForRow(at: indexPath) as! TableViewCell
+//        cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
 //        
-//        print("おらおら")
-//        
+        tableView.reloadData()
+        
+        
+        
 //        let nex = self.storyboard!.instantiateViewController(withIdentifier: "Initial")
 //        self.present(nex, animated: true, completion: nil)
-//        
-//    }
+        
+    }
     
     
     // セルが削除が可能なことを伝えるメソッド

@@ -20,6 +20,13 @@ extension UITableView {
 
 class InitialViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    // ピンされた都市のID
+    var pinedCityCell = 0
+
+    
+    
+    
+    
     // タイム調整バフ・デバフ
     var adjustTimeStat = 0
     
