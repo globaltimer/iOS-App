@@ -29,6 +29,24 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView:      UITableView!
     
     
+    // 2/23追加
+    @IBAction func adjustTimeBeforeButton(_ sender: Any) {
+        
+    }
+    
+    @IBOutlet weak var adjustTimeBeforeLabel: UILabel!
+    
+    @IBOutlet weak var adjustTimeNowLabel: UILabel!
+    
+    @IBOutlet weak var adjustTimeAheadLabel: UILabel!
+    
+    @IBAction func adjustTimeAheadButton(_ sender: Any) {
+    }
+    
+    // タイム調整バフ・デバフ
+    let adjustTimeStat = 0
+    
+    
     // GMT標準時刻
     var GMT = Date()
     
@@ -38,7 +56,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     var formatter = DateFormatter()
     // 左欄、日付と西暦を表示させるためのフォーマッタ
     var formatter2 = DateFormatter()
-    
     
     
     // 全都市リスト --> ユーザーにより追加された都市のみ抽出
@@ -69,8 +86,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         //
         print("何度でも呼ばれるぜ！！")
         //
-        ///Users/<username>/Library/Developer/CoreSimulator/Devices/<simulator-uuid>/data/Containers/Data/Application/<application-uuid>/Documents/default.realm
 
+        // Realmのパス
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
         
@@ -89,35 +106,9 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // 初回起動時のみ
         if cities.count == 0 {
-            
             print("初回起動だと 判定された！！！")
             initialEnrollCities()
-            
-            // empty用データでlabelを満たす
-//            cityNameLabel.text = ""
-//            MDYLabel.text = ""
-//            timeLabel.text = ""
         }
-        
-        // 初回起動時でなければ、テーブルビューの先頭の都市データを表示
-        else {
-            
-//            cityNameLabel.text = cities[0].name.uppercased()
-//            cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-//            
-//            MDYLabel.text = formatter2.string(from: GMT)
-//            MDYLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-//            
-//            timeLabel.text = formatter.string(from: GMT)
-//            timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-        }
-        
-//        let customCell1 = tableView.dequeueReusableCell(withIdentifier: "Cell", for: IndexPath(row: 0, section: 0)) as! InitialTableViewCell
-//        
-//            
-//        print(customCell1.cityNameLabel.text)
-
-        
     }
     
     
@@ -146,6 +137,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             tmpFormat.timeStyle = .none
             
             let GMT = Date()
+            let before30m = Date(timeInterval: -60*30, since: GMT)
+            let after30m  = Date(timeInterval:  60*30, since: GMT)
             
             MDYLabel.text = tmpFormat.string(from: GMT)
             MDYLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
@@ -155,9 +148,19 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             timeLabel.text = tmpFormat.string(from: GMT)
             timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
             
-        }
-        
+            // 2/23追記
+            
+            adjustTimeBeforeLabel.text = tmpFormat.string(from: before30m)
+            adjustTimeBeforeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+            
+            adjustTimeNowLabel.text = tmpFormat.string(from: GMT)
+            adjustTimeNowLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+            
+            adjustTimeAheadLabel.text = tmpFormat.string(from: after30m)
+            adjustTimeAheadLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
 
+            
+        }
     }
     
 
