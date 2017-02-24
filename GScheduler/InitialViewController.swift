@@ -20,6 +20,9 @@ extension UITableView {
 
 class InitialViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    // タイム調整バフ・デバフ
+    var adjustTimeStat = 0
+    
     /* UI Components */
     @IBOutlet weak var cityNameLabel:  UILabel!
     @IBOutlet weak var MDYLabel:       UILabel!
@@ -32,6 +35,34 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     // 2/23追加
     @IBAction func adjustTimeBeforeButton(_ sender: Any) {
         
+        adjustTimeStat -= 1
+        
+        print("バフレベル: \(adjustTimeStat)")
+        
+        var tmpFormat = DateFormatter()
+        
+        setConfigToFormatter2(fm: &tmpFormat, cellIdx: 0)
+
+        tmpFormat.dateFormat = "HH:mm"
+
+        let bef30 = (60 * 30 * (adjustTimeStat-1))
+        let new   = (60 * 30 * (adjustTimeStat+0))
+        let aft30 = (60 * 30 * (adjustTimeStat+1))
+        
+        let GMT = Date()
+        
+        let before30m = Date(timeInterval:  TimeInterval(bef30), since: GMT)
+        let newtral   = Date(timeInterval:  TimeInterval(new), since: GMT)
+        let after30m  = Date(timeInterval:  TimeInterval(aft30), since: GMT)
+        
+        adjustTimeBeforeLabel.text = tmpFormat.string(from: before30m)
+        adjustTimeNowLabel.text = tmpFormat.string(from: newtral)
+        adjustTimeAheadLabel.text = tmpFormat.string(from: after30m)
+        
+        
+        timeLabel.text = tmpFormat.string(from: newtral)
+        
+        
     }
     
     @IBOutlet weak var adjustTimeBeforeLabel: UILabel!
@@ -41,10 +72,10 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var adjustTimeAheadLabel: UILabel!
     
     @IBAction func adjustTimeAheadButton(_ sender: Any) {
+        adjustTimeStat += 1
     }
     
-    // タイム調整バフ・デバフ
-    let adjustTimeStat = 0
+
     
     
     // GMT標準時刻
@@ -158,8 +189,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             
             adjustTimeAheadLabel.text = tmpFormat.string(from: after30m)
             adjustTimeAheadLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-
-            
         }
     }
     
