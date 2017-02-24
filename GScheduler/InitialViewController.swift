@@ -88,7 +88,48 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var adjustTimeAheadLabel: UILabel!
     
     @IBAction func adjustTimeAheadButton(_ sender: Any) {
+        
+        if cities.isEmpty {
+            print("なにもしない")
+            return
+        }
+        
         adjustTimeStat += 1
+        
+        print("バフレベル: \(adjustTimeStat)")
+        
+        var tmpFormat2 = DateFormatter()
+        
+        setConfigToFormatter2(fm: &tmpFormat2, cellIdx: 0)
+        
+        tmpFormat2.dateFormat = "HH:mm"
+        
+        let bef30 = (60 * 30 * (adjustTimeStat-1))
+        let new   = (60 * 30 * (adjustTimeStat+0))
+        let aft30 = (60 * 30 * (adjustTimeStat+1))
+        
+        let GMT = Date()
+        
+        let before30m = Date(timeInterval:  TimeInterval(bef30), since: GMT)
+        let newtral   = Date(timeInterval:  TimeInterval(new), since: GMT)
+        let after30m  = Date(timeInterval:  TimeInterval(aft30), since: GMT)
+        
+        adjustTimeBeforeLabel.text = tmpFormat2.string(from: before30m)
+        adjustTimeNowLabel.text = tmpFormat2.string(from: newtral)
+        adjustTimeAheadLabel.text = tmpFormat2.string(from: after30m)
+        
+        
+        timeLabel.text = tmpFormat2.string(from: newtral)
+        
+        
+        tmpFormat2.dateFormat = "MM/dd YYYY"
+        //tmpFormat2.dateStyle = .medium
+        //tmpFormat2.timeStyle = .none
+        
+        MDYLabel.text = tmpFormat2.string(from: newtral)
+        
+        // テーブル再描画
+        tableView.reloadData()
     }
     
 
@@ -254,13 +295,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             setConfigToFormatter(fm: &tmpFormat, cellIdx: indexPath.row)
             
             tmpFormat.dateFormat = "HH:mm"
-
-            
-            // tmpFormat.dateFormat = "HH:mm"
-            
-//            let bef30 = (60 * 30 * (adjustTimeStat-1))
-//            let new   = (60 * 30 * (adjustTimeStat+0))
-//            let aft30 = (60 * 30 * (adjustTimeStat+1))
             
             let GMT = Date()
             let new = 60 * 30 * (adjustTimeStat+0)
