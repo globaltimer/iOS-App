@@ -104,14 +104,6 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
             cell.diffGMTLabel.text = "GMT ±00:00"
         }
         
-        
-        
-        
-        /////
-    
-        
-        
-        
         cell.diffGMTLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
         
         cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
@@ -126,19 +118,32 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
 //        self.dismiss(animated: true, completion: nil)
         
         //Navigation Controllerを取得
-        let nav = self.navigationController!
+        // ここ、モーダル遷移でこの画面に来ているとここで落ちる
         
-        //呼び出し元のView Controllerを遷移履歴から取得しパラメータを渡す
-        // ここが "2"の理由がわからねえ。。。
-        let InfoVc = nav.viewControllers[nav.viewControllers.count-2] as! ViewController
         
-        if (searchBar.text?.characters.count)! > 0 {
-                        
-            InfoVc.selectedCity = filteredCities[indexPath.row]
-            
-        } else {
-            InfoVc.selectedCity = cities[indexPath.row]
-        }
+        
+        
+        
+        
+//        let nav = self.navigationController!
+//        
+//        //呼び出し元のView Controllerを遷移履歴から取得しパラメータを渡す
+//        // ここが "2"の理由がわからねえ。。。
+//        let InfoVc = nav.viewControllers[nav.viewControllers.count-2] as! ViewController
+//        
+////        if (searchBar.text?.characters.count)! > 0 {
+//        if !((searchBar.text?.isEmpty)!) {
+//        
+//            InfoVc.selectedCity = filteredCities[indexPath.row]
+//            
+//        } else {
+//            InfoVc.selectedCity = cities[indexPath.row]
+//        }
+        
+        
+        
+        
+        
         
         
         try! realm.write {
@@ -174,8 +179,12 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
             }
         }
         
-        //閉じる
-        nav.popViewController(animated: true)
+        //閉じる(ナビゲーションバーで遷移してきたなら、こうすれば戻れるんだよ)
+        // nav.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
+        
+        
+        
     }
     
     
