@@ -69,9 +69,9 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         timeLabel.text = tmpFormat2.string(from: newtral)
         
         
-        tmpFormat2.dateFormat = "MM/dd YYYY"
-        //tmpFormat2.dateStyle = .medium
-        //tmpFormat2.timeStyle = .none
+        //tmpFormat2.dateFormat = "MM/dd YYYY"
+        tmpFormat2.dateStyle = .medium
+        tmpFormat2.timeStyle = .none
         
         MDYLabel.text = tmpFormat2.string(from: newtral)
         
@@ -122,9 +122,9 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         timeLabel.text = tmpFormat2.string(from: newtral)
         
         
-        tmpFormat2.dateFormat = "MM/dd YYYY"
-        //tmpFormat2.dateStyle = .medium
-        //tmpFormat2.timeStyle = .none
+        //tmpFormat2.dateFormat = "MM/dd YYYY"
+        tmpFormat2.dateStyle = .medium
+        tmpFormat2.timeStyle = .none
         
         MDYLabel.text = tmpFormat2.string(from: newtral)
         
@@ -417,7 +417,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 75
     }
     
     

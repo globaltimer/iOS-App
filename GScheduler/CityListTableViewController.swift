@@ -2,9 +2,6 @@
 import UIKit
 import RealmSwift
 
-
-//class CityListTableViewController: UITableViewController, UISearchBarDelegate {
-
 class CityListTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
@@ -13,11 +10,11 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     let realm = try! Realm()
     
     let cities = try! Realm().objects(StoredCity.self).sorted(byKeyPath: "id", ascending: true)
-    
     var filteredCities: [StoredCity] = []
     
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         //
         tableView.delegate = self
@@ -26,14 +23,6 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         searchBar.delegate = self
     }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        //
-        
-    }
-
- 
 
     // テキストフィールド入力開始前に呼ばれる
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
@@ -72,15 +61,27 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         if (searchBar.text?.characters.count)! > 0 {
             
             cell.cityNameLabel.text = filteredCities[indexPath.row].name
-            cell.diffGMTLabel.text = "hogehoge-"
+            
+            
+            //cell.diffGMTLabel.text = "hogehoge-"
+            
+            let fmt = DateFormatter()
+            
+            let timeZone = filteredCities[indexPath.row].timeZone
+            fmt.dateFormat = "ZZZZ"
+            fmt.timeZone = TimeZone(abbreviation: timeZone)
+            
+            cell.diffGMTLabel.text = fmt.string(from: Date())
+            
+            if cell.diffGMTLabel.text == "GMT" {
+                cell.diffGMTLabel.text = "GMT ±00:00"
+            }
 
             return cell
         }
         
-        cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
+        cell.cityNameLabel.text = cities[indexPath.row].name
         cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-        
-        
         
         ////
         var formatter = DateFormatter()
@@ -121,10 +122,6 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         // ここ、モーダル遷移でこの画面に来ているとここで落ちる
         
         
-        
-        
-        
-        
 //        let nav = self.navigationController!
 //        
 //        //呼び出し元のView Controllerを遷移履歴から取得しパラメータを渡す
@@ -140,11 +137,7 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
 //            InfoVc.selectedCity = cities[indexPath.row]
 //        }
         
-        
-        
-        
-        
-        
+
         
         try! realm.write {
             
@@ -182,12 +175,7 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         //閉じる(ナビゲーションバーで遷移してきたなら、こうすれば戻れるんだよ)
         // nav.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
-        
-        
-        
     }
-    
-    
     
     
     //////////////////
