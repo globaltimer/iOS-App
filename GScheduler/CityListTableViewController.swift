@@ -41,12 +41,13 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NeoCell    // as! AddCityViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NeoCell
         
+        
+        // リアルタイムサーチ時の挙動
         if (searchBar.text?.characters.count)! > 0 {
             
             cell.cityNameLabel.text = filteredCities[indexPath.row].name
-            
             
             //cell.diffGMTLabel.text = "hogehoge-"
             
@@ -64,6 +65,18 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
 
             return cell
         }
+        
+        
+        let head_character = sections[indexPath.section]
+        
+        print("都市のインデックスは、\(head_character)")
+        
+        let cities = self.cities.filter("name BEGINSWITH '\(head_character)'")
+        
+        
+        
+
+        
         
         cell.cityNameLabel.text = cities[indexPath.row].name
         cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
@@ -128,7 +141,21 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
             
             if (searchBar.text?.characters.count)! == 0 {
                 
-                let id = indexPath.row
+                //let id = indexPath.row
+                
+                let selectedCN = ((tableView.cellForRow(at: indexPath)) as! NeoCell).cityNameLabel.text
+                
+                let selectedCityName = selectedCN!
+                
+                print("タッチされた都市名はーーー、\(selectedCityName)")
+                
+                let tmp_id = realm.objects(StoredCity.self).filter("name == '\(selectedCityName)'").first?.id
+                
+                let id = tmp_id!
+                
+                print("タッチされた都市名のIDはーーー、\(id)")
+
+                print("ブレイク！")
                 
                 let orderNo: Int
                 
@@ -141,7 +168,7 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
                 
                 realm.create(StoredCity.self, value: ["id": id, "isSelected": true, "orderNo": orderNo], update: true)
                 
-                print("\(cities[indexPath.row].name) was enrolled!")
+                print("\(cities[id].name) was enrolled!")
                 
             } else {  // フィルタされた状態でセルがクリックされた場合
                 
@@ -174,10 +201,18 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if (searchBar.text?.characters.count)! > 0 {
+            
             return filteredCities.count
         }
         
-        return cities.count
+        let head_character = sections[section]
+        
+        let cityStartFromABC = cities.filter("name BEGINSWITH '\(head_character)'")
+        
+        return cityStartFromABC.count
+        
+        //return cities.count
+        
     }
     
     var sections = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -197,7 +232,6 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         
         return sections[section]
     }
-    
     
     
     // インデックスリストをタップ時のコールバック
@@ -242,8 +276,5 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         searchBar.text = ""
         self.tableView.reloadData()
     }
-    
-    
 }
-
 

@@ -34,9 +34,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.dataSource = self
         
         // 編集ボタンを左上に配置
-        if cities.count > 0 {
+//        if cities.count > 0 {
             navigationItem.leftBarButtonItem = editButtonItem
-        }
+//        }
         
         // 初回起動時のみ
         if try! Realm().objects(StoredCity.self).count == 0 {
@@ -95,7 +95,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
         setConfigToFormatter2(fm: &formatter2, cellIdx: indexPath.row)
 
-        
         // 1/25追記
         formatter.dateFormat = "HH:mm"
         
@@ -120,8 +119,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         
-        
-        
         cell.DayYearLabel.text  = formatter2.string(from: GMT)
         cell.DayYearLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
         
@@ -144,13 +141,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let nex = self.storyboard!.instantiateViewController(withIdentifier: "Initial")
-        self.present(nex, animated: true, completion: nil)
-        
+        print("hoge")
     }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        
+//        print("おらおら")
+//        
+//        let nex = self.storyboard!.instantiateViewController(withIdentifier: "Initial")
+//        self.present(nex, animated: true, completion: nil)
+//        
+//    }
     
     
     // セルが削除が可能なことを伝えるメソッド
