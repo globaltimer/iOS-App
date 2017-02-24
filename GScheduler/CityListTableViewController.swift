@@ -168,7 +168,7 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     //////////////////
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count // 26
+        return sections.count // 26だよ
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -186,7 +186,7 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         
         //return sections.map { $0.title }
-        print("はげとる")
+        print("はげとるな")
         return ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     }
     
