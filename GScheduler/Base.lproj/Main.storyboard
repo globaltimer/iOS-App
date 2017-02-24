@@ -101,7 +101,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1223" y="951"/>
+            <point key="canvasLocation" x="1127" y="137"/>
         </scene>
         <!--Set  Time-->
         <scene sceneID="ANy-6q-u42">
@@ -113,7 +113,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="0R9-ys-OfG"/>
+                        <segue destination="WOX-4z-qbf" kind="relationship" relationship="rootViewController" id="O71-UB-Ged"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dd5-Gj-G1v" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -426,7 +426,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BNW-N1-n4B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2030.625" y="949.64788732394368"/>
+            <point key="canvasLocation" x="1937" y="136"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="W6z-Mt-jJu">
@@ -639,7 +639,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4JO-W7-8jH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1222.5" y="137.32394366197184"/>
+            <point key="canvasLocation" x="1127" y="950"/>
         </scene>
         <!--Time Now-->
         <scene sceneID="DtI-jG-16q">
@@ -653,7 +653,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="WOX-4z-qbf" kind="relationship" relationship="rootViewController" id="dAF-mg-k8b"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="BgV-ce-ccf"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hiD-qN-fEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

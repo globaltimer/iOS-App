@@ -97,9 +97,9 @@
 				4402238C1DF3689A00774C30 /* Main.storyboard */,
 				440223881DF3689A00774C30 /* AppDelegate.swift */,
 				440223A81DF3E05600774C30 /* Model */,
-				448ABC291E397AC60005958C /* Initial View */,
 				44DA6E1A1DF53EF800417140 /* 1st Tab */,
-				44DA6E1B1DF53F1800417140 /* 2nd Tab */,
+				448ABC291E397AC60005958C /* 2nd Tab */,
+				44DA6E1B1DF53F1800417140 /* 3rd Tab */,
 				440223911DF3689A00774C30 /* LaunchScreen.storyboard */,
 				440223941DF3689A00774C30 /* Info.plist */,
 				440223A91DF4033900774C30 /* memo */,
@@ -130,12 +130,12 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		448ABC291E397AC60005958C /* Initial View */ = {
+		448ABC291E397AC60005958C /* 2nd Tab */ = {
 			isa = PBXGroup;
 			children = (
 				448ABC2A1E397AFB0005958C /* InitialViewController.swift */,
 			);
-			name = "Initial View";
+			name = "2nd Tab";
 			sourceTree = "<group>";
 		};
 		448ABC2C1E397BE60005958C /* Image */ = {
@@ -161,13 +161,13 @@
 			name = "1st Tab";
 			sourceTree = "<group>";
 		};
-		44DA6E1B1DF53F1800417140 /* 2nd Tab */ = {
+		44DA6E1B1DF53F1800417140 /* 3rd Tab */ = {
 			isa = PBXGroup;
 			children = (
 				44DA6E141DF52D4900417140 /* RegisteredTaskTimeViewController.swift */,
 				44DA6E1C1DF53F3F00417140 /* TaskRegisterViewController.swift */,
 			);
-			name = "2nd Tab";
+			name = "3rd Tab";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
