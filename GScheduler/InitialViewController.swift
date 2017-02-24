@@ -39,11 +39,11 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         print("バフレベル: \(adjustTimeStat)")
         
-        var tmpFormat = DateFormatter()
+        var tmpFormat2 = DateFormatter()
         
-        setConfigToFormatter2(fm: &tmpFormat, cellIdx: 0)
+        setConfigToFormatter2(fm: &tmpFormat2, cellIdx: 0)
 
-        tmpFormat.dateFormat = "HH:mm"
+        tmpFormat2.dateFormat = "HH:mm"
 
         let bef30 = (60 * 30 * (adjustTimeStat-1))
         let new   = (60 * 30 * (adjustTimeStat+0))
@@ -55,13 +55,19 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         let newtral   = Date(timeInterval:  TimeInterval(new), since: GMT)
         let after30m  = Date(timeInterval:  TimeInterval(aft30), since: GMT)
         
-        adjustTimeBeforeLabel.text = tmpFormat.string(from: before30m)
-        adjustTimeNowLabel.text = tmpFormat.string(from: newtral)
-        adjustTimeAheadLabel.text = tmpFormat.string(from: after30m)
+        adjustTimeBeforeLabel.text = tmpFormat2.string(from: before30m)
+        adjustTimeNowLabel.text = tmpFormat2.string(from: newtral)
+        adjustTimeAheadLabel.text = tmpFormat2.string(from: after30m)
         
         
-        timeLabel.text = tmpFormat.string(from: newtral)
+        timeLabel.text = tmpFormat2.string(from: newtral)
         
+        
+        tmpFormat2.dateFormat = "MM/dd YYYY"
+        //tmpFormat2.dateStyle = .medium
+        //tmpFormat2.timeStyle = .none
+        
+        MDYLabel.text = tmpFormat2.string(from: newtral)
         
     }
     
@@ -125,14 +131,14 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         // 編集ボタンを左上に配置
         //navigationItem.leftBarButtonItem = editButtonItem
         
-        // フォーマッタの設定
-        setConfigToFormatter(fm: &formatter, cellIdx: 0)
-        setConfigToFormatter2(fm: &formatter2, cellIdx: 0)
-        
-        formatter.dateFormat = "HH:mm"
-        
-        formatter2.dateStyle = .medium
-        formatter2.timeStyle = .none
+//        // フォーマッタの設定
+//        setConfigToFormatter(fm: &formatter, cellIdx: 0)
+//        setConfigToFormatter2(fm: &formatter2, cellIdx: 0)
+//        
+//        formatter.dateFormat = "HH:mm"
+//        
+//        formatter2.dateStyle = .medium
+//        formatter2.timeStyle = .none
         
         
         // 初回起動時のみ
@@ -154,6 +160,21 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         cities = realm.objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
         
         tableView.reloadData()
+        
+        
+        // フォーマッタの設定
+        if !cities.isEmpty {
+            setConfigToFormatter(fm: &formatter, cellIdx: 0)
+            setConfigToFormatter2(fm: &formatter2, cellIdx: 0)
+        }
+        
+        formatter.dateFormat = "HH:mm"
+        
+        formatter2.dateStyle = .medium
+        formatter2.timeStyle = .none
+        
+        
+        
         
         if !cities.isEmpty {
             
