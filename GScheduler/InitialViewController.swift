@@ -75,6 +75,19 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         MDYLabel.text = tmpFormat2.string(from: newtral)
         
+        
+        let minusOrPlus  = adjustTimeStat > 0 ? "+ " : "- "
+        let diffHour     = "\(abs(adjustTimeStat / 2)):"
+        let diffMinutes  = adjustTimeStat % 2 == 0 ? "00 " : "30 "
+        let pastOrFuture = adjustTimeStat > 0 ? "in the future" : "in the past"
+        
+        timeAheadLabel.text = minusOrPlus + diffHour + diffMinutes + pastOrFuture
+        
+        if adjustTimeStat == 0 {
+            timeAheadLabel.text = "now"
+        }
+        
+        
         // テーブル再描画
         tableView.reloadData()
         
@@ -127,6 +140,18 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         tmpFormat2.timeStyle = .none
         
         MDYLabel.text = tmpFormat2.string(from: newtral)
+        
+        
+        let minusOrPlus  = adjustTimeStat > 0 ? "+ " : "- "
+        let diffHour     = "\(abs(adjustTimeStat / 2)):"
+        let diffMinutes  = adjustTimeStat % 2 == 0 ? "00 " : "30 "
+        let pastOrFuture = adjustTimeStat > 0 ? "in the future" : "in the past"
+        
+        timeAheadLabel.text = minusOrPlus + diffHour + diffMinutes + pastOrFuture
+        
+        if adjustTimeStat == 0 {
+            timeAheadLabel.text = "now"
+        }
         
         // テーブル再描画
         tableView.reloadData()
@@ -207,6 +232,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         print("こいや")
         //
         adjustTimeStat = 0
+        timeAheadLabel.text = "now"
         //
         GMT = Date()
         
@@ -330,6 +356,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             
         } // 特別時のセル設定 完了
         
+        // これないと　どんどん　ずれてくから　必要よ。
+        GMT = Date()
 
         // フォーマッタの初期設定
         setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)

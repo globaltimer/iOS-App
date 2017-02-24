@@ -34,7 +34,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.dataSource = self
         
         // 編集ボタンを左上に配置
-        navigationItem.leftBarButtonItem = editButtonItem
+        if cities.count > 0 {
+            navigationItem.leftBarButtonItem = editButtonItem
+        }
         
         // 初回起動時のみ
         if try! Realm().objects(StoredCity.self).count == 0 {
@@ -61,10 +63,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        
         super.viewWillDisappear(animated)
         //
         // ビュー消滅時、編集モードを解除しているけど、ボタンの設定が解除されない
         tableView.isEditing = false
+        
     }
     
     
@@ -107,6 +111,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // 2017/1/25修正
         cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
         cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        
+        
+        if indexPath.row == 0 {
+            let a = "\u{1F4CC} "
+            cell.cityNameLabel.text = a + cities[indexPath.row].name.uppercased()
+
+        }
+        
+        
+        
         
         cell.DayYearLabel.text  = formatter2.string(from: GMT)
         cell.DayYearLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
@@ -223,7 +237,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 print("\(city.name)は、\(tmp)から \(city.orderNo)に 移動しました")
             }
             
-            print("")
+            // 文字のピンを再設定するためだ、致し方ない。。
+            tableView.reloadData()
+            
         }
     }
     
@@ -235,9 +251,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //        return true
 //    }
     
-   editrow
-    
-    
+        
     // セルをdeleteするときの処理
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
