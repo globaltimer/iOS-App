@@ -23,6 +23,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     // タイム調整バフ・デバフ
     var adjustTimeStat = 0
     
+    
     /* UI Components */
     @IBOutlet weak var cityNameLabel:  UILabel!
     @IBOutlet weak var MDYLabel:       UILabel!
@@ -34,6 +35,11 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // 2/23追加
     @IBAction func adjustTimeBeforeButton(_ sender: Any) {
+        
+        if cities.isEmpty {
+            print("なにもしない")
+            return
+        }
         
         adjustTimeStat -= 1
         
@@ -68,6 +74,10 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         //tmpFormat2.timeStyle = .none
         
         MDYLabel.text = tmpFormat2.string(from: newtral)
+        
+        // テーブル再描画
+        tableView.reloadData()
+        
         
     }
     
@@ -155,6 +165,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         //
         print("こいや")
         //
+        adjustTimeStat = 0
+        //
         GMT = Date()
         
         cities = realm.objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
@@ -233,10 +245,58 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        var formatter = DateFormatter()
-//        // 左欄、日付と西暦を表示させるためのフォーマッタ
-//        var formatter2 = DateFormatter()
         
+        // 時間調整がかかっているときのセル表示
+        if adjustTimeStat != 0 {
+            
+            var tmpFormat = DateFormatter()
+            
+            setConfigToFormatter(fm: &tmpFormat, cellIdx: indexPath.row)
+            
+            tmpFormat.dateFormat = "HH:mm"
+
+            
+            // tmpFormat.dateFormat = "HH:mm"
+            
+//            let bef30 = (60 * 30 * (adjustTimeStat-1))
+//            let new   = (60 * 30 * (adjustTimeStat+0))
+//            let aft30 = (60 * 30 * (adjustTimeStat+1))
+            
+            let GMT = Date()
+            let new = 60 * 30 * (adjustTimeStat+0)
+            
+            let newtral   = Date(timeInterval:  TimeInterval(new), since: GMT)
+
+//            adjustTimeBeforeLabel.text = tmpFormat.string(from: before30m)
+//            adjustTimeNowLabel.text = tmpFormat.string(from: newtral)
+//            adjustTimeAheadLabel.text = tmpFormat.string(from: after30m)
+            
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! InitialTableViewCell
+            
+            
+            cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
+            cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+            
+            
+            cell.timeLabel.text = tmpFormat.string(from: newtral)
+            cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+            
+//            tmpFormat.dateFormat = "HH:mm"
+            tmpFormat.dateStyle = .medium
+            tmpFormat.timeStyle = .none
+            
+            
+            cell.yearAndMonthLabel.text = tmpFormat.string(from: newtral)
+            cell.yearAndMonthLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
+            
+            cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
+            
+            return cell
+            
+        } // 特別時のセル設定 完了
+        
+
         // フォーマッタの初期設定
         setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
         setConfigToFormatter2(fm: &formatter2, cellIdx: indexPath.row)
