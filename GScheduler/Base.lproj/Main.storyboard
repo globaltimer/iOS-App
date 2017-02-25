@@ -449,7 +449,7 @@
         <!--WORLD CLOCK-->
         <scene sceneID="ytu-jT-yha">
             <objects>
-                <viewController storyboardIdentifier="Initial" id="WOX-4z-qbf" customClass="InitialViewController" customModule="GScheduler" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="setTime" id="WOX-4z-qbf" customClass="InitialViewController" customModule="GScheduler" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dCV-Pn-HfW"/>
                         <viewControllerLayoutGuide type="bottom" id="Wvu-7d-I9N"/>

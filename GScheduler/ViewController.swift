@@ -21,7 +21,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
     
     // ピンされたcityのセル番号
-    var pinedCityCell = -1
+    var pinedCityCell = 0
     
     
     
@@ -158,11 +158,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         print("おらおら")
         
+        if indexPath.row == pinedCityCell {
+            
+            // パターン1: モーダル遷移なので、ナビゲーションバーがない
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let controller = storyboard.instantiateViewController(withIdentifier: "setTime")
+//            self.present(controller, animated: true, completion: nil)
+//            return
+            
+            // パターン2: delegateセットするとこで落ちる
+            
+            //let second = InitialViewController()
+            //second.modalTransitionStyle = .crossDissolve
+            // 変数に任意の値を渡せる
+            //second.myMessasge = "トップ画面からの遷移"
+            // 画像データも渡せるので、撮影した画像をアルバムに保存しなくて良い
+            //second.myImage = UIImage(...)
+            // 遷移履歴に追加する形で画面遷移
+            //navigationController?.pushViewController(second as UIViewController, animated: true)
+            
+            // パターン3: セグだからそもそも無理
+            // self.performSegue(withIdentifier: "setTime", sender: nil)
+            
+            
+
+            
+            return
         
         
-        
-        
-        
+            
+        }
         
 
         // ピン都市を更新
