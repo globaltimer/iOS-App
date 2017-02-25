@@ -21,7 +21,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
     
     // ピンされたcityのセル番号
-    var pinedCityCell = 0
+    var pinedCityCell = -1
     
     
     
@@ -157,6 +157,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         print("おらおら")
+        
+        
+        
+        
+        
+        
+        
 
         // ピン都市を更新
         pinedCityCell = indexPath.row

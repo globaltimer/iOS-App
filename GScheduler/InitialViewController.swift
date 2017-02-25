@@ -21,10 +21,9 @@ extension UITableView {
 class InitialViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // ピンされた都市のID
-    var pinedCityCell = 0
+    // -1 = isSelectedな都市が1件もなく、テーブルセルが一行もない状態
+    var pinedCityCell = -1
 
-    
-    
     
     
     // タイム調整バフ・デバフ
@@ -54,8 +53,14 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         var tmpFormat2 = DateFormatter()
         
-        setConfigToFormatter2(fm: &tmpFormat2, cellIdx: 0)
+        // setConfigToFormatter2(fm: &tmpFormat2, cellIdx: 0)
 
+        if pinedCityCell > -1 {
+           setConfigToFormatter2(fm: &tmpFormat2, cellIdx: pinedCityCell)
+        }
+        
+
+        
         tmpFormat2.dateFormat = "HH:mm"
 
         let bef30 = (60 * 30 * (adjustTimeStat-1))
