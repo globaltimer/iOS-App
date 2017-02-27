@@ -2,30 +2,12 @@
 import UIKit
 import RealmSwift
 
-extension UITableView {
-    
-    func hoge(vc: InitialViewController) {
-        
-        print("ほげほげ！黒魔術")
-        self.reloadData()
-        //
-        //let yearAndMonthLabel = (self.cellForRow(at: IndexPath(row: 0, section: 0)) as! InitialTableViewCell).yearAndMonthLabel.text
-        
-        //let timelabel = (self.cellForRow(at: IndexPath(row: 0, section: 0)) as! InitialTableViewCell).timeLabel.text
-        
-//        vc.MDYLabel.text = yearAndMonthLabel
-        //vc.timeLabel.text = timelabel
-    }
-}
-
 class InitialViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // ピンされた都市のID
     // -1 = isSelectedな都市が1件もなく、テーブルセルが一行もない状態
     var pinedCityCell = -1
 
-    
-    
     // タイム調整バフ・デバフ
     var adjustTimeStat = 0
     
@@ -271,7 +253,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             
             print("フォーマットしろや")
             
-            cityNameLabel.text = cities[0].name.uppercased()
+            cityNameLabel.text = cities[pinedCityCell].name.uppercased()
+            //cityNameLabel.text = cities[0].name.uppercased()
             cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
             
             var tmpFormat = DateFormatter()

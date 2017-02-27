@@ -12,6 +12,8 @@ extension UILabel {
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    
+    
     // GMT標準時刻
     var GMT = Date()
     
@@ -36,6 +38,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         tableView.delegate = self
         tableView.dataSource = self
+        //
+        //tabBarController?.tabBar.delegate = self
         
         // 編集ボタンを左上に配置
 //        if cities.count > 0 {
@@ -55,6 +59,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //            // initialEnrollCities()
 //        }
     }
+    
     
     
     override var prefersStatusBarHidden: Bool {
@@ -180,13 +185,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             // パターン3: セグだからそもそも無理
             // self.performSegue(withIdentifier: "setTime", sender: nil)
             
+            let view = tabBarController?.view.subviews[0]
             
+            UIView.beginAnimations(nil, context: nil)
+            UIView.setAnimationDuration(0.75)
+            UIView.setAnimationCurve(.easeInOut)
+            UIView.setAnimationTransition(.flipFromRight, for: view!, cache: true)
+            UIView.commitAnimations()
+            
+            self.tabBarController?.selectedIndex = 1
+            
+            let hoge = self.tabBarController?.selectedViewController?.childViewControllers[0] as! InitialViewController
+            
+            
+            
+            
+            hoge.pinedCityCell = indexPath.row
+            
+            self.tabBarController?.selectedIndex = 1
+ 
 
-            
             return
-        
-        
-            
         }
         
 
