@@ -112,6 +112,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
         var formatter = DateFormatter()
         // 左欄、日付と西暦を表示させるためのフォーマッタ
         var formatter2 = DateFormatter()
