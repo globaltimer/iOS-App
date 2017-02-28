@@ -16,11 +16,8 @@
 		440223A71DF3B8D200774C30 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440223A61DF3B8D200774C30 /* City.swift */; };
 		440223AA1DF4033900774C30 /* memo in Resources */ = {isa = PBXBuildFile; fileRef = 440223A91DF4033900774C30 /* memo */; };
 		446E7C321DF5CC6700E5D3E5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446E7C311DF5CC6700E5D3E5 /* Images.xcassets */; };
-		448ABC281E3975AE0005958C /* CinzelDecorative-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 448ABC271E3975AE0005958C /* CinzelDecorative-Regular.ttf */; };
 		448ABC2B1E397AFB0005958C /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448ABC2A1E397AFB0005958C /* InitialViewController.swift */; };
-		448ABC2E1E397BFF0005958C /* fever.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 448ABC2D1E397BFF0005958C /* fever.jpg */; };
 		448ABC301E397F350005958C /* InitialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448ABC2F1E397F350005958C /* InitialTableViewCell.swift */; };
-		448ABC321E39B6B50005958C /* sunny.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 448ABC311E39B6B50005958C /* sunny.jpg */; };
 		448ABC341E39BD8B0005958C /* Megrim.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 448ABC331E39BD8B0005958C /* Megrim.ttf */; };
 		448ABC381E39C4DE0005958C /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 448ABC371E39C4DE0005958C /* plus.png */; };
 		449259B11E4C2904006B9AAD /* NeoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449259B01E4C2904006B9AAD /* NeoCell.swift */; };
@@ -46,11 +43,8 @@
 		440223A61DF3B8D200774C30 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		440223A91DF4033900774C30 /* memo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = memo; sourceTree = "<group>"; };
 		446E7C311DF5CC6700E5D3E5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		448ABC271E3975AE0005958C /* CinzelDecorative-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CinzelDecorative-Regular.ttf"; sourceTree = "<group>"; };
 		448ABC2A1E397AFB0005958C /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
-		448ABC2D1E397BFF0005958C /* fever.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fever.jpg; sourceTree = "<group>"; };
 		448ABC2F1E397F350005958C /* InitialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialTableViewCell.swift; sourceTree = "<group>"; };
-		448ABC311E39B6B50005958C /* sunny.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sunny.jpg; sourceTree = "<group>"; };
 		448ABC331E39BD8B0005958C /* Megrim.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Megrim.ttf; sourceTree = "<group>"; };
 		448ABC371E39C4DE0005958C /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		449259B01E4C2904006B9AAD /* NeoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeoCell.swift; sourceTree = "<group>"; };
@@ -144,10 +138,7 @@
 				44E96D831E5FECC000FD82C7 /* pin.png */,
 				448ABC371E39C4DE0005958C /* plus.png */,
 				448ABC331E39BD8B0005958C /* Megrim.ttf */,
-				448ABC271E3975AE0005958C /* CinzelDecorative-Regular.ttf */,
 				449259B21E4C472E006B9AAD /* Quicksand-Regular.ttf */,
-				448ABC2D1E397BFF0005958C /* fever.jpg */,
-				448ABC311E39B6B50005958C /* sunny.jpg */,
 			);
 			name = Image;
 			sourceTree = "<group>";
@@ -231,12 +222,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				448ABC321E39B6B50005958C /* sunny.jpg in Resources */,
-				448ABC2E1E397BFF0005958C /* fever.jpg in Resources */,
 				448ABC381E39C4DE0005958C /* plus.png in Resources */,
 				440223931DF3689A00774C30 /* LaunchScreen.storyboard in Resources */,
 				446E7C321DF5CC6700E5D3E5 /* Images.xcassets in Resources */,
-				448ABC281E3975AE0005958C /* CinzelDecorative-Regular.ttf in Resources */,
 				440223AA1DF4033900774C30 /* memo in Resources */,
 				44E96D841E5FECC000FD82C7 /* pin.png in Resources */,
 				4402238E1DF3689A00774C30 /* Main.storyboard in Resources */,

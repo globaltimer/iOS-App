@@ -2,13 +2,10 @@
 import Foundation
 import RealmSwift
 
-struct City {
-    
-    let name: String
-    let timeZone: String
-    
-}
-
+//struct City {
+//    let name: String
+//    let timeZone: String
+//}
 
 class StoredCity: Object {
     
@@ -36,9 +33,5 @@ class StoredCity: Object {
         self.name = name
         self.timeZone = timeZone
         self.isSelected = isSelected
-        
     }
-    
 }
-
-

@@ -81,19 +81,14 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             timeAheadLabel.text = "now"
         }
         
-        
         // テーブル再描画
         tableView.reloadData()
-        
-        
     }
     
     @IBOutlet weak var adjustTimeBeforeLabel: UILabel!
-    
     @IBOutlet weak var adjustTimeNowLabel: UILabel!
-    
     @IBOutlet weak var adjustTimeAheadLabel: UILabel!
-    
+
     @IBAction func adjustTimeAheadButton(_ sender: Any) {
         
         if cities.isEmpty {
@@ -152,7 +147,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
 
-    
     
     // GMT標準時刻
     var GMT = Date()
@@ -307,11 +301,19 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         // ラベルに表示する内容は、 viewWillAppearだと、早すぎる。こっちに書かないとだめ。
-        cityNameLabel.text = cities[pinedCityCell].name.uppercased()
+        if !cities.isEmpty {
+            cityNameLabel.text = cities[pinedCityCell].name.uppercased()
+        }
+        
+        
         cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
         var tmpFormat = DateFormatter()
-        setConfigToFormatter2(fm: &tmpFormat, cellIdx: pinedCityCell)
+        
+        if !cities.isEmpty {
+            setConfigToFormatter2(fm: &tmpFormat, cellIdx: pinedCityCell)
+        }
+        
         tmpFormat.dateStyle = .medium
         tmpFormat.timeStyle = .none
         
@@ -319,25 +321,30 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         let before30m = Date(timeInterval: -60*30, since: GMT)
         let after30m  = Date(timeInterval:  60*30, since: GMT)
         
-        MDYLabel.text = tmpFormat.string(from: GMT)
-        MDYLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        if !cities.isEmpty {
+            MDYLabel.text = tmpFormat.string(from: GMT)
+            MDYLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        }
         
         tmpFormat.dateFormat = "HH:mm"
         
-        timeLabel.text = tmpFormat.string(from: GMT)
-        timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        if !cities.isEmpty {
+            timeLabel.text = tmpFormat.string(from: GMT)
+            timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        }
         
         // 2/23追記
         
-        adjustTimeBeforeLabel.text = tmpFormat.string(from: before30m)
-        adjustTimeBeforeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-        
-        adjustTimeNowLabel.text = tmpFormat.string(from: GMT)
-        adjustTimeNowLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-        
-        adjustTimeAheadLabel.text = tmpFormat.string(from: after30m)
-        adjustTimeAheadLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-        
+        if !cities.isEmpty {
+            adjustTimeBeforeLabel.text = tmpFormat.string(from: before30m)
+            adjustTimeBeforeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+            
+            adjustTimeNowLabel.text = tmpFormat.string(from: GMT)
+            adjustTimeNowLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+            
+            adjustTimeAheadLabel.text = tmpFormat.string(from: after30m)
+            adjustTimeAheadLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        }
     }
     
     

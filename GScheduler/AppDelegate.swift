@@ -6,18 +6,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    // var pinedCityCell = -1
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        
         // フォント
-//        let megrim = "Megrim"
         let megrim = "Quicksand"
         
-        
-//        UILabel.appearance().font = UIFont(name: megrim, size: 14)
-        
+//       UILabel.appearance().font = UIFont(name: megrim, size: 14)
         
         //UITabBar.appearance().backgroundColor = UIColor.blue
         
@@ -49,7 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // ナビゲーションバーの背景色
         UINavigationBar.appearance().barTintColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-
         
         return true
     }
@@ -75,7 +69,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
-

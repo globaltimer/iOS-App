@@ -403,8 +403,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             (name: "X",     timeZone: "JST"),
             (name: "Y",    timeZone: "CET"),
             (name: "Z",    timeZone: "GMT"),
-
-
         ]
 
         var cities: [StoredCity] = []

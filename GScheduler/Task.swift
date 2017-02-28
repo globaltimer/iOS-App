@@ -2,7 +2,6 @@
 import Foundation
 import RealmSwift
 
-
 class Task: Object {
     
     // 管理用 ID。プライマリーキー
@@ -12,7 +11,6 @@ class Task: Object {
     dynamic var desc: String = ""
     
     dynamic var date: Date = Date()
-    
     
     /**
      id をプライマリーキーとして設定
@@ -30,9 +28,5 @@ class Task: Object {
         self.name = name
         self.desc = desc
         self.date = date
-        
     }
-    
 }
-
-
