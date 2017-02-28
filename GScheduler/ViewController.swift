@@ -84,6 +84,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         // ビュー消滅時、編集モードを解除しているけど、ボタンの設定が解除されない
         tableView.isEditing = false
+        //
+        
+        print("画面1: will disappear")
+        
+//        // 現在の ピンされた都市を保存
+        let ud = UserDefaults.standard
+        ud.set(pinedCityCell, forKey: "pinedCityCell")
+        ud.synchronize()
+        print("シンクロしました")
         
     }
     
@@ -161,7 +170,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        print("おらおら")
         
         if indexPath.row == pinedCityCell {
             
@@ -193,18 +201,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             UIView.setAnimationTransition(.flipFromRight, for: view!, cache: true)
             UIView.commitAnimations()
             
-            self.tabBarController?.selectedIndex = 1
-            
-            let hoge = self.tabBarController?.selectedViewController?.childViewControllers[0] as! InitialViewController
-            
-            
-            
-            
-            hoge.pinedCityCell = indexPath.row
+            // 現在の ピンされた都市を保存
+            let ud = UserDefaults.standard
+            ud.set(pinedCityCell, forKey: "pinedCityCell")
+            ud.synchronize()
             
             self.tabBarController?.selectedIndex = 1
- 
-
+            
             return
         }
         
@@ -212,16 +215,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // ピン都市を更新
         pinedCityCell = indexPath.row
         
-//        let cell = tableView.cellForRow(at: indexPath) as! TableViewCell
-//        cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
-//        
         tableView.reloadData()
-        
-        
-        
-//        let nex = self.storyboard!.instantiateViewController(withIdentifier: "Initial")
-//        self.present(nex, animated: true, completion: nil)
-        
     }
     
     

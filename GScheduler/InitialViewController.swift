@@ -223,8 +223,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         super.viewWillAppear(animated)
         //
-        print("こいや")
-        //
         adjustTimeStat = 0
         timeAheadLabel.text = "now"
         //
@@ -232,6 +230,14 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         cities = realm.objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
         
+//        let ud = UserDefaults.standard
+//        if ud.object(forKey: "pinedCityCell") != nil {
+//            pinedCityCell = ud.integer(forKey: "pinedCityCell")
+//            print("データあり！ pinedCityCell は \(pinedCityCell)")
+//        }
+        
+        print("画面2: will appear まさか　こっちのほうが　速いのか！？")
+
         tableView.reloadData()
         
         
@@ -246,48 +252,93 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         formatter2.dateStyle = .medium
         formatter2.timeStyle = .none
         
-        
-        
-        
+
         if !cities.isEmpty {
             
             print("フォーマットしろや")
             
-            cityNameLabel.text = cities[pinedCityCell].name.uppercased()
+            // cityNameLabel.text = cities[pinedCityCell].name.uppercased()
+            
             //cityNameLabel.text = cities[0].name.uppercased()
-            cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-            
-            var tmpFormat = DateFormatter()
-            setConfigToFormatter2(fm: &tmpFormat, cellIdx: 0)
-            tmpFormat.dateStyle = .medium
-            tmpFormat.timeStyle = .none
-            
-            let GMT = Date()
-            let before30m = Date(timeInterval: -60*30, since: GMT)
-            let after30m  = Date(timeInterval:  60*30, since: GMT)
-            
-            MDYLabel.text = tmpFormat.string(from: GMT)
-            MDYLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-            
-            tmpFormat.dateFormat = "HH:mm"
-            
-            timeLabel.text = tmpFormat.string(from: GMT)
-            timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-            
-            // 2/23追記
-            
-            adjustTimeBeforeLabel.text = tmpFormat.string(from: before30m)
-            adjustTimeBeforeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-            
-            adjustTimeNowLabel.text = tmpFormat.string(from: GMT)
-            adjustTimeNowLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-            
-            adjustTimeAheadLabel.text = tmpFormat.string(from: after30m)
-            adjustTimeAheadLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+//            cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+//            
+//            var tmpFormat = DateFormatter()
+//            setConfigToFormatter2(fm: &tmpFormat, cellIdx: 0)
+//            tmpFormat.dateStyle = .medium
+//            tmpFormat.timeStyle = .none
+//            
+//            let GMT = Date()
+//            let before30m = Date(timeInterval: -60*30, since: GMT)
+//            let after30m  = Date(timeInterval:  60*30, since: GMT)
+//            
+//            MDYLabel.text = tmpFormat.string(from: GMT)
+//            MDYLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+//            
+//            tmpFormat.dateFormat = "HH:mm"
+//            
+//            timeLabel.text = tmpFormat.string(from: GMT)
+//            timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+//            
+//            // 2/23追記
+//            
+//            adjustTimeBeforeLabel.text = tmpFormat.string(from: before30m)
+//            adjustTimeBeforeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+//            
+//            adjustTimeNowLabel.text = tmpFormat.string(from: GMT)
+//            adjustTimeNowLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+//            
+//            adjustTimeAheadLabel.text = tmpFormat.string(from: after30m)
+//            adjustTimeAheadLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         }
+        
     }
     
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("画面2: did appear まさか　こっちのほうが　速いのか！？????")
+        //
+        
+        let ud = UserDefaults.standard
+        if ud.object(forKey: "pinedCityCell") != nil {
+            pinedCityCell = ud.integer(forKey: "pinedCityCell")
+            print("データあり！ pinedCityCell は \(pinedCityCell)")
+        }
+        
+        // ラベルに表示する内容は、 viewWillAppearだと、早すぎる。こっちに書かないとだめ。
+        cityNameLabel.text = cities[pinedCityCell].name.uppercased()
+        cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        
+        var tmpFormat = DateFormatter()
+        setConfigToFormatter2(fm: &tmpFormat, cellIdx: pinedCityCell)
+        tmpFormat.dateStyle = .medium
+        tmpFormat.timeStyle = .none
+        
+        let GMT = Date()
+        let before30m = Date(timeInterval: -60*30, since: GMT)
+        let after30m  = Date(timeInterval:  60*30, since: GMT)
+        
+        MDYLabel.text = tmpFormat.string(from: GMT)
+        MDYLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        
+        tmpFormat.dateFormat = "HH:mm"
+        
+        timeLabel.text = tmpFormat.string(from: GMT)
+        timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        
+        // 2/23追記
+        
+        adjustTimeBeforeLabel.text = tmpFormat.string(from: before30m)
+        adjustTimeBeforeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        
+        adjustTimeNowLabel.text = tmpFormat.string(from: GMT)
+        adjustTimeNowLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        
+        adjustTimeAheadLabel.text = tmpFormat.string(from: after30m)
+        adjustTimeAheadLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        
+    }
+    
     
     // -MARK: TableView
     
