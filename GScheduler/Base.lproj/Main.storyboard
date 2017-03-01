@@ -58,7 +58,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDd-Kx-nML">
                                                     <rect key="frame" x="8" y="18" width="150" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="24"/>
+                                                    <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -461,13 +461,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VrO-yG-K4S">
                                 <rect key="frame" x="0.0" y="64" width="320" height="220"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin.png" translatesAutoresizingMaskIntoConstraints="NO" id="MJi-Ga-aDY">
-                                        <rect key="frame" x="10" y="10" width="24" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="24" id="niI-4v-lp7"/>
-                                            <constraint firstAttribute="height" constant="24" id="yOo-d6-mT0"/>
-                                        </constraints>
-                                    </imageView>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Aq-zJ-Gkz">
                                         <rect key="frame" x="14" y="51" width="292" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -548,7 +541,7 @@
                                         <color key="backgroundColor" red="0.88000846740000005" green="1" blue="0.40411795189999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FH8-bc-q6F">
-                                        <rect key="frame" x="39" y="11" width="254" height="22"/>
+                                        <rect key="frame" x="8" y="15" width="254" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
                                         <nil key="textColor"/>
@@ -557,8 +550,6 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.80392156862745101" green="0.80392156862745101" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="MJi-Ga-aDY" firstAttribute="leading" secondItem="VrO-yG-K4S" secondAttribute="leading" constant="10" id="GZT-4F-aCK"/>
-                                    <constraint firstItem="MJi-Ga-aDY" firstAttribute="top" secondItem="VrO-yG-K4S" secondAttribute="top" constant="10" id="ms6-7r-c9w"/>
                                     <constraint firstAttribute="height" constant="220" id="uiE-e6-BXN"/>
                                 </constraints>
                             </view>
@@ -664,6 +655,5 @@
     <resources>
         <image name="clock" width="24" height="24"/>
         <image name="menu" width="24" height="24"/>
-        <image name="pin.png" width="256" height="256"/>
     </resources>
 </document>

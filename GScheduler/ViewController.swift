@@ -12,8 +12,6 @@ extension UILabel {
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    
-    
     // GMT標準時刻
     var GMT = Date()
     
@@ -24,7 +22,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // ピンされたcityのセル番号
     var pinedCityCell = 0
-    
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -51,15 +48,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("初回起動だと 判定された！！！")
             initialEnrollCities()
         }
-        
-        
-        // 初回起動時のみ
-//        if try! Realm().objects(StoredCity.self).count == 0 {
-//            print("初回起動だと 判定された！！！")
-//            // initialEnrollCities()
-//        }
     }
-    
     
     
     override var prefersStatusBarHidden: Bool {
@@ -84,7 +73,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         // ビュー消滅時、編集モードを解除しているけど、ボタンの設定が解除されない
         tableView.isEditing = false
-        //
         
         print("画面1: will disappear")
         
@@ -99,9 +87,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         
+        print("hoge---")
+        
         super.setEditing(editing, animated: animated)
         
         tableView.isEditing = editing
+        
+        for cell in tableView.visibleCells {
+            if tableView.isEditing {
+                (cell as! TableViewCell).timeLabel.isHidden = true
+            } else {
+                (cell as! TableViewCell).timeLabel.isHidden = false
+            }
+        }
     }
     
     
@@ -167,10 +165,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
 
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         
         if indexPath.row == pinedCityCell {
             
@@ -193,21 +188,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             // パターン3: セグだからそもそも無理
             // self.performSegue(withIdentifier: "setTime", sender: nil)
+
             
-            let view = tabBarController?.view.subviews[0]
+            // アニメで遷移したいときは、この6行をカットインしろ
+//            let view = tabBarController?.view.subviews[0]
+//            UIView.beginAnimations(nil, context: nil)
+//            UIView.setAnimationDuration(0.75)
+//            UIView.setAnimationCurve(.easeInOut)
+//            UIView.setAnimationTransition(.flipFromRight, for: view!, cache: true)
+//            UIView.commitAnimations()
             
-            UIView.beginAnimations(nil, context: nil)
-            UIView.setAnimationDuration(0.75)
-            UIView.setAnimationCurve(.easeInOut)
-            UIView.setAnimationTransition(.flipFromRight, for: view!, cache: true)
-            UIView.commitAnimations()
             
             // 現在の ピンされた都市を保存
             let ud = UserDefaults.standard
             ud.set(pinedCityCell, forKey: "pinedCityCell")
             ud.synchronize()
             
-            self.tabBarController?.selectedIndex = 1
+            // 遷移したければ　これコメントインして
+            // self.tabBarController?.selectedIndex = 1
             
             return
         }
@@ -223,9 +221,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // セルが削除が可能なことを伝えるメソッド
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) ->UITableViewCellEditingStyle {
 
+        print("きたきた")
+        
         if tableView.isEditing {
             return .delete
         } else {
+            
+            for cell in tableView.visibleCells {
+                (cell as! TableViewCell).timeLabel.isHidden = false
+            }
+            
+            
+            
             return .none
         }
     }
@@ -304,20 +311,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 print("\(city.name)は、\(tmp)から \(city.orderNo)に 移動しました")
             }
             
-
             // 文字のピンを再設定するためだ、致し方ない。。
             tableView.reloadData()
             
         }
     }
     
-    
-    
-//    - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
-
-//    func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
     
         
     // セルをdeleteするときの処理

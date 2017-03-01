@@ -302,10 +302,9 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // ラベルに表示する内容は、 viewWillAppearだと、早すぎる。こっちに書かないとだめ。
         if !cities.isEmpty {
-            cityNameLabel.text = cities[pinedCityCell].name.uppercased()
+            let pin = "\u{1F4CC} "
+            cityNameLabel.text = pin + cities[pinedCityCell].name.uppercased()
         }
-        
-        
         cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
         var tmpFormat = DateFormatter()
@@ -388,7 +387,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! InitialTableViewCell
             
-            
             cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
             cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
             
@@ -436,10 +434,10 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
         cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
-        if indexPath.row == pinedCityCell {
-            let a = "\u{1F4CC} "
-            cell.cityNameLabel.text = a + cities[indexPath.row].name.uppercased()
-        }
+//        if indexPath.row == pinedCityCell {
+//            let a = "\u{1F4CC} "
+//            cell.cityNameLabel.text = a + cities[indexPath.row].name.uppercased()
+//        }
         
         cell.yearAndMonthLabel.text = formatter2.string(from: GMT)
         cell.yearAndMonthLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)

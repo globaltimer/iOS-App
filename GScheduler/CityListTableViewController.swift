@@ -74,11 +74,7 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         let cities = self.cities.filter("name BEGINSWITH '\(head_character)'")
         
         
-        
-
-        
-        
-        cell.cityNameLabel.text = cities[indexPath.row].name
+        cell.cityNameLabel.text =  cities[indexPath.row].name
         cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
         ////
