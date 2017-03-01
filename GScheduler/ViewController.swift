@@ -402,7 +402,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             (name: "W", timeZone: "PST"),
             (name: "X",     timeZone: "JST"),
             (name: "Y",    timeZone: "CET"),
-            (name: "Z",    timeZone: "GMT"),
+            (name: "Z",    timeZone: "GMT")
         ]
 
         var cities: [StoredCity] = []
