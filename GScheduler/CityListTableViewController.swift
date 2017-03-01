@@ -43,7 +43,6 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NeoCell
         
-        
         // リアルタイムサーチ時の挙動
         if (searchBar.text?.characters.count)! > 0 {
             
@@ -191,8 +190,29 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     //////////////////
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        
+        
+        print("そんで、セクション数が決定される。")
+        
+        if (searchBar.text?.characters.count)! > 0 {
+        
+//            var count = 0
+//            
+//            for city in filteredCities {
+//                if city.name.contains(searchBar.text!) {
+//                    count += 1
+//                }
+//            }
+//            
+//            return count
+            
+            // ↑　こんなことせんでもこれでええやん。It works well!
+            return 1
+        }
+        
         return sections.count // 26だよ
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -213,7 +233,6 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         
         //return sections.map { $0.title }
-        print("はげとるな")
         
         // searchBarに文字があればインデックスは表示しない
         if (searchBar.text?.characters.count)! > 0 {
@@ -225,6 +244,12 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     
     /// セクションのタイトルを返す
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        if (searchBar.text?.characters.count)! > 0 {
+            
+            return nil
+            
+        }
         
         print("セクションのタイトル: \(sections[section])")
         return sections[section]
@@ -254,6 +279,8 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
 
         // 小文字・大文字を無視して検索
         filteredCities = cities.filter{ $0.name.lowercased().contains((searchWord?.lowercased())!) }
+        
+        print("まず、filteredCitiesのフィルタリングが行われる")
         
         tableView.reloadData()
     }

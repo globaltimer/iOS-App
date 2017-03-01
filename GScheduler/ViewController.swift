@@ -167,49 +167,49 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == pinedCityCell {
-            
-            // パターン1: モーダル遷移なので、ナビゲーションバーがない
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let controller = storyboard.instantiateViewController(withIdentifier: "setTime")
-//            self.present(controller, animated: true, completion: nil)
+//        if indexPath.row == pinedCityCell {
+//            
+//            // パターン1: モーダル遷移なので、ナビゲーションバーがない
+////            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+////            let controller = storyboard.instantiateViewController(withIdentifier: "setTime")
+////            self.present(controller, animated: true, completion: nil)
+////            return
+//            
+//            // パターン2: delegateセットするとこで落ちる
+//            
+//            //let second = InitialViewController()
+//            //second.modalTransitionStyle = .crossDissolve
+//            // 変数に任意の値を渡せる
+//            //second.myMessasge = "トップ画面からの遷移"
+//            // 画像データも渡せるので、撮影した画像をアルバムに保存しなくて良い
+//            //second.myImage = UIImage(...)
+//            // 遷移履歴に追加する形で画面遷移
+//            //navigationController?.pushViewController(second as UIViewController, animated: true)
+//            
+//            // パターン3: セグだからそもそも無理
+//            // self.performSegue(withIdentifier: "setTime", sender: nil)
+//
+//            
+//            // アニメで遷移したいときは、この6行をカットインしろ
+////            let view = tabBarController?.view.subviews[0]
+////            UIView.beginAnimations(nil, context: nil)
+////            UIView.setAnimationDuration(0.75)
+////            UIView.setAnimationCurve(.easeInOut)
+////            UIView.setAnimationTransition(.flipFromRight, for: view!, cache: true)
+////            UIView.commitAnimations()
+//            
+//            
+//            // 現在の ピンされた都市を保存
+//            let ud = UserDefaults.standard
+//            ud.set(pinedCityCell, forKey: "pinedCityCell")
+//            ud.synchronize()
+//            
+//            // 遷移したければ　これコメントインして
+//            // self.tabBarController?.selectedIndex = 1
+//            
 //            return
-            
-            // パターン2: delegateセットするとこで落ちる
-            
-            //let second = InitialViewController()
-            //second.modalTransitionStyle = .crossDissolve
-            // 変数に任意の値を渡せる
-            //second.myMessasge = "トップ画面からの遷移"
-            // 画像データも渡せるので、撮影した画像をアルバムに保存しなくて良い
-            //second.myImage = UIImage(...)
-            // 遷移履歴に追加する形で画面遷移
-            //navigationController?.pushViewController(second as UIViewController, animated: true)
-            
-            // パターン3: セグだからそもそも無理
-            // self.performSegue(withIdentifier: "setTime", sender: nil)
-
-            
-            // アニメで遷移したいときは、この6行をカットインしろ
-//            let view = tabBarController?.view.subviews[0]
-//            UIView.beginAnimations(nil, context: nil)
-//            UIView.setAnimationDuration(0.75)
-//            UIView.setAnimationCurve(.easeInOut)
-//            UIView.setAnimationTransition(.flipFromRight, for: view!, cache: true)
-//            UIView.commitAnimations()
-            
-            
-            // 現在の ピンされた都市を保存
-            let ud = UserDefaults.standard
-            ud.set(pinedCityCell, forKey: "pinedCityCell")
-            ud.synchronize()
-            
-            // 遷移したければ　これコメントインして
-            // self.tabBarController?.selectedIndex = 1
-            
-            return
-        }
-        
+//        }
+//        
 
         // ピン都市を更新
         pinedCityCell = indexPath.row
