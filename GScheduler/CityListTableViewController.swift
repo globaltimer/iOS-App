@@ -197,18 +197,14 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if (searchBar.text?.characters.count)! > 0 {
-            
             return filteredCities.count
         }
         
         let head_character = sections[section]
-        
         let cityStartFromABC = cities.filter("name BEGINSWITH '\(head_character)'")
-        
         return cityStartFromABC.count
         
         //return cities.count
-        
     }
     
     var sections = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -218,6 +214,12 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         
         //return sections.map { $0.title }
         print("はげとるな")
+        
+        // searchBarに文字があればインデックスは表示しない
+        if (searchBar.text?.characters.count)! > 0 {
+            return nil
+        }
+        
         return ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     }
     
@@ -225,18 +227,16 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         print("セクションのタイトル: \(sections[section])")
-        
         return sections[section]
     }
     
     
     // インデックスリストをタップ時のコールバック
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title:String, at index: Int) -> Int {
-        
         print("おら！！")
-
         return index
     }
+    
     
     ////////
     
