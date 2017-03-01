@@ -304,6 +304,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 print("\(city.name)は、\(tmp)から \(city.orderNo)に 移動しました")
             }
             
+
             // 文字のピンを再設定するためだ、致し方ない。。
             tableView.reloadData()
             

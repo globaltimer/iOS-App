@@ -392,10 +392,10 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
             cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
             
-            if indexPath.row == pinedCityCell {
-                let a = "\u{1F4CC} "
-                cell.cityNameLabel.text = a + cities[indexPath.row].name.uppercased()
-            }
+//            if indexPath.row == pinedCityCell {
+//                let a = "\u{1F4CC} "
+//                cell.cityNameLabel.text = a + cities[indexPath.row].name.uppercased()
+//            }
             
             
             cell.timeLabel.text = tmpFormat.string(from: newtral)
