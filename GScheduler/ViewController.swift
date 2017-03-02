@@ -27,6 +27,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var timeLabel: UILabel!
     
+    
+    @IBAction func rightButtonTapped(_ sender: Any) {
+        
+//        let vc = CityListTableViewController()
+        let vc = storyboard?.instantiateViewController(withIdentifier: "cityTable")
+            
+
+        self.present(vc!, animated: true, completion: nil)
+
+        
+    }
+    
+    
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad( )

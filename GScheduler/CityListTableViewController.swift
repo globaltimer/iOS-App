@@ -17,6 +17,8 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         
         super.viewDidLoad()
         //
+        print("un")
+        //
         tableView.delegate = self
         tableView.dataSource = self
         
