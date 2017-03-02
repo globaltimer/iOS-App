@@ -48,13 +48,13 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
             
             cell.cityNameLabel.text = filteredCities[indexPath.row].name
             
-            //cell.diffGMTLabel.text = "hogehoge-"
-            
             let fmt = DateFormatter()
             
             let timeZone = filteredCities[indexPath.row].timeZone
             fmt.dateFormat = "ZZZZ"
-            fmt.timeZone = TimeZone(abbreviation: timeZone)
+            //fmt.timeZone = TimeZone(abbreviation: timeZone)
+            fmt.timeZone = NSTimeZone(name: timeZone) as TimeZone!
+            
             
             cell.diffGMTLabel.text = fmt.string(from: Date())
             
