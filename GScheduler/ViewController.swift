@@ -31,8 +31,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         super.viewDidLoad()
         //
-        initialEnrollCities()
-        //
         //print(Realm.Configuration.defaultConfiguration.fileURL!)
         //
         tableView.delegate = self
@@ -354,7 +352,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // タイムゾーン
         let timeZone = cities[cellIdx].timeZone
         fm.dateFormat = "MM/dd HH:mm"
-        fm.timeZone = TimeZone(abbreviation: timeZone)
+        
+        fm.timeZone =  NSTimeZone(name: timeZone) as TimeZone!
     }
     
     
@@ -363,7 +362,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // タイムゾーン
         let timeZone = cities[cellIdx].timeZone
         //fm.dateFormat = "YYYY / MM / dd"
-        fm.timeZone = TimeZone(abbreviation: timeZone)
+        
+        fm.timeZone =  NSTimeZone(name: timeZone) as TimeZone!
     }
     
     
@@ -395,6 +395,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         print("はいはいおわり！　結果は")
         print(citiesAry)
+        
+        try! realm.write {
+            for city in citiesAry {
+                self.realm.add(city, update: true)
+                print("\(city.name) was saved!")
+            }
+        }
         
     } // 初期化処理
     

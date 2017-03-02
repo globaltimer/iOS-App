@@ -82,9 +82,13 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         // フォーマッタの初期設定
         func setConfigToFormatter(fm: inout DateFormatter, cellIdx: Int) {
             // タイムゾーン
+            
             let timeZone = cities[cellIdx].timeZone
             fm.dateFormat = "ZZZZ"
-            fm.timeZone = TimeZone(abbreviation: timeZone)
+            
+            // 3/1 修正！！
+            // fm.timeZone = TimeZone(abbreviation: timeZone)
+            fm.timeZone = NSTimeZone(name: timeZone) as TimeZone!
         }
         
         setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
@@ -164,6 +168,8 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
                 realm.create(StoredCity.self, value: ["id": id, "isSelected": true, "orderNo": orderNo], update: true)
                 
                 print("\(cities[id].name) was enrolled!")
+                
+                print(cities[id])
                 
             } else {  // フィルタされた状態でセルがクリックされた場合
                 
