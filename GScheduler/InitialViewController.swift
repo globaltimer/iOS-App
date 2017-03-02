@@ -493,7 +493,9 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     func setConfigToFormatter(fm: inout DateFormatter, cellIdx: Int) {
         // タイムゾーン
         let timeZone = cities[cellIdx].timeZone
-        fm.timeZone = TimeZone(abbreviation: timeZone)
+        
+        //fm.timeZone = TimeZone(abbreviation: timeZone)
+        fm.timeZone = NSTimeZone(name: timeZone) as TimeZone!
         
         fm.dateFormat = "MM/dd HH:mm"
     }
@@ -502,68 +504,14 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     func setConfigToFormatter2(fm: inout DateFormatter, cellIdx: Int) {
         // タイムゾーン
         let timeZone = cities[cellIdx].timeZone
-        fm.timeZone = TimeZone(abbreviation: timeZone)
+        //fm.timeZone = TimeZone(abbreviation: timeZone)
+        fm.timeZone = NSTimeZone(name: timeZone) as TimeZone!
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
     }
-    
-    
-    // -MARK: Initial Setting
-    
-    // 初回アプリ起動時に1回のみ、すべての都市をデータベースに登録
-//    func initialEnrollCities() {
-//        
-//        let citySeed = [
-//            (name: "Vancouver", timeZone: "PST"),
-//            (name: "Tokyo",     timeZone: "JST"),
-//            (name: "Venice",    timeZone: "CET"),
-//            (name: "London",    timeZone: "GMT"),
-//            //
-//            (name: "A", timeZone: "PST"),
-//            (name: "B",     timeZone: "JST"),
-//            (name: "C",    timeZone: "CET"),
-//            (name: "D",    timeZone: "GMT"),
-//            (name: "E", timeZone: "PST"),
-//            (name: "F",     timeZone: "JST"),
-//            (name: "G",    timeZone: "CET"),
-//            (name: "H", timeZone: "PST"),
-//            (name: "I",     timeZone: "JST"),
-//            (name: "J",    timeZone: "CET"),
-//            (name: "K",    timeZone: "GMT"),
-//            (name: "L", timeZone: "PST"),
-//            (name: "M",     timeZone: "JST"),
-//            (name: "N",    timeZone: "CET"),
-//            // O, P
-//            (name: "Q",    timeZone: "GMT"),
-//            // R
-//            (name: "S", timeZone: "PST"),
-//            (name: "T",     timeZone: "JST"),
-//            (name: "U",    timeZone: "CET"),
-//            (name: "V",    timeZone: "GMT"),
-//            (name: "W", timeZone: "PST"),
-//            (name: "X",     timeZone: "JST"),
-//            (name: "Y",    timeZone: "CET"),
-//            (name: "Z",    timeZone: "GMT"),
-//            
-//            
-//        ]
-//        
-//        var cities: [StoredCity] = []
-//        
-//        for (idx, value) in citySeed.enumerated() {
-//            cities.append(StoredCity(id: idx, name: value.name, timeZone: value.timeZone, isSelected: false))
-//        }
-//        
-//        try! realm.write {
-//            for city in cities {
-//                self.realm.add(city, update: true)
-//                print("\(city.name) was saved!")
-//            }
-//        }
-//    }
 }
 
 
