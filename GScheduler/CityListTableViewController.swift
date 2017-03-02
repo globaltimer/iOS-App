@@ -9,7 +9,7 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         
     let realm = try! Realm()
     
-    let cities = try! Realm().objects(StoredCity.self).sorted(byKeyPath: "id", ascending: true)
+    let cities = try! Realm().objects(StoredCity.self).sorted(byKeyPath: "name", ascending: true)
     var filteredCities: [StoredCity] = []
     
 
@@ -140,8 +140,6 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
             
             if (searchBar.text?.characters.count)! == 0 {
                 
-                //let id = indexPath.row
-                
                 let selectedCN = ((tableView.cellForRow(at: indexPath)) as! NeoCell).cityNameLabel.text
                 
                 let selectedCityName = selectedCN!
@@ -153,8 +151,6 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
                 let id = tmp_id!
                 
                 print("タッチされた都市名のIDはーーー、\(id)")
-
-                print("ブレイク！")
                 
                 let orderNo: Int
                 
@@ -167,9 +163,8 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
                 
                 realm.create(StoredCity.self, value: ["id": id, "isSelected": true, "orderNo": orderNo], update: true)
                 
-                print("\(cities[id].name) was enrolled!")
+                print("\(cities.filter("id == \(id)").first?.name) was enrolled!")
                 
-                print(cities[id])
                 
             } else {  // フィルタされた状態でセルがクリックされた場合
                 
