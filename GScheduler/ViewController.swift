@@ -66,7 +66,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        //
+        
         GMT = Date()
         
         cities = realm.objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
@@ -207,7 +207,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 ////            UIView.setAnimationCurve(.easeInOut)
 ////            UIView.setAnimationTransition(.flipFromRight, for: view!, cache: true)
 ////            UIView.commitAnimations()
-//            
+        
+//        print("")
+//
 //            
 //            // 現在の ピンされた都市を保存
 //            let ud = UserDefaults.standard
@@ -396,7 +398,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         })
         
-        print("はいはいおわり！　結果は")
+        print("はいはいおわり！")
         print(citiesAry)
         
         try! realm.write {
