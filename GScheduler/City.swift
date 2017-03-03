@@ -2,11 +2,6 @@
 import Foundation
 import RealmSwift
 
-//struct City {
-//    let name: String
-//    let timeZone: String
-//}
-
 class StoredCity: Object {
     
     // 管理用 ID。プライマリーキー

@@ -41,8 +41,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
            setConfigToFormatter2(fm: &tmpFormat2, cellIdx: pinedCityCell)
         }
         
-
-        
         tmpFormat2.dateFormat = "HH:mm"
 
         let bef30 = (60 * 30 * (adjustTimeStat-1))
@@ -84,6 +82,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         // テーブル再描画
         tableView.reloadData()
     }
+    
     
     @IBOutlet weak var adjustTimeBeforeLabel: UILabel!
     @IBOutlet weak var adjustTimeNowLabel: UILabel!
@@ -102,7 +101,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         var tmpFormat2 = DateFormatter()
         
-        setConfigToFormatter2(fm: &tmpFormat2, cellIdx: 0)
+        setConfigToFormatter2(fm: &tmpFormat2, cellIdx: pinedCityCell)
         
         tmpFormat2.dateFormat = "HH:mm"
         
@@ -147,7 +146,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
 
-    
     // GMT標準時刻
     var GMT = Date()
     
@@ -186,8 +184,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.dataSource = self
         //
         print("何度でも呼ばれるぜ！！")
-        //
-
         // Realmのパス
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
@@ -349,19 +345,9 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // -MARK: TableView
     
-    // テーブルを編集可能にするメソッド
-//    override func setEditing(_ editing: Bool, animated: Bool) {
-//        
-//        super.setEditing(editing, animated: animated)
-//        //tableView.isEditing = editing
-//        tableView.isEditing = false
-//    }
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cities.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -513,7 +499,5 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         return 75
     }
 }
-
-
 
 
