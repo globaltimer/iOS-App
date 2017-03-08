@@ -119,7 +119,7 @@
             <objects>
                 <navigationController id="gK4-b3-w1b" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Set  Time" image="menu" selectedImage="menu" id="wSz-xc-L2A"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5sn-hF-s0J">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5sn-hF-s0J">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -384,7 +384,13 @@
                             <constraint firstItem="KJc-Ag-CXg" firstAttribute="leading" secondItem="shY-eV-x1W" secondAttribute="leading" id="kN3-N9-mRZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="7TV-dp-EDL"/>
+                    <navigationItem key="navigationItem" id="7TV-dp-EDL">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="i2L-DK-ku6">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="8gq-5f-Iqa" id="gxb-Nw-e81"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="KJc-Ag-CXg" id="0bp-0m-VfO"/>
                         <outlet property="tableView" destination="shY-eV-x1W" id="Igk-eO-h49"/>
@@ -639,7 +645,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9v2-8B-EtM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Time Now" image="clock" selectedImage="clock" id="esS-AA-sk8"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Cn1-tx-k0k">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Cn1-tx-k0k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -657,7 +663,7 @@
             <objects>
                 <navigationController storyboardIdentifier="cityTable" automaticallyAdjustsScrollViewInsets="NO" id="wtG-jc-bQR" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4dt-he-jEa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4dt-he-jEa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

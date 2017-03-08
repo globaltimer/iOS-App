@@ -12,6 +12,11 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     let cities = try! Realm().objects(StoredCity.self).sorted(byKeyPath: "name", ascending: true)
     var filteredCities: [StoredCity] = []
     
+    
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 
     override func viewDidLoad() {
         
