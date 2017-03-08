@@ -364,7 +364,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             let GMT = Date()
             let new = 60 * 30 * (adjustTimeStat+0)
             
-            let newtral   = Date(timeInterval:  TimeInterval(new), since: GMT)
+            let newtral = Date(timeInterval:  TimeInterval(new), since: GMT)
 
 //            adjustTimeBeforeLabel.text = tmpFormat.string(from: before30m)
 //            adjustTimeNowLabel.text = tmpFormat.string(from: newtral)
