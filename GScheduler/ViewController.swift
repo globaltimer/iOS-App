@@ -411,6 +411,3 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     } // 初期化処理
 
 } // class
-
-
-
