@@ -36,9 +36,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         
-        super.viewDidLoad( )
+        super.viewDidLoad()
         //
-        //print(Realm.Configuration.defaultConfiguration.fileURL!)
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         //
         tableView.delegate = self
         tableView.dataSource = self
@@ -388,7 +388,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // csvを1行ずつ読み込む
         csvStringData.enumerateLines(invoking: { (line, stop) -> () in
             
-            
             // カンマ区切りで分割
             let cityDataArray = line.components(separatedBy: ",")
             citiesAry.append(
@@ -408,6 +407,55 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
         
+        // 都市の初期設定(いくつかの都市をあらかじめプリセット)
+        setInitCities()
+        
+        
     } // 初期化処理
+    
+    func setInitCities() {
+
+        try! realm.write {
+            
+            var dynamicOrderNo = 0
+            
+            var localTimeZoneName: String {
+                return TimeZone.current.identifier
+            }
+            
+            // 端末の現在位置の都市のID
+            let currentCityID = realm.objects(StoredCity.self).filter("timeZone == '\(localTimeZoneName)'").first?.id
+            
+            // 端末のタイムゾーンをもとにしたプリセット
+            if let currentCityID = currentCityID {
+                realm.create(StoredCity.self, value: ["id": currentCityID, "isSelected": true, "orderNo": dynamicOrderNo], update: true)
+                    dynamicOrderNo += 1
+            }
+            
+            if currentCityID != 201 {
+                // 東京
+                realm.create(StoredCity.self, value: ["id": 201, "isSelected": true, "orderNo": dynamicOrderNo], update: true)
+                dynamicOrderNo += 1
+            }
+            
+            if currentCityID != 202 {
+                // ナイロビ
+                realm.create(StoredCity.self, value: ["id": 202, "isSelected": true, "orderNo": dynamicOrderNo], update: true)
+                dynamicOrderNo += 1
+            }
+            
+            if currentCityID != 108 {
+                // バンクーバー
+                realm.create(StoredCity.self, value: ["id": 108, "isSelected": true, "orderNo": dynamicOrderNo], update: true)
+            }
+        }
+    }
 
 } // class
+
+
+
+
+
+
+
