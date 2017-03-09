@@ -163,19 +163,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
 
     
-    // 昔、ここにボタンがあったときは、こんなメソッドをセットしていました...
-//    @IBAction func LaunchTabVC(_ sender: AnyObject) {
-//        let nex = self.storyboard!.instantiateViewController(withIdentifier: "TabBar")
-//        self.present(nex, animated: true, completion: nil)
-//    }
-    
-    // ステータスバーの表示 / 非表示 の切り替え
-//    override var prefersStatusBarHidden: Bool {
-//        //return true
-//        return false
-//    }
-    
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -191,21 +178,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         // 編集ボタンを左上に配置
         //navigationItem.leftBarButtonItem = editButtonItem
         
-//        // フォーマッタの設定
-//        setConfigToFormatter(fm: &formatter, cellIdx: 0)
-//        setConfigToFormatter2(fm: &formatter2, cellIdx: 0)
-//        
-//        formatter.dateFormat = "HH:mm"
-//        
-//        formatter2.dateStyle = .medium
-//        formatter2.timeStyle = .none
-        
-        
-        // 初回起動時のみ
-        //if cities.count == 0 {
-            //print("初回起動だと 判定された！！！")
-            //initialEnrollCities()
-        //}
     }
     
     
@@ -220,17 +192,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         cities = realm.objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
         
-//        let ud = UserDefaults.standard
-//        if ud.object(forKey: "pinedCityCell") != nil {
-//            pinedCityCell = ud.integer(forKey: "pinedCityCell")
-//            print("データあり！ pinedCityCell は \(pinedCityCell)")
-//        }
-        
         print("画面2: will appear まさか　こっちのほうが　速いのか！？")
 
-        // tableView.reloadData()
-        
-        
         // フォーマッタの設定
         if !cities.isEmpty {
             setConfigToFormatter(fm: &formatter, cellIdx: 0)
@@ -241,46 +204,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         formatter2.dateStyle = .medium
         formatter2.timeStyle = .none
-        
-
-        if !cities.isEmpty {
-            
-            print("フォーマットしろや")
-            
-            // cityNameLabel.text = cities[pinedCityCell].name.uppercased()
-            
-            //cityNameLabel.text = cities[0].name.uppercased()
-//            cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-//            
-//            var tmpFormat = DateFormatter()
-//            setConfigToFormatter2(fm: &tmpFormat, cellIdx: 0)
-//            tmpFormat.dateStyle = .medium
-//            tmpFormat.timeStyle = .none
-//            
-//            let GMT = Date()
-//            let before30m = Date(timeInterval: -60*30, since: GMT)
-//            let after30m  = Date(timeInterval:  60*30, since: GMT)
-//            
-//            MDYLabel.text = tmpFormat.string(from: GMT)
-//            MDYLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-//            
-//            tmpFormat.dateFormat = "HH:mm"
-//            
-//            timeLabel.text = tmpFormat.string(from: GMT)
-//            timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-//            
-//            // 2/23追記
-//            
-//            adjustTimeBeforeLabel.text = tmpFormat.string(from: before30m)
-//            adjustTimeBeforeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-//            
-//            adjustTimeNowLabel.text = tmpFormat.string(from: GMT)
-//            adjustTimeNowLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-//            
-//            adjustTimeAheadLabel.text = tmpFormat.string(from: after30m)
-//            adjustTimeAheadLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-        }
-        
     }
     
 
@@ -381,7 +304,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
 //                cell.cityNameLabel.text = a + cities[indexPath.row].name.uppercased()
 //            }
             
-            
             cell.timeLabel.text = tmpFormat.string(from: newtral)
             cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
             
@@ -399,13 +321,18 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             
         } // 特別時のセル設定 完了
         
+        
+        ////////////////////
+        // バフデバフ = 0時 //
+        ////////////////////
+        
+        
         // これないと　どんどん　ずれてくから　必要よ。
         GMT = Date()
 
         // フォーマッタの初期設定
         setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
         setConfigToFormatter2(fm: &formatter2, cellIdx: indexPath.row)
-        
         
         // 1/25追記
         formatter.dateFormat = "HH:mm"
@@ -419,11 +346,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         // 2017/1/25修正
         cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
         cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-        
-//        if indexPath.row == pinedCityCell {
-//            let a = "\u{1F4CC} "
-//            cell.cityNameLabel.text = a + cities[indexPath.row].name.uppercased()
-//        }
         
         cell.yearAndMonthLabel.text = formatter2.string(from: GMT)
         cell.yearAndMonthLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
@@ -496,6 +418,11 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == pinedCityCell {
+            return 0
+        }
+        
         return 75
     }
 }

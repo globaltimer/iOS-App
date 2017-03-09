@@ -329,6 +329,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             try! realm.write {
                 
+                // 3/8 削除したら、そりゃisSelectedも変わります
+                
                 for city in cities {
                     
                     if city.orderNo < indexPath.row {
