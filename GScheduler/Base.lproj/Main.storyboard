@@ -20,7 +20,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--WORLD CLOCK-->
+        <!--GLOBAL CLOCK-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ViewController" customModule="GScheduler" customModuleProvider="target" sceneMemberID="viewController">
@@ -98,7 +98,7 @@
                             <constraint firstItem="uLX-zH-seL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cHV-5E-Dfh"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="WORLD CLOCK" id="x9Z-Fo-c3w">
+                    <navigationItem key="navigationItem" title="GLOBAL CLOCK" id="x9Z-Fo-c3w">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="och-Tg-VkG">
                             <color key="tintColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -119,7 +119,7 @@
             <objects>
                 <navigationController id="gK4-b3-w1b" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Set  Time" image="menu" selectedImage="menu" id="wSz-xc-L2A"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5sn-hF-s0J">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5sn-hF-s0J">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -151,7 +151,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7V3-PO-Sdl" id="niq-3r-aa3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zV-Ef-cjD">
@@ -562,7 +562,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Wv-FN-ewx" id="kOj-yJ-XnX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUx-q7-GFi">
@@ -645,7 +645,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9v2-8B-EtM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Time Now" image="clock" selectedImage="clock" id="esS-AA-sk8"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Cn1-tx-k0k">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Cn1-tx-k0k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -663,7 +663,7 @@
             <objects>
                 <navigationController storyboardIdentifier="cityTable" automaticallyAdjustsScrollViewInsets="NO" id="wtG-jc-bQR" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4dt-he-jEa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4dt-he-jEa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

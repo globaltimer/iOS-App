@@ -156,10 +156,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     // 左欄、日付と西暦を表示させるためのフォーマッタ
     var formatter2 = DateFormatter()
     
-    
-    // 全都市リスト --> ユーザーにより追加された都市のみ抽出
-//    let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "id", ascending: true)
-
     var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
 
     
@@ -174,10 +170,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         // Realmのパス
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
-        
         // 編集ボタンを左上に配置
         //navigationItem.leftBarButtonItem = editButtonItem
-        
     }
     
     

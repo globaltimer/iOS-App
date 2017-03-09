@@ -327,9 +327,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if editingStyle == .delete {
             
-            try! realm.write {
+            let tmp = pinedCityCell
+            
+            // pinedCityCellの振り直し
+            if indexPath.row > pinedCityCell {
                 
-                // 3/8 削除したら、そりゃisSelectedも変わります
+            }
+            
+            else if indexPath.row == pinedCityCell {
+                if indexPath.row != 0 {
+                    pinedCityCell -= 1
+                }
+            }
+            
+            else if indexPath.row  < pinedCityCell {
+                pinedCityCell -= 1
+            }
+            
+            print("ピン都市が、\(tmp) から \(pinedCityCell)になりました")
+            
+            
+            try! realm.write {
                 
                 for city in cities {
                     
