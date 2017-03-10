@@ -30,6 +30,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
              NSFontAttributeName: UIFont(name: megrim, size: 18) as Any
         ]
         
+        //
+        
+        
+        //tintColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        
+        
+        //backgroundColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        
+        
+        
         // ナビゲーションバーのボタン
 //        UINavigationBar.appearance().tintColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         

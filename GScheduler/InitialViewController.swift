@@ -172,6 +172,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // 編集ボタンを左上に配置
         //navigationItem.leftBarButtonItem = editButtonItem
+        
+        
     }
     
     

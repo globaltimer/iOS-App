@@ -326,6 +326,7 @@
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="KJc-Ag-CXg">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="shY-eV-x1W">
@@ -418,7 +419,7 @@
             </objects>
             <point key="canvasLocation" x="-487" y="572"/>
         </scene>
-        <!--WORLD CLOCK-->
+        <!--GLOBAL CLOCK-->
         <scene sceneID="ytu-jT-yha">
             <objects>
                 <viewController storyboardIdentifier="setTime" id="WOX-4z-qbf" customClass="InitialViewController" customModule="GScheduler" customModuleProvider="target" sceneMemberID="viewController">
@@ -623,7 +624,7 @@
                             <constraint firstItem="74p-8S-Muv" firstAttribute="bottom" secondItem="Wvu-7d-I9N" secondAttribute="top" id="mse-pV-fZS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="WORLD CLOCK" id="gpZ-6y-Y1o"/>
+                    <navigationItem key="navigationItem" title="GLOBAL CLOCK" id="gpZ-6y-Y1o"/>
                     <connections>
                         <outlet property="MDYLabel" destination="oac-TI-0IO" id="gLZ-ij-EuT"/>
                         <outlet property="adjustTimeAheadLabel" destination="3O9-AM-bAo" id="NbX-P6-c21"/>

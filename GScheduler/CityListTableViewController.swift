@@ -29,7 +29,7 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         
         searchBar.delegate = self
         
-        searchBar.barTintColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        searchBar.barTintColor = UIColor(red:0.14, green:0.68, blue:0.73, alpha:1.0)
         
         for subView in searchBar.subviews {
             for secondSubView in subView.subviews {
@@ -38,6 +38,8 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
                 }
             }
         }
+        
+        // UISearchBar.appearance().backgroundColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
     }
     
     
