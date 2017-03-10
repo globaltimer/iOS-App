@@ -44,10 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UINavigationBar.appearance().tintColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         
         // 右のボタンはなぜかきかないため、SBで直接指定している
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: megrim, size: 18) as Any,
-            NSForegroundColorAttributeName: UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0),
-        ], for: .normal)
-            
+//        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: megrim, size: 18) as Any,
+//            NSForegroundColorAttributeName: UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0),
+//        ], for: .normal)
+        
         
         // ナビゲーションバーの背景色
         UINavigationBar.appearance().barTintColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)

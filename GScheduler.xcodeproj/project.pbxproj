@@ -15,6 +15,7 @@
 		440223A51DF3A28F00774C30 /* CityListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440223A41DF3A28F00774C30 /* CityListTableViewController.swift */; };
 		440223A71DF3B8D200774C30 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440223A61DF3B8D200774C30 /* City.swift */; };
 		440223AA1DF4033900774C30 /* memo in Resources */ = {isa = PBXBuildFile; fileRef = 440223A91DF4033900774C30 /* memo */; };
+		4443D8C41E733C95009650C8 /* CoreActionSheetPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4443D8C31E733C95009650C8 /* CoreActionSheetPicker.framework */; };
 		446E7C321DF5CC6700E5D3E5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446E7C311DF5CC6700E5D3E5 /* Images.xcassets */; };
 		448ABC2B1E397AFB0005958C /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448ABC2A1E397AFB0005958C /* InitialViewController.swift */; };
 		448ABC301E397F350005958C /* InitialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448ABC2F1E397F350005958C /* InitialTableViewCell.swift */; };
@@ -42,6 +43,7 @@
 		440223A41DF3A28F00774C30 /* CityListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityListTableViewController.swift; sourceTree = "<group>"; };
 		440223A61DF3B8D200774C30 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		440223A91DF4033900774C30 /* memo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = memo; sourceTree = "<group>"; };
+		4443D8C31E733C95009650C8 /* CoreActionSheetPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreActionSheetPicker.framework; path = Carthage/Build/iOS/CoreActionSheetPicker.framework; sourceTree = "<group>"; };
 		446E7C311DF5CC6700E5D3E5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		448ABC2A1E397AFB0005958C /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		448ABC2F1E397F350005958C /* InitialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialTableViewCell.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4443D8C41E733C95009650C8 /* CoreActionSheetPicker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +109,7 @@
 		4402239F1DF3731D00774C30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4443D8C31E733C95009650C8 /* CoreActionSheetPicker.framework */,
 				440223A01DF3732000774C30 /* Realm.framework */,
 				440223A11DF3732000774C30 /* RealmSwift.framework */,
 			);
@@ -245,6 +249,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CoreActionSheetPicker.framework",
 			);
 			outputPaths = (
 			);

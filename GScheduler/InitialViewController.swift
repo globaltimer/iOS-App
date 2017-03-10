@@ -1,6 +1,8 @@
 
 import UIKit
 import RealmSwift
+import CoreActionSheetPicker
+
 
 class InitialViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -162,6 +164,10 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        //
+//        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Quicksand", size: 18) as Any,
+//                                                             NSForegroundColorAttributeName: UIColor.blue,
+//                                                             ], for: .normal)
         //
         tableView.delegate = self
         tableView.dataSource = self
@@ -420,6 +426,69 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         return 75
+    }
+    
+    
+    // 3/10 タップアクション追加
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        super.touchesEnded(touches, with: event)
+        
+        for touch: UITouch in touches {
+            
+            let tag = touch.view!.tag
+            switch tag {
+                case 1, 2:
+                    let v = touch.view
+                    if let v = v {
+                        tap(v)
+                    }
+//                case 2:
+//                    let v = touch.view
+//                    if let v = v {
+//                        tap(v)
+//                    }
+                default:
+                    break
+            }
+        }
+    }
+    
+    
+    func tap(_ view: UIView) {
+        
+        print("きたね。タグ番号は\(view.tag)")
+        
+        let pickerMode = (view.tag == 1) ? UIDatePickerMode.date : UIDatePickerMode.dateAndTime
+        
+        let datePicker = ActionSheetDatePicker(
+            title: "Select date.",
+            datePickerMode: pickerMode,
+            selectedDate: Date(),
+            doneBlock: { picker, value, index in
+                print("value = \(value)")
+                print("index = \(index)")
+                print("picker = \(picker)")
+                
+                //let tmp = value as! Date
+                //self.myLabel.text = String(describing: tmp)
+                return
+        },
+            cancel: { ActionStringCancelBlock in return },
+            origin: view
+        )
+        
+        
+        let secondsInWeek: TimeInterval = 7 * 24 * 60 * 60
+        
+//        if view.tag == 1 {
+//        datePicker?.minimumDate = NSDate(timeInterval: -secondsInWeek, since: NSDate() as Date) as Date!
+//        datePicker?.maximumDate = NSDate(timeInterval: secondsInWeek, since: NSDate() as Date) as Date!
+//        }
+        
+        datePicker?.minuteInterval = 1
+        
+        datePicker?.show()
     }
 }
 

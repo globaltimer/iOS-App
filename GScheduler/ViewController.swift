@@ -2,7 +2,6 @@
 import UIKit
 import RealmSwift
 
-
 extension UILabel {
     func kern(kerningValue:CGFloat) {
         self.attributedText =  NSAttributedString(string: self.text ?? "", attributes: [NSKernAttributeName:kerningValue, NSFontAttributeName:font, NSForegroundColorAttributeName:self.textColor])
@@ -48,6 +47,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // 編集ボタンを左上に配置
 //        if cities.count > 0 {
             navigationItem.leftBarButtonItem = editButtonItem
+            navigationItem.leftBarButtonItem?.tintColor = UIColor.white
 //        }
         
         // 初回起動時のみ
