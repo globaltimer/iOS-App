@@ -38,8 +38,6 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
                 }
             }
         }
-        
-        // UISearchBar.appearance().backgroundColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
     }
     
     
@@ -121,30 +119,6 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        // modal時にしか効かないっぽい？ので、これはダメ
-//        self.dismiss(animated: true, completion: nil)
-        
-        //Navigation Controllerを取得
-        // ここ、モーダル遷移でこの画面に来ているとここで落ちる
-        
-        
-//        let nav = self.navigationController!
-//        
-//        //呼び出し元のView Controllerを遷移履歴から取得しパラメータを渡す
-//        // ここが "2"の理由がわからねえ。。。
-//        let InfoVc = nav.viewControllers[nav.viewControllers.count-2] as! ViewController
-//        
-////        if (searchBar.text?.characters.count)! > 0 {
-//        if !((searchBar.text?.isEmpty)!) {
-//        
-//            InfoVc.selectedCity = filteredCities[indexPath.row]
-//            
-//        } else {
-//            InfoVc.selectedCity = cities[indexPath.row]
-//        }
-        
-
-        
         try! realm.write {
             
             if (searchBar.text?.characters.count)! == 0 {
@@ -174,7 +148,6 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
                 
                 print("\(cities.filter("id == \(id)").first?.name) was enrolled!")
                 
-                
             } else {  // フィルタされた状態でセルがクリックされた場合
                 
                 let id = filteredCities[indexPath.row].id
@@ -195,28 +168,13 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     
-    //////////////////
-    // インデックス  ///
-    //////////////////
+    ///////////////
+    // MARK: Index
+    ///////////////
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        
-        print("そんで、セクション数が決定される。")
-        
         if (searchBar.text?.characters.count)! > 0 {
-        
-//            var count = 0
-//            
-//            for city in filteredCities {
-//                if city.name.contains(searchBar.text!) {
-//                    count += 1
-//                }
-//            }
-//            
-//            return count
-            
-            // ↑　こんなことせんでもこれでええやん。It works well!
             return 1
         }
         
@@ -232,9 +190,9 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         
         let head_character = sections[section]
         let cityStartFromABC = cities.filter("name BEGINSWITH '\(head_character)'")
+
         return cityStartFromABC.count
         
-        //return cities.count
     }
     
     var sections = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -252,13 +210,12 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
         return ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     }
     
+    
     /// セクションのタイトルを返す
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if (searchBar.text?.characters.count)! > 0 {
-            
             return nil
-            
         }
         
         print("セクションのタイトル: \(sections[section])")
@@ -268,18 +225,11 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
     
     // インデックスリストをタップ時のコールバック
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title:String, at index: Int) -> Int {
-        print("おら！！")
         return index
     }
     
     
-    ////////
-    
-    // MARK: search bar
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        print("hoge---")
         
         filteredCities = []
         

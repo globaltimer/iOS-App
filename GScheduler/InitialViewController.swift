@@ -88,7 +88,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.reloadData()
     }
     
-    
 
     @IBAction func adjustTimeAheadButton(_ sender: Any) {
         
@@ -120,7 +119,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         adjustTimeBeforeLabel.text = tmpFormat2.string(from: before30m)
         adjustTimeNowLabel.text = tmpFormat2.string(from: newtral)
         adjustTimeAheadLabel.text = tmpFormat2.string(from: after30m)
-        
         
         timeLabel.text = tmpFormat2.string(from: newtral)
         
@@ -161,9 +159,9 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
 
     
-    //////////////////
-    // MARK: LifeCycle
-    //////////////////
+    ////////////////////
+    // MARK: Life Cycle
+    ////////////////////
     
     override func viewDidLoad() {
         
@@ -272,7 +270,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         
         // 時間調整がかかっているときのセル表示
         if adjustTimeStat != 0 {
@@ -425,7 +422,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
-    
     // 3/10 タップアクション追加
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -503,15 +499,12 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
-    
     func hoge() {
         print("ほげー")
         
         let calendar = Calendar(identifier: .gregorian)
         let date = calendar.date(from: DateComponents(year: 2016, month: 10, day: 1))
     }
-    
-    
 }
 
 

@@ -15,7 +15,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var GMT = Date()
     
     let realm = try! Realm()
-//    let cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "id", ascending: true)
 
     var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
     
@@ -27,18 +26,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var timeLabel: UILabel!
     
     
-    @IBAction func rightButtonTapped(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "cityTable")
-        self.present(vc!, animated: true, completion: nil)
-    }
+    ///////////////////
+    // MARK: Life Cycle
+    ///////////////////
     
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        //
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
-        //
+        
+        //print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
         let ud = UserDefaults.standard
         if ud.object(forKey: "pinedCityCell") != nil {
             pinedCityCell = ud.integer(forKey: "pinedCityCell")
@@ -47,7 +45,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.delegate = self
         tableView.dataSource = self
-                
+        
         // 編集ボタンを左上に配置
 //        if cities.count > 0 {
             navigationItem.leftBarButtonItem = editButtonItem
@@ -62,15 +60,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    override var prefersStatusBarHidden: Bool {
-        return false
-    }
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        
+        //
         GMT = Date()
         
         cities = realm.objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
@@ -88,7 +81,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         print("画面1: will disappear")
         
-//        // 現在の ピンされた都市を保存
+        // 現在の ピンされた都市を保存
         let ud = UserDefaults.standard
         ud.set(pinedCityCell, forKey: "pinedCityCell")
         ud.synchronize()
@@ -96,20 +89,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        
-        super.setEditing(editing, animated: animated)
-        
-        tableView.isEditing = editing
-        
-        for cell in tableView.visibleCells {
-            if tableView.isEditing {
-                (cell as! TableViewCell).timeLabel.isHidden = true
-            } else {
-                (cell as! TableViewCell).timeLabel.isHidden = false
-            }
-        }
+    //////////////
+    // MARK: Event
+    //////////////
+    
+    
+    @IBAction func rightButtonTapped(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "cityTable")
+        self.present(vc!, animated: true, completion: nil)
     }
+    
+    
+    //////////////////
+    // MARK: TableView
+    //////////////////
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -127,19 +120,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
         setConfigToFormatter2(fm: &formatter2, cellIdx: indexPath.row)
 
-        // 1/25追記
-        formatter.dateFormat = "HH:mm"
-        
-        formatter2.dateStyle = .medium
-        formatter2.timeStyle = .none
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         
-//        cell.cityNameLabel.text = cities[indexPath.row].name
-//        cell.timeLabel.text = formatter.string(from: GMT)
-        
-        
-        // 2017/1/25修正
+
         cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
         cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
@@ -159,13 +143,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.timeLabel.kern(kerningValue: 2)
 
         
-        
         if indexPath.row % 2 == 0 {
-//            cell.backgroundColor = UIColor(hue: 0.61, saturation: 0.09, brightness: 0.99, alpha: 1.0)
             cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
-
         } else {
-//            cell.backgroundColor = UIColor.white
             cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         }
         
@@ -178,66 +158,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        if indexPath.row == pinedCityCell {
-//            
-//            // パターン1: モーダル遷移なので、ナビゲーションバーがない
-////            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-////            let controller = storyboard.instantiateViewController(withIdentifier: "setTime")
-////            self.present(controller, animated: true, completion: nil)
-////            return
-//            
-//            // パターン2: delegateセットするとこで落ちる
-//            
-//            //let second = InitialViewController()
-//            //second.modalTransitionStyle = .crossDissolve
-//            // 変数に任意の値を渡せる
-//            //second.myMessasge = "トップ画面からの遷移"
-//            // 画像データも渡せるので、撮影した画像をアルバムに保存しなくて良い
-//            //second.myImage = UIImage(...)
-//            // 遷移履歴に追加する形で画面遷移
-//            //navigationController?.pushViewController(second as UIViewController, animated: true)
-//            
-//            // パターン3: セグだからそもそも無理
-//            // self.performSegue(withIdentifier: "setTime", sender: nil)
-//
-//            
-//            // アニメで遷移したいときは、この6行をカットインしろ
-////            let view = tabBarController?.view.subviews[0]
-////            UIView.beginAnimations(nil, context: nil)
-////            UIView.setAnimationDuration(0.75)
-////            UIView.setAnimationCurve(.easeInOut)
-////            UIView.setAnimationTransition(.flipFromRight, for: view!, cache: true)
-////            UIView.commitAnimations()
-        
-//        print("")
-//
-//            
-//            // 現在の ピンされた都市を保存
-//            let ud = UserDefaults.standard
-//            ud.set(pinedCityCell, forKey: "pinedCityCell")
-//            ud.synchronize()
-//            
-//            // 遷移したければ　これコメントインして
-//            // self.tabBarController?.selectedIndex = 1
-//            
-//            return
-//        }
-//        
-
         // ピン都市を更新
         pinedCityCell = indexPath.row
-        
+    
         tableView.reloadData()
     }
     
     
     // セルが削除が可能なことを伝えるメソッド
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) ->UITableViewCellEditingStyle {
-
-        print("きたきた")
         
         if tableView.isEditing {
             return .delete
@@ -374,12 +306,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        
+        super.setEditing(editing, animated: animated)
+        
+        tableView.isEditing = editing
+        
+        for cell in tableView.visibleCells {
+            if tableView.isEditing {
+                (cell as! TableViewCell).timeLabel.isHidden = true
+            } else {
+                (cell as! TableViewCell).timeLabel.isHidden = false
+            }
+        }
+    }
+    
+    
     // フォーマッタの初期設定
     func setConfigToFormatter(fm: inout DateFormatter, cellIdx: Int) {
         // タイムゾーン
         let timeZone = cities[cellIdx].timeZone
-        fm.dateFormat = "MM/dd HH:mm"
-        
+        fm.dateFormat = "HH:mm"
+
         fm.timeZone =  NSTimeZone(name: timeZone) as TimeZone!
     }
     
@@ -388,17 +341,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func setConfigToFormatter2(fm: inout DateFormatter, cellIdx: Int) {
         // タイムゾーン
         let timeZone = cities[cellIdx].timeZone
-        //fm.dateFormat = "YYYY / MM / dd"
-        
         fm.timeZone =  NSTimeZone(name: timeZone) as TimeZone!
+        
+        fm.dateStyle = .medium
+        fm.timeStyle = .none
     }
     
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
-    
-    
+
     func initialEnrollCities() {
         
         var citiesAry: [StoredCity] = []
@@ -421,8 +371,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         })
         
-        print("はいはいおわり！")
-        print(citiesAry)
         
         try! realm.write {
             for city in citiesAry {
@@ -433,9 +381,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // 都市の初期設定(いくつかの都市をあらかじめプリセット)
         setInitCities()
-        
-        
     } // 初期化処理
+    
     
     func setInitCities() {
 
@@ -475,10 +422,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 } // class
-
-
-
-
 
 
 
