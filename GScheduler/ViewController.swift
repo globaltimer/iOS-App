@@ -20,7 +20,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
     
     // ピンされたcityのセル番号
-    var pinedCityCell = 0
+    var pinedCityCell: Int
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -55,6 +55,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("初回起動だと 判定された！！！")
             initialEnrollCities()
         }
+        //
+        let ud = UserDefaults.standard
+        print(ud.object(forKey: "pinedCityCell"))
     }
     
     

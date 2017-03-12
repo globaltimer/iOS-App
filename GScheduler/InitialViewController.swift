@@ -48,9 +48,9 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         tmpFormat2.dateFormat = "HH:mm"
 
-        let bef30 = (60 * 30 * (adjustTimeStat-1))
-        let new   = (60 * 30 * (adjustTimeStat+0))
-        let aft30 = (60 * 30 * (adjustTimeStat+1))
+        let bef30 = 60 * 30 * (adjustTimeStat-1)
+        let new   = 60 * 30 * (adjustTimeStat+0)
+        let aft30 = 60 * 30 * (adjustTimeStat+1)
         
         let GMT = Date()
         
@@ -107,9 +107,9 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         tmpFormat2.dateFormat = "HH:mm"
         
-        let bef30 = (60 * 30 * (adjustTimeStat-1))
-        let new   = (60 * 30 * (adjustTimeStat+0))
-        let aft30 = (60 * 30 * (adjustTimeStat+1))
+        let bef30 = 60 * 30 * (adjustTimeStat-1)
+        let new   = 60 * 30 * (adjustTimeStat+0)
+        let aft30 = 60 * 30 * (adjustTimeStat+1)
         
         let GMT = Date()
         
@@ -209,13 +209,15 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidAppear(animated)
         print("画面2: did appear まさか　こっちのほうが　速いのか！？????")
         //
-        tableView.reloadData()
+        //tableView.reloadData()
         
         let ud = UserDefaults.standard
         if ud.object(forKey: "pinedCityCell") != nil {
             pinedCityCell = ud.integer(forKey: "pinedCityCell")
             print("データあり！ pinedCityCell は \(pinedCityCell)")
         }
+        
+        tableView.reloadData()
         
         // ラベルに表示する内容は、 viewWillAppearだと、早すぎる。こっちに書かないとだめ。
         if !cities.isEmpty {
@@ -325,7 +327,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         
         // これないと　どんどん　ずれてくから　必要よ。
-        GMT = Date()
+        //GMT = Date()
 
         // フォーマッタの初期設定
         setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
@@ -453,23 +455,42 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let datePicker = ActionSheetDatePicker(
             title: "Select date.",
-            datePickerMode: pickerMode,
+            datePickerMode: .dateAndTime,
             selectedDate: Date(),
             doneBlock: { picker, value, index in
                 print("value = \(value)")
                 print("index = \(index)")
                 print("picker = \(picker)")
                 
-                //let tmp = value as! Date
-                //self.myLabel.text = String(describing: tmp)
-                return
+                //self.hoge()
+                
+                let tmp = value as! Date
+                
+                print("タイム原型 \(tmp)")
+                
+                let timeGap = NSTimeZone(name: (self.cities[self.pinedCityCell].timeZone))?.secondsFromGMT
+                
+                let tmp2 = Date(timeInterval: TimeInterval(-timeGap!), since: tmp)
+                
+                print("タイム原型 \(tmp2)")
+                
+               // let timeGap = NSTimeZone(name: (self.cities[self.pinedCityCell].timeZone))?.secondsFromGMT
+                
+                //print(timeGap)
+                
+                self.GMT = Date(timeInterval: -TimeInterval(timeGap!), since: tmp)
+                
+                print("改訂タイム: \(self.GMT)")
+
+                self.tableView.reloadData()
+                
         },
             cancel: { ActionStringCancelBlock in return },
             origin: view
         )
         
         
-        let secondsInWeek: TimeInterval = 7 * 24 * 60 * 60
+        //let secondsInWeek: TimeInterval = 7 * 24 * 60 * 60
         
 //        if view.tag == 1 {
 //        datePicker?.minimumDate = NSDate(timeInterval: -secondsInWeek, since: NSDate() as Date) as Date!
@@ -480,6 +501,17 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         datePicker?.show()
     }
+    
+    
+    
+    func hoge() {
+        print("ほげー")
+        
+        let calendar = Calendar(identifier: .gregorian)
+        let date = calendar.date(from: DateComponents(year: 2016, month: 10, day: 1))
+    }
+    
+    
 }
 
 
