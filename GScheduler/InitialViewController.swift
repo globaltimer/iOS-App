@@ -451,9 +451,11 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let datePicker = ActionSheetDatePicker(
             title: "Select date.",
-            datePickerMode: .dateAndTime,
-            selectedDate: Date(),
+            datePickerMode: pickerMode,
+            selectedDate: Date(),  //Date(timeInterval: TimeInterval(0), since: Date()),
+            //Date(),
             doneBlock: { picker, value, index in
+                
                 print("value = \(value)")
                 print("index = \(index)")
                 print("picker = \(picker)")
@@ -498,13 +500,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         datePicker?.show()
     }
     
-    
-    func hoge() {
-        print("ほげー")
-        
-        let calendar = Calendar(identifier: .gregorian)
-        let date = calendar.date(from: DateComponents(year: 2016, month: 10, day: 1))
-    }
 }
 
 
