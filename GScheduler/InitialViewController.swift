@@ -6,8 +6,7 @@ import CoreActionSheetPicker
 
 class InitialViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    // ピンされた都市のID
-    // -1 = isSelectedな都市が1件もなく、テーブルセルが一行もない状態
+    // ピンされた都市のID。 -1 = isSelectedな都市が1件もなく、テーブルセルが一行もない状態
     var pinedCityCell = -1
 
     // タイム調整バフ・デバフ
@@ -21,6 +20,10 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var timeAheadLabel: UILabel!
     
     @IBOutlet weak var tableView:      UITableView!
+    
+    @IBOutlet weak var adjustTimeBeforeLabel: UILabel!
+    @IBOutlet weak var adjustTimeNowLabel: UILabel!
+    @IBOutlet weak var adjustTimeAheadLabel: UILabel!
     
     
     // 2/23追加
@@ -86,9 +89,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
-    @IBOutlet weak var adjustTimeBeforeLabel: UILabel!
-    @IBOutlet weak var adjustTimeNowLabel: UILabel!
-    @IBOutlet weak var adjustTimeAheadLabel: UILabel!
 
     @IBAction func adjustTimeAheadButton(_ sender: Any) {
         
@@ -161,13 +161,13 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
 
     
+    //////////////////
+    // MARK: LifeCycle
+    //////////////////
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        //
-//        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Quicksand", size: 18) as Any,
-//                                                             NSForegroundColorAttributeName: UIColor.blue,
-//                                                             ], for: .normal)
         //
         tableView.delegate = self
         tableView.dataSource = self
@@ -175,11 +175,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         print("何度でも呼ばれるぜ！！")
         // Realmのパス
         print(Realm.Configuration.defaultConfiguration.fileURL!)
-        
-        // 編集ボタンを左上に配置
-        //navigationItem.leftBarButtonItem = editButtonItem
-        
-        
     }
     
     
@@ -210,6 +205,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     
 
     override func viewDidAppear(_ animated: Bool) {
+        
         super.viewDidAppear(animated)
         print("画面2: did appear まさか　こっちのほうが　速いのか！？????")
         //
@@ -254,7 +250,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         // 2/23追記
-        
         if !cities.isEmpty {
             adjustTimeBeforeLabel.text = tmpFormat.string(from: before30m)
             adjustTimeBeforeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
@@ -399,6 +394,14 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == pinedCityCell {
+            return 0
+        }
+        return 75
+    }
+    
+    
     // フォーマッタの初期設定
     func setConfigToFormatter(fm: inout DateFormatter, cellIdx: Int) {
         // タイムゾーン
@@ -410,6 +413,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         fm.dateFormat = "MM/dd HH:mm"
     }
     
+    
     // フォーマッタの初期設定
     func setConfigToFormatter2(fm: inout DateFormatter, cellIdx: Int) {
         // タイムゾーン
@@ -418,15 +422,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         fm.timeZone = NSTimeZone(name: timeZone) as TimeZone!
     }
     
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if indexPath.row == pinedCityCell {
-            return 0
-        }
-        
-        return 75
-    }
     
     
     // 3/10 タップアクション追加
@@ -443,11 +438,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
                     if let v = v {
                         tap(v)
                     }
-//                case 2:
-//                    let v = touch.view
-//                    if let v = v {
-//                        tap(v)
-//                    }
                 default:
                     break
             }

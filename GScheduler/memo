@@ -12,3 +12,38 @@ http://seeku.hateblo.jp/entry/2014/09/29/084248
 //
 
 セルの順番並び替えた時、セルのpinNoも変えないとだめ。
+
+//
+
+・時間表示のロジック
+
+viewWillAppear
+
+    adjustTimeStat = 0
+    GMT = Date()
+
+
+viewDidAppear
+
+
+
+cellForRowAt(つまりReloadされるたびに呼ばれる)
+    GMT = Date()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
