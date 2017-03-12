@@ -20,7 +20,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
     
     // ピンされたcityのセル番号
-    var pinedCityCell: Int
+    var pinedCityCell = 0
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -39,11 +39,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         //
+        let ud = UserDefaults.standard
+        if ud.object(forKey: "pinedCityCell") != nil {
+            pinedCityCell = ud.integer(forKey: "pinedCityCell")
+            print("データあり！ pinedCityCell は \(pinedCityCell)")
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
-        //
-        //tabBarController?.tabBar.delegate = self
-        
+                
         // 編集ボタンを左上に配置
 //        if cities.count > 0 {
             navigationItem.leftBarButtonItem = editButtonItem
@@ -55,9 +59,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("初回起動だと 判定された！！！")
             initialEnrollCities()
         }
-        //
-        let ud = UserDefaults.standard
-        print(ud.object(forKey: "pinedCityCell"))
     }
     
     
