@@ -479,23 +479,30 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
 //        let ddd = formatter.date(from: "2017/03/13 16:00:00 +09:00")
 //        print(ddd)
         
+        // まず、端末のローカルの時間とピンした都市のIntervalを取得
+        // 16時間
+        
+        //
+        let t = Date(timeIntervalSinceNow: 16 * 60 * 60)
         
         
         let datePicker = ActionSheetDatePicker(
             title: "Select date.",
             datePickerMode: pickerMode,
             //selectedDate: dateFromString as Date!,
-            selectedDate: Date(),
+            selectedDate: t,
             
             doneBlock: { picker, value, index in
                 
                 print("value = \(value)"); print("index = \(index)"); print("picker = \(picker)")
                 
+                // ↑で作ったDate()をもとに生成されたvalue
+                let tt = Date(timeInterval: -16*60*60, since: value as! Date)
                 
                 
-                self.GMT = value as! Date
+                //self.GMT = value as! Date
+                self.GMT = tt
                 
-                //self.GMT = Date(timeInterval: 3600, since: Date())
 
                 self.tableView.reloadData()
                 
