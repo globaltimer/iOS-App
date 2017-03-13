@@ -437,6 +437,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     func tap(_ view: UIView) {
         
         print("きたね。タグ番号は\(view.tag)")
+        
         let pickerMode = (view.tag == 1) ? UIDatePickerMode.date : UIDatePickerMode.dateAndTime
         
         let tz = NSTimeZone(name: cities[pinedCityCell].timeZone)
@@ -445,13 +446,15 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         fm.dateFormat = "yyyy/MM/dd HH:mm:ss"   // "MM/dd HH:mm"
         // なんと、「タイムゾーンを明示的に指定しないとGMT標準時を出力する」という死ぬほどだるかった罠がある。
         // タイムゾーンをきちんと指定しよう
+        // ちなみにこの1行がないと、PCの時間?(=バンクーバー)に標準になるっぽい
         fm.timeZone = tz as TimeZone!   // ここにバンクーバー(GMT-7)をセットしておけば。。。
         
-        let d = fm.string(from: Date())
+        let s = fm.string(from: Date())
         
         // これで、ちゃんと、[バンクーバーが 3/12 22:00のときのGMT時間 (= 3/13 5:00)が出力される]
-        //let dateFromString = fm.date(from: "2017/3/12 22:00:00")!
-        let dateFromString = fm.date(from: d)!
+        let dateFromString = fm.date(from: s)!
+        
+        print("ゴルァ！！ \(fm.timeZone)")
         print("ゴルァ！！ \(dateFromString)")
         
         // ここまで来たらOK.それを ↓ の selecetedDateに渡してあげればよい。
@@ -489,12 +492,45 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             origin: view
         )
         
+        
+        
 //        if view.tag == 1 {
 //        datePicker?.minimumDate = NSDate(timeInterval: -secondsInWeek, since: NSDate() as Date) as Date!
 //        datePicker?.maximumDate = NSDate(timeInterval: secondsInWeek, since: NSDate() as Date) as Date!
 //        }
         
         datePicker?.minuteInterval = 1
+
+        // 現在の日時を取得
+        var now = dateFromString
+        
+        // システムのカレンダーを取得
+        let cal = Calendar.current
+        
+        // 現在時刻のDateComponentsを取り出す
+        var dataComps = cal.dateComponents([.year, .month, .day, .hour, .minute], from: now)
+        
+        print("\(dataComps.year!)年\(dataComps.month!)月\(dataComps.day!)日 \(dataComps.hour!)時\(dataComps.minute!)分")
+        
+        cal.date(from: dataComps)
+        
+        
+        
+//        var dateComps = DateComponents()
+//        dateComps.year = 2017
+//        dateComps.month = 3
+//        dateComps.day =  13
+//        
+//        dateComps.hour = 0
+//        dateComps.minute = 10
+//        
+//        let cal = Calendar.current
+//        cal.date(from: dateComps) // カレンダーの完了
+        
+        datePicker?.calendar = cal
+        
+        
+        
         
         datePicker?.show()
     }

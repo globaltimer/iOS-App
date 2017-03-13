@@ -114,11 +114,11 @@
             </objects>
             <point key="canvasLocation" x="1126.875" y="136.26760563380282"/>
         </scene>
-        <!--Set  Time-->
+        <!--Set Time-->
         <scene sceneID="ANy-6q-u42">
             <objects>
                 <navigationController id="gK4-b3-w1b" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Set  Time" image="menu" selectedImage="menu" id="wSz-xc-L2A"/>
+                    <tabBarItem key="tabBarItem" title="Set Time" image="setting.png" selectedImage="setting.png" id="wSz-xc-L2A"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5sn-hF-s0J">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -535,6 +535,12 @@
                                             <constraint firstItem="3xk-8J-bof" firstAttribute="top" secondItem="wbe-Vf-nvc" secondAttribute="top" constant="4" id="vhh-ky-Noj"/>
                                         </constraints>
                                     </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil.png" translatesAutoresizingMaskIntoConstraints="NO" id="zdR-W0-mGd">
+                                        <rect key="frame" x="331" y="45" width="16" height="16"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil.png" translatesAutoresizingMaskIntoConstraints="NO" id="nZw-EB-VGn">
+                                        <rect key="frame" x="331" y="94" width="16" height="16"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.80392156862745101" green="0.80392156862745101" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -544,6 +550,8 @@
                                     <constraint firstItem="oac-TI-0IO" firstAttribute="leading" secondItem="FH8-bc-q6F" secondAttribute="leading" id="9c5-F7-Irl"/>
                                     <constraint firstItem="oac-TI-0IO" firstAttribute="top" secondItem="FH8-bc-q6F" secondAttribute="bottom" constant="8" symbolic="YES" id="CaO-46-mwn"/>
                                     <constraint firstItem="wbe-Vf-nvc" firstAttribute="top" secondItem="d9N-GR-SIG" secondAttribute="bottom" constant="7" id="K6b-Tj-KUh"/>
+                                    <constraint firstAttribute="trailing" secondItem="zdR-W0-mGd" secondAttribute="trailing" constant="28" id="NNy-a6-NLA"/>
+                                    <constraint firstItem="nZw-EB-VGn" firstAttribute="centerY" secondItem="v4D-pO-pal" secondAttribute="centerY" id="Nyy-8C-1qx"/>
                                     <constraint firstItem="FH8-bc-q6F" firstAttribute="leading" secondItem="VrO-yG-K4S" secondAttribute="leadingMargin" id="Ppn-B9-T96"/>
                                     <constraint firstItem="FH8-bc-q6F" firstAttribute="top" secondItem="VrO-yG-K4S" secondAttribute="topMargin" id="RXn-CV-SI3"/>
                                     <constraint firstItem="v4D-pO-pal" firstAttribute="leading" secondItem="d9N-GR-SIG" secondAttribute="leading" id="UU3-yg-QqW"/>
@@ -551,6 +559,8 @@
                                     <constraint firstItem="FH8-bc-q6F" firstAttribute="trailing" secondItem="VrO-yG-K4S" secondAttribute="trailingMargin" id="g3i-CV-pE0"/>
                                     <constraint firstItem="d9N-GR-SIG" firstAttribute="leading" secondItem="wbe-Vf-nvc" secondAttribute="leading" id="jJ1-PE-Zs5"/>
                                     <constraint firstItem="v4D-pO-pal" firstAttribute="trailing" secondItem="d9N-GR-SIG" secondAttribute="trailing" id="jo6-Ja-FRK"/>
+                                    <constraint firstItem="nZw-EB-VGn" firstAttribute="leading" secondItem="zdR-W0-mGd" secondAttribute="leading" id="qmP-Ei-VAd"/>
+                                    <constraint firstItem="zdR-W0-mGd" firstAttribute="centerY" secondItem="oac-TI-0IO" secondAttribute="centerY" id="tcm-H0-8k6"/>
                                     <constraint firstItem="oac-TI-0IO" firstAttribute="leading" secondItem="v4D-pO-pal" secondAttribute="leading" id="u0f-av-uFA"/>
                                     <constraint firstItem="d9N-GR-SIG" firstAttribute="top" secondItem="v4D-pO-pal" secondAttribute="bottom" constant="13" id="xdC-tn-F2u"/>
                                 </constraints>
@@ -567,7 +577,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUx-q7-GFi">
-                                                    <rect key="frame" x="8" y="42" width="61" height="21"/>
+                                                    <rect key="frame" x="8" y="42" width="187" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="dc2-Kd-KpA"/>
                                                     </constraints>
@@ -585,7 +595,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qi6-TU-Wa9">
-                                                    <rect key="frame" x="8" y="15" width="61" height="21"/>
+                                                    <rect key="frame" x="8" y="15" width="187" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="187" id="SJX-Rw-9cF"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="24"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -638,7 +651,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4JO-W7-8jH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1126.0869565217392" y="949.72826086956525"/>
+            <point key="canvasLocation" x="1125.5999999999999" y="949.47526236881572"/>
         </scene>
         <!--Time Now-->
         <scene sceneID="DtI-jG-16q">
@@ -680,6 +693,7 @@
     </scenes>
     <resources>
         <image name="clock" width="24" height="24"/>
-        <image name="menu" width="24" height="24"/>
+        <image name="pencil.png" width="16" height="16"/>
+        <image name="setting.png" width="24" height="24"/>
     </resources>
 </document>

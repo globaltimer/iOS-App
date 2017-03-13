@@ -23,6 +23,8 @@
 		448ABC381E39C4DE0005958C /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 448ABC371E39C4DE0005958C /* plus.png */; };
 		449259B11E4C2904006B9AAD /* NeoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449259B01E4C2904006B9AAD /* NeoCell.swift */; };
 		449259B31E4C472E006B9AAD /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 449259B21E4C472E006B9AAD /* Quicksand-Regular.ttf */; };
+		44B112AF1E7673CD00845CC9 /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B112AE1E7673CC00845CC9 /* pencil.png */; };
+		44B112B11E76772400845CC9 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B112B01E76772400845CC9 /* setting.png */; };
 		44C5187D1E67F4010050CA61 /* CityNameSeed.csv in Resources */ = {isa = PBXBuildFile; fileRef = 44C5187C1E67F4010050CA61 /* CityNameSeed.csv */; };
 		44DA6E151DF52D4900417140 /* RegisteredTaskTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA6E141DF52D4900417140 /* RegisteredTaskTimeViewController.swift */; };
 		44DA6E191DF53A5700417140 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA6E181DF53A5700417140 /* Task.swift */; };
@@ -51,6 +53,8 @@
 		448ABC371E39C4DE0005958C /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		449259B01E4C2904006B9AAD /* NeoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeoCell.swift; sourceTree = "<group>"; };
 		449259B21E4C472E006B9AAD /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
+		44B112AE1E7673CC00845CC9 /* pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil.png; sourceTree = "<group>"; };
+		44B112B01E76772400845CC9 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
 		44C5187C1E67F4010050CA61 /* CityNameSeed.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CityNameSeed.csv; sourceTree = "<group>"; };
 		44DA6E141DF52D4900417140 /* RegisteredTaskTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisteredTaskTimeViewController.swift; sourceTree = "<group>"; };
 		44DA6E181DF53A5700417140 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 				44E96D831E5FECC000FD82C7 /* pin.png */,
 				448ABC371E39C4DE0005958C /* plus.png */,
 				448ABC331E39BD8B0005958C /* Megrim.ttf */,
+				44B112AE1E7673CC00845CC9 /* pencil.png */,
+				44B112B01E76772400845CC9 /* setting.png */,
 				449259B21E4C472E006B9AAD /* Quicksand-Regular.ttf */,
 			);
 			name = Image;
@@ -233,6 +239,8 @@
 				44E96D841E5FECC000FD82C7 /* pin.png in Resources */,
 				4402238E1DF3689A00774C30 /* Main.storyboard in Resources */,
 				448ABC341E39BD8B0005958C /* Megrim.ttf in Resources */,
+				44B112B11E76772400845CC9 /* setting.png in Resources */,
+				44B112AF1E7673CD00845CC9 /* pencil.png in Resources */,
 				449259B31E4C472E006B9AAD /* Quicksand-Regular.ttf in Resources */,
 				44C5187D1E67F4010050CA61 /* CityNameSeed.csv in Resources */,
 			);
