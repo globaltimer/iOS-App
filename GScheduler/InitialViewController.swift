@@ -478,6 +478,20 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
                 self.tableView.reloadData()
                 
                 // 後始末　ここも慎重に書かないと即死だぞ
+                self.adjustTimeStat = 0
+                self.timeAheadLabel.text = "now"
+
+                fm.dateFormat = "HH:mm"
+                
+                self.timeLabel.text = fm.string(from: self.GMT)
+
+                let before30m = Date(timeInterval:  TimeInterval(60 * -30), since: self.GMT)
+                let newtral   = Date(timeInterval:  TimeInterval(0), since: self.GMT)
+                let after30m  = Date(timeInterval:  TimeInterval(60 * 30), since: self.GMT)
+                
+                self.adjustTimeBeforeLabel.text = fm.string(from: before30m)
+                self.adjustTimeNowLabel.text    = fm.string(from: newtral)
+                self.adjustTimeAheadLabel.text  = fm.string(from: after30m)
             },
             
             cancel: { ActionStringCancelBlock in return },
