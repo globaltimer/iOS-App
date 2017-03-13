@@ -52,7 +52,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         let new   = 60 * 30 * (adjustTimeStat+0)
         let aft30 = 60 * 30 * (adjustTimeStat+1)
         
-        let GMT = Date()
+        //let GMT = Date()
         
         let before30m = Date(timeInterval:  TimeInterval(bef30), since: GMT)
         let newtral   = Date(timeInterval:  TimeInterval(new), since: GMT)
@@ -110,7 +110,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         let new   = 60 * 30 * (adjustTimeStat+0)
         let aft30 = 60 * 30 * (adjustTimeStat+1)
         
-        let GMT = Date()
+        // let GMT = Date()
         
         let before30m = Date(timeInterval:  TimeInterval(bef30), since: GMT)
         let newtral   = Date(timeInterval:  TimeInterval(new), since: GMT)
@@ -280,25 +280,16 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             
             tmpFormat.dateFormat = "HH:mm"
             
-            let GMT = Date()
+            //let GMT = Date()
             let new = 60 * 30 * (adjustTimeStat+0)
             
-            let newtral = Date(timeInterval:  TimeInterval(new), since: GMT)
-
-//            adjustTimeBeforeLabel.text = tmpFormat.string(from: before30m)
-//            adjustTimeNowLabel.text = tmpFormat.string(from: newtral)
-//            adjustTimeAheadLabel.text = tmpFormat.string(from: after30m)
-            
+            let newtral = Date(timeInterval:  TimeInterval(new), since: self.GMT)
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! InitialTableViewCell
             
             cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
             cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
             
-//            if indexPath.row == pinedCityCell {
-//                let a = "\u{1F4CC} "
-//                cell.cityNameLabel.text = a + cities[indexPath.row].name.uppercased()
-//            }
             
             cell.timeLabel.text = tmpFormat.string(from: newtral)
             cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
