@@ -446,49 +446,43 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     func tap(_ view: UIView) {
         
         print("きたね。タグ番号は\(view.tag)")
-        
         let pickerMode = (view.tag == 1) ? UIDatePickerMode.date : UIDatePickerMode.dateAndTime
+        
+        let tz = NSTimeZone(name: cities[pinedCityCell].timeZone)
+        
+        let fm = DateFormatter()
+        fm.dateFormat = "yyyy/MM/dd HH:mm:ss"   // "MM/dd HH:mm"
+        // なんと、「タイムゾーンを明示的に指定しないとGMT標準時を出力する」という死ぬほどだるかった罠がある。
+        // タイムゾーンをきちんと指定しよう
+        fm.timeZone = tz as TimeZone!   // ここにバンクーバー(GMT-7)をセットしておけば。。。
+        
+        let d = fm.string(from: Date())
+        
+        // これで、ちゃんと、[バンクーバーが 3/12 22:00のときのGMT時間 (= 3/13 5:00)が出力される]
+        //let dateFromString = fm.date(from: "2017/3/12 22:00:00")!
+        let dateFromString = fm.date(from: d)!
+        print("ゴルァ！！ \(dateFromString)")
+        
+        // ここまで来たらOK.それを ↓ の selecetedDateに渡してあげればよい。
         
         let datePicker = ActionSheetDatePicker(
             title: "Select date.",
             datePickerMode: pickerMode,
-            selectedDate: Date(),  //Date(timeInterval: TimeInterval(0), since: Date()),
-            //Date(),
+            selectedDate: dateFromString as Date!,
             doneBlock: { picker, value, index in
                 
-                print("value = \(value)")
-                print("index = \(index)")
-                print("picker = \(picker)")
+                print("value = \(value)"); print("index = \(index)"); print("picker = \(picker)")
                 
-                //self.hoge()
-                
-                let tmp = value as! Date
-                
-                print("タイム原型 \(tmp)")
-                
-                let timeGap = NSTimeZone(name: (self.cities[self.pinedCityCell].timeZone))?.secondsFromGMT
-                
-                let tmp2 = Date(timeInterval: TimeInterval(-timeGap!), since: tmp)
-                
-                print("タイム原型 \(tmp2)")
-                
-               // let timeGap = NSTimeZone(name: (self.cities[self.pinedCityCell].timeZone))?.secondsFromGMT
-                
-                //print(timeGap)
-                
-                self.GMT = Date(timeInterval: -TimeInterval(timeGap!), since: tmp)
-                
-                print("改訂タイム: \(self.GMT)")
+                self.GMT = value as! Date
 
                 self.tableView.reloadData()
                 
-        },
+                // 後始末　ここも慎重に書かないと即死だぞ
+            },
+            
             cancel: { ActionStringCancelBlock in return },
             origin: view
         )
-        
-        
-        //let secondsInWeek: TimeInterval = 7 * 24 * 60 * 60
         
 //        if view.tag == 1 {
 //        datePicker?.minimumDate = NSDate(timeInterval: -secondsInWeek, since: NSDate() as Date) as Date!
@@ -500,6 +494,22 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         datePicker?.show()
     }
     
+    
+//    class DateUtils {
+//        class func dateFromString(string: String, format: String) -> NSDate {
+//            let formatter: DateFormatter = DateFormatter()
+//            //formatter.calendar = NSGregorianCalendar
+//            formatter.dateFormat = format
+//            return formatter.date(from: string)! as NSDate
+//        }
+//        
+//        class func stringFromDate(date: NSDate, format: String) -> String {
+//            let formatter: DateFormatter = DateFormatter()
+////            formatter.calendar = gregorianCalendar
+//            formatter.dateFormat = format
+//            return formatter.string(from: date as Date)
+//        }
+//    }
 }
 
 
