@@ -10,10 +10,20 @@ class DateUtils {
         return formatter.date(from: string)! as Date
     }
 
-    class func stringFromDate(date: NSDate, format: String) -> String {
+//    class func stringFromDate(date: NSDate, format: String) -> String {
+//        let formatter: DateFormatter = DateFormatter()
+////            formatter.calendar = gregorianCalendar
+//        formatter.dateFormat = format
+//        return formatter.string(from: date as Date)
+//    }
+    
+    class func stringFromDate(date: NSDate, format: String, tz: TimeZone) -> String {
+        
         let formatter: DateFormatter = DateFormatter()
-//            formatter.calendar = gregorianCalendar
+        
         formatter.dateFormat = format
+        formatter.timeZone   = tz
+        
         return formatter.string(from: date as Date)
     }
 }
