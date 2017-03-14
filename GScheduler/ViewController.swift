@@ -48,8 +48,15 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // 編集ボタンを左上に配置
 //        if cities.count > 0 {
+        
             navigationItem.leftBarButtonItem = editButtonItem
             navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        navigationItem.leftBarButtonItem?.setTitleTextAttributes(
+            [ NSFontAttributeName: UIFont(name: "quicksand", size: 18) as Any
+              //NSForegroundColorAttributeName: UIColor(red:0.13, green:0.55, blue:0.83, alpha:1.0) as Any
+            ]
+            , for: .normal)
+        
 //        }
         
         // 初回起動時のみ
@@ -85,6 +92,7 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
         let ud = UserDefaults.standard
         ud.set(pinedCityCell, forKey: "pinedCityCell")
         ud.synchronize()
+        
         print("シンクロしました")
     }
     
