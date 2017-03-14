@@ -2,15 +2,15 @@
 import UIKit
 import RealmSwift
 
-class CityListTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class CityListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
         
     let realm = try! Realm()
     
-    let cities = try! Realm().objects(StoredCity.self).sorted(byKeyPath: "name", ascending: true)
-    var filteredCities: [StoredCity] = []
+    let cities = try! Realm().objects(City.self).sorted(byKeyPath: "name", ascending: true)
+    var filteredCities: [City] = []
     
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
@@ -129,7 +129,7 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
                 
                 print("タッチされた都市名はーーー、\(selectedCityName)")
                 
-                let tmp_id = realm.objects(StoredCity.self).filter("name == '\(selectedCityName)'").first?.id
+                let tmp_id = realm.objects(City.self).filter("name == '\(selectedCityName)'").first?.id
                 
                 let id = tmp_id!
                 
@@ -138,13 +138,13 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
                 let orderNo: Int
                 
                 // もしまだユーザーによってaddされていなければ、orderNo付与
-                if realm.object(ofType: StoredCity.self, forPrimaryKey: id)?.orderNo == -1 {
-                    orderNo = realm.objects(StoredCity.self).filter("isSelected == true").count
+                if realm.object(ofType: City.self, forPrimaryKey: id)?.orderNo == -1 {
+                    orderNo = realm.objects(City.self).filter("isSelected == true").count
                 } else { // 既にaddされている都市がまた選ばれたら、OrderNoはそのまま
-                    orderNo = (realm.object(ofType: StoredCity.self, forPrimaryKey: id)?.orderNo)!
+                    orderNo = (realm.object(ofType: City.self, forPrimaryKey: id)?.orderNo)!
                 }
                 
-                realm.create(StoredCity.self, value: ["id": id, "isSelected": true, "orderNo": orderNo], update: true)
+                realm.create(City.self, value: ["id": id, "isSelected": true, "orderNo": orderNo], update: true)
                 
                 print("\(cities.filter("id == \(id)").first?.name) was enrolled!")
                 
@@ -152,10 +152,10 @@ class CityListTableViewController: UIViewController, UITableViewDelegate, UITabl
                 
                 let id = filteredCities[indexPath.row].id
                 
-                let orderNo = realm.objects(StoredCity.self).filter("isSelected == true").count
+                let orderNo = realm.objects(City.self).filter("isSelected == true").count
                 
                 
-                realm.create(StoredCity.self, value: ["id": id, "isSelected": true, "orderNo": orderNo], update: true)
+                realm.create(City.self, value: ["id": id, "isSelected": true, "orderNo": orderNo], update: true)
                 
                 print("\(filteredCities[indexPath.row].name) was enrolled!")
                 

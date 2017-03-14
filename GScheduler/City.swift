@@ -2,9 +2,9 @@
 import Foundation
 import RealmSwift
 
-class StoredCity: Object {
+class City: Object {
     
-    // 管理用 ID。プライマリーキー
+    // 管理用ID。プライマリーキー
     dynamic var id = 0
     dynamic var name = ""
     dynamic var timeZone = ""
@@ -29,4 +29,5 @@ class StoredCity: Object {
         self.timeZone = timeZone
         self.isSelected = isSelected
     }
+    
 }

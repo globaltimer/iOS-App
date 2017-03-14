@@ -9,14 +9,14 @@ extension UILabel {
 }
 
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TimeNowViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // GMT標準時刻
     var GMT = Date()
     
     let realm = try! Realm()
 
-    var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
+    var cities = try! Realm().objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
     
     // ピンされたcityのセル番号
     var pinedCityCell = 0
@@ -66,7 +66,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         GMT = Date()
         
-        cities = realm.objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
+        cities = realm.objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
         
         tableView.reloadData()
     }
@@ -362,7 +362,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func initialEnrollCities() {
         
-        var citiesAry: [StoredCity] = []
+        var citiesAry: [City] = []
         
         let csvFilePath = Bundle.main.path(forResource: "CityNameSeed", ofType: "csv")
         
@@ -376,7 +376,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             // カンマ区切りで分割
             let cityDataArray = line.components(separatedBy: ",")
             citiesAry.append(
-                StoredCity(id: id, name: cityDataArray[0], timeZone: cityDataArray[1], isSelected: false)
+                City(id: id, name: cityDataArray[0], timeZone: cityDataArray[1], isSelected: false)
             )
             id += 1
             
@@ -406,29 +406,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
             // 端末の現在位置の都市のID
-            let currentCityID = realm.objects(StoredCity.self).filter("timeZone == '\(localTimeZoneName)'").first?.id
+            let currentCityID = realm.objects(City.self).filter("timeZone == '\(localTimeZoneName)'").first?.id
             
             // 端末のタイムゾーンをもとにしたプリセット
             if let currentCityID = currentCityID {
-                realm.create(StoredCity.self, value: ["id": currentCityID, "isSelected": true, "orderNo": dynamicOrderNo], update: true)
+                realm.create(City.self, value: ["id": currentCityID, "isSelected": true, "orderNo": dynamicOrderNo], update: true)
                     dynamicOrderNo += 1
             }
             
             if currentCityID != 201 {
                 // 東京
-                realm.create(StoredCity.self, value: ["id": 201, "isSelected": true, "orderNo": dynamicOrderNo], update: true)
+                realm.create(City.self, value: ["id": 201, "isSelected": true, "orderNo": dynamicOrderNo], update: true)
                 dynamicOrderNo += 1
             }
             
             if currentCityID != 202 {
                 // ナイロビ
-                realm.create(StoredCity.self, value: ["id": 202, "isSelected": true, "orderNo": dynamicOrderNo], update: true)
+                realm.create(City.self, value: ["id": 202, "isSelected": true, "orderNo": dynamicOrderNo], update: true)
                 dynamicOrderNo += 1
             }
             
             if currentCityID != 108 {
                 // バンクーバー
-                realm.create(StoredCity.self, value: ["id": 108, "isSelected": true, "orderNo": dynamicOrderNo], update: true)
+                realm.create(City.self, value: ["id": 108, "isSelected": true, "orderNo": dynamicOrderNo], update: true)
             }
         }
     }

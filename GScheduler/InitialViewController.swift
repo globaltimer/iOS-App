@@ -4,7 +4,7 @@ import RealmSwift
 import CoreActionSheetPicker
 
 
-class InitialViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SetTimeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // ピンされた都市のID。 -1 = isSelectedな都市が1件もなく、テーブルセルが一行もない状態
     var pinedCityCell = -1
@@ -23,7 +23,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     // 左欄、日付と西暦を表示させるためのフォーマッタ
     var formatter2 = DateFormatter()
     
-    var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
+    var cities = try! Realm().objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
     
     
     
@@ -179,7 +179,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         //
         GMT = Date()
         
-        cities = realm.objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
+        cities = realm.objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
         
         print("画面2: will appear まさか　こっちのほうが　速いのか！？")
 
@@ -535,23 +535,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         datePicker?.show()
     }
-    
-    
-//    class DateUtils {
-//        class func dateFromString(string: String, format: String) -> NSDate {
-//            let formatter: DateFormatter = DateFormatter()
-//            //formatter.calendar = NSGregorianCalendar
-//            formatter.dateFormat = format
-//            return formatter.date(from: string)! as NSDate
-//        }
-//        
-//        class func stringFromDate(date: NSDate, format: String) -> String {
-//            let formatter: DateFormatter = DateFormatter()
-////            formatter.calendar = gregorianCalendar
-//            formatter.dateFormat = format
-//            return formatter.string(from: date as Date)
-//        }
-//    }
 }
 
 

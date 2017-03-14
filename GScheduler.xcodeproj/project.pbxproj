@@ -16,6 +16,7 @@
 		440223A71DF3B8D200774C30 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440223A61DF3B8D200774C30 /* City.swift */; };
 		440223AA1DF4033900774C30 /* memo in Resources */ = {isa = PBXBuildFile; fileRef = 440223A91DF4033900774C30 /* memo */; };
 		4443D8C41E733C95009650C8 /* CoreActionSheetPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4443D8C31E733C95009650C8 /* CoreActionSheetPicker.framework */; };
+		4446B1B81E78954B0058B55D /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446B1B71E78954B0058B55D /* DateUtils.swift */; };
 		446E7C321DF5CC6700E5D3E5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446E7C311DF5CC6700E5D3E5 /* Images.xcassets */; };
 		448ABC2B1E397AFB0005958C /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448ABC2A1E397AFB0005958C /* InitialViewController.swift */; };
 		448ABC301E397F350005958C /* InitialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448ABC2F1E397F350005958C /* InitialTableViewCell.swift */; };
@@ -46,6 +47,7 @@
 		440223A61DF3B8D200774C30 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		440223A91DF4033900774C30 /* memo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = memo; sourceTree = "<group>"; };
 		4443D8C31E733C95009650C8 /* CoreActionSheetPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreActionSheetPicker.framework; path = Carthage/Build/iOS/CoreActionSheetPicker.framework; sourceTree = "<group>"; };
+		4446B1B71E78954B0058B55D /* DateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		446E7C311DF5CC6700E5D3E5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		448ABC2A1E397AFB0005958C /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		448ABC2F1E397F350005958C /* InitialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialTableViewCell.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 		440223871DF3689A00774C30 /* GScheduler */ = {
 			isa = PBXGroup;
 			children = (
+				4446B1B61E7895310058B55D /* Utils */,
 				44C5187C1E67F4010050CA61 /* CityNameSeed.csv */,
 				448ABC2C1E397BE60005958C /* Image */,
 				4402238C1DF3689A00774C30 /* Main.storyboard */,
@@ -127,6 +130,14 @@
 				44DA6E181DF53A5700417140 /* Task.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		4446B1B61E7895310058B55D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4446B1B71E78954B0058B55D /* DateUtils.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		448ABC291E397AC60005958C /* 2nd Tab */ = {
@@ -273,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4402238B1DF3689A00774C30 /* ViewController.swift in Sources */,
+				4446B1B81E78954B0058B55D /* DateUtils.swift in Sources */,
 				448ABC2B1E397AFB0005958C /* InitialViewController.swift in Sources */,
 				4402239D1DF3691200774C30 /* TableViewCell.swift in Sources */,
 				440223A71DF3B8D200774C30 /* City.swift in Sources */,
