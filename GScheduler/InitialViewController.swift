@@ -480,16 +480,30 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
 //        print(ddd)
         
         // まず、端末のローカルの時間とピンした都市のIntervalを取得
-        // 16時間
         
-        //
-        let t = Date(timeIntervalSinceNow: 16 * 60 * 60)
+        // let locale = NSLocale.current
+//         print("端末のロケール: \(locale)")  // en_JP
+        
+        let tz = NSTimeZone.system
+        print("端末のtz: \(tz)")  // America/Vancouver (current)
+        
+        // abs(ピンされた都市 - 端末timeZoneの都市)で求められる
+        let diff = abs(
+            (NSTimeZone(name: cities[pinedCityCell].timeZone) as TimeZone!).secondsFromGMT()
+            -
+            tz.secondsFromGMT()
+        )
+        
+        print("差: \(diff)")
+        
+        //let t = Date(timeIntervalSinceNow: 16 * 60 * 60)
+        let t = Date(timeIntervalSinceNow: TimeInterval(diff))
         
         
         let datePicker = ActionSheetDatePicker(
             title: "Select date.",
             datePickerMode: pickerMode,
-            //selectedDate: dateFromString as Date!,
+
             selectedDate: t,
             
             doneBlock: { picker, value, index in
@@ -497,7 +511,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
                 print("value = \(value)"); print("index = \(index)"); print("picker = \(picker)")
                 
                 // ↑で作ったDate()をもとに生成されたvalue
-                let tt = Date(timeInterval: -16*60*60, since: value as! Date)
+                //let tt = Date(timeInterval: -16*60*60, since: value as! Date)
+                let tt = Date(timeInterval: TimeInterval(-diff), since: value as! Date)
                 
                 
                 //self.GMT = value as! Date
@@ -527,36 +542,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             cancel: { ActionStringCancelBlock in return },
             origin: view
         )
-        
-        
-        
-//        if view.tag == 1 {
-//        datePicker?.minimumDate = NSDate(timeInterval: -secondsInWeek, since: NSDate() as Date) as Date!
-//        datePicker?.maximumDate = NSDate(timeInterval: secondsInWeek, since: NSDate() as Date) as Date!
-//        }
-        
-//        datePicker?.minuteInterval = 1
-//
-//        // 現在の日時を取得
-//        // var now = dateFromString
-//        
-//        // システムのカレンダーを取得
-//        let cal = Calendar.current
-//        
-//        var dateComps = DateComponents()
-//        dateComps.year = 2016
-//        dateComps.year = 9
-//        dateComps.year = 16
-//        
-//        var theDate = cal.date(from: dateComps)
-//        
-//        
-//        
-//        let p = UIDatePicker()
-//        p.date = Date()
-        
-        
-        
         
         datePicker?.show()
     }
