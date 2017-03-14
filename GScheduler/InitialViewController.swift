@@ -13,6 +13,20 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     var adjustTimeStat = 0
     
     
+    // GMT標準時刻
+    var GMT = Date()
+    
+    let realm = try! Realm()
+    
+    /* フォーマッタ */
+    var formatter = DateFormatter()
+    // 左欄、日付と西暦を表示させるためのフォーマッタ
+    var formatter2 = DateFormatter()
+    
+    var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
+    
+    
+    
     /* UI Components */
     @IBOutlet weak var cityNameLabel:  UILabel!
     @IBOutlet weak var MDYLabel:       UILabel!
@@ -65,8 +79,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         timeLabel.text = tmpFormat2.string(from: newtral)
         
-        
-        //tmpFormat2.dateFormat = "MM/dd YYYY"
         tmpFormat2.dateStyle = .medium
         tmpFormat2.timeStyle = .none
         
@@ -122,13 +134,10 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         
         timeLabel.text = tmpFormat2.string(from: newtral)
         
-        
-        //tmpFormat2.dateFormat = "MM/dd YYYY"
         tmpFormat2.dateStyle = .medium
         tmpFormat2.timeStyle = .none
         
         MDYLabel.text = tmpFormat2.string(from: newtral)
-        
         
         let minusOrPlus  = adjustTimeStat > 0 ? "+ " : "- "
         let diffHour     = "\(abs(adjustTimeStat / 2)):"
@@ -146,19 +155,6 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
 
-    // GMT標準時刻
-    var GMT = Date()
-    
-    let realm = try! Realm()
-    
-    /* フォーマッタ */
-    var formatter = DateFormatter()
-    // 左欄、日付と西暦を表示させるためのフォーマッタ
-    var formatter2 = DateFormatter()
-    
-    var cities = try! Realm().objects(StoredCity.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
-
-    
     ////////////////////
     // MARK: Life Cycle
     ////////////////////
@@ -169,10 +165,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         //
         tableView.delegate = self
         tableView.dataSource = self
-        //
-        print("何度でも呼ばれるぜ！！")
         // Realmのパス
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        // print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
     
     
@@ -205,16 +199,15 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
+        
         print("画面2: did appear まさか　こっちのほうが　速いのか！？????")
-        //
-        //tableView.reloadData()
         
         let ud = UserDefaults.standard
         if ud.object(forKey: "pinedCityCell") != nil {
             pinedCityCell = ud.integer(forKey: "pinedCityCell")
             print("データあり！ pinedCityCell は \(pinedCityCell)")
         }
-        
+        // ↓のreloadは、↑のUserDefaultを呼んだ後でないとダメ
         tableView.reloadData()
         
         // ラベルに表示する内容は、 viewWillAppearだと、早すぎる。こっちに書かないとだめ。
@@ -234,6 +227,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         tmpFormat.timeStyle = .none
         
         let GMT = Date()
+        
         let before30m = Date(timeInterval: -60*30, since: GMT)
         let after30m  = Date(timeInterval:  60*30, since: GMT)
         
@@ -263,7 +257,10 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
-    // -MARK: TableView
+    ///////////////////
+    // MARK: Table View
+    ///////////////////
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cities.count
@@ -271,7 +268,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // 時間調整がかかっているときのセル表示
+        // case 1: バフ・デバフ != 0
+        
         if adjustTimeStat != 0 {
             
             var tmpFormat = DateFormatter()
@@ -294,10 +292,8 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.timeLabel.text = tmpFormat.string(from: newtral)
             cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
             
-//            tmpFormat.dateFormat = "HH:mm"
             tmpFormat.dateStyle = .medium
             tmpFormat.timeStyle = .none
-            
             
             cell.yearAndMonthLabel.text = tmpFormat.string(from: newtral)
             cell.yearAndMonthLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
@@ -309,13 +305,7 @@ class InitialViewController: UIViewController, UITableViewDataSource, UITableVie
         } // 特別時のセル設定 完了
         
         
-        ////////////////////
-        // バフデバフ = 0時 //
-        ////////////////////
-        
-        
-        // これないと　どんどん　ずれてくから　必要よ。
-        //GMT = Date()
+        // case 2: バフ・デバフ == 0
 
         // フォーマッタの初期設定
         setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
