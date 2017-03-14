@@ -22,8 +22,6 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
         
         super.viewDidLoad()
         //
-        print("un")
-        //
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -31,6 +29,7 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
         
         searchBar.barTintColor = UIColor(red:0.14, green:0.68, blue:0.73, alpha:1.0)
         
+        // searchBarの中の配色
         for subView in searchBar.subviews {
             for secondSubView in subView.subviews {
                 if secondSubView.isKind(of: UITextField.self) {

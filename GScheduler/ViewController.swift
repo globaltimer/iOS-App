@@ -131,13 +131,13 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var formatter = DateFormatter()
-        // 左欄、日付と西暦を表示させるためのフォーマッタ
-        var formatter2 = DateFormatter()
-        
-        // フォーマッタの初期設定
-        setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
-        setConfigToFormatter2(fm: &formatter2, cellIdx: indexPath.row)
+//        var formatter = DateFormatter()
+//        // 左欄、日付と西暦を表示させるためのフォーマッタ
+//        var formatter2 = DateFormatter()
+//        
+//        // フォーマッタの初期設定
+//        setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
+//        setConfigToFormatter2(fm: &formatter2, cellIdx: indexPath.row)
 
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
@@ -153,20 +153,26 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         
-        cell.DayYearLabel.text  = formatter2.string(from: GMT)
+        cell.DayYearLabel.text  = DateUtils.stringFromDate(
+            date: GMT,
+            format: "",
+            tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
+        )
         cell.DayYearLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
         
-        cell.timeLabel.text     = formatter.string(from: GMT)
-        cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
+       
+        cell.timeLabel.text     = DateUtils.stringFromDate(
+            date: GMT,
+            format: "HH:mm",
+            tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
+        )
+        cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         cell.timeLabel.kern(kerningValue: 2)
 
         
-        if indexPath.row % 2 == 0 {
-            cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
-        } else {
-            cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
-        }
+        cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
+        
         
         if isEditing == true {
             cell.timeLabel.isHidden = true
@@ -347,24 +353,24 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     // フォーマッタの初期設定
-    func setConfigToFormatter(fm: inout DateFormatter, cellIdx: Int) {
-        // タイムゾーン
-        let timeZone = cities[cellIdx].timeZone
-        fm.dateFormat = "HH:mm"
-
-        fm.timeZone =  NSTimeZone(name: timeZone) as TimeZone!
-    }
-    
-    
-    // フォーマッタの初期設定
-    func setConfigToFormatter2(fm: inout DateFormatter, cellIdx: Int) {
-        // タイムゾーン
-        let timeZone = cities[cellIdx].timeZone
-        fm.timeZone =  NSTimeZone(name: timeZone) as TimeZone!
-        
-        fm.dateStyle = .medium
-        fm.timeStyle = .none
-    }
+//    func setConfigToFormatter(fm: inout DateFormatter, cellIdx: Int) {
+//        // タイムゾーン
+//        let timeZone = cities[cellIdx].timeZone
+//        fm.dateFormat = "HH:mm"
+//
+//        fm.timeZone =  NSTimeZone(name: timeZone) as TimeZone!
+//    }
+//    
+//    
+//    // フォーマッタの初期設定
+//    func setConfigToFormatter2(fm: inout DateFormatter, cellIdx: Int) {
+//        // タイムゾーン
+//        let timeZone = cities[cellIdx].timeZone
+//        fm.timeZone =  NSTimeZone(name: timeZone) as TimeZone!
+//        
+//        fm.dateStyle = .medium
+//        fm.timeStyle = .none
+//    }
     
     
 
