@@ -95,8 +95,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     @IBAction func rightButtonTapped(_ sender: Any) {
+        
+        // TODO: メモリリークしとる
+        //let vc = storyboard?.instantiateViewController(withIdentifier: "cityTable")
+        //self.present(vc!, animated: true, completion: nil)
+        
+        
+        // ので、なんとかしないと...
         let vc = storyboard?.instantiateViewController(withIdentifier: "cityTable")
-        self.present(vc!, animated: true, completion: nil)
+        if let vc = vc {
+            self.present(vc, animated: true, completion: nil)
+        }
+        
+        
     }
     
     
