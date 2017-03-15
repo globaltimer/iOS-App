@@ -16,7 +16,9 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
     
     let realm = try! Realm()
 
-    var cities = try! Realm().objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
+    // var cities = try! Realm().objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
+    
+    var cities: Results<City>!
     
     // ピンされたcityのセル番号
     var pinedCityCell = 0
@@ -35,7 +37,10 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
         
         super.viewDidLoad()
         
-        //print(Realm.Configuration.defaultConfiguration.fileURL!)
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
+        cities = realm.objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
+        
         
         let ud = UserDefaults.standard
         if ud.object(forKey: "pinedCityCell") != nil {
@@ -162,7 +167,7 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
         
         
        
-        cell.timeLabel.text     = DateUtils.stringFromDate(
+        cell.timeLabel.text = DateUtils.stringFromDate(
             date: GMT,
             format: "HH:mm",
             tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
@@ -406,6 +411,7 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // 都市の初期設定(いくつかの都市をあらかじめプリセット)
         setInitCities()
+        
     } // 初期化処理
     
     

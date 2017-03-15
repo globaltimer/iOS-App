@@ -9,8 +9,10 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
         
     let realm = try! Realm()
     
-    let cities = try! Realm().objects(City.self).sorted(byKeyPath: "name", ascending: true)
+    var cities: Results<City> = try! Realm().objects(City.self).sorted(byKeyPath: "name", ascending: true)
+
     var filteredCities: [City] = []
+    
     
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
@@ -21,6 +23,8 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        //
+        //cities = realm.objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
         //
         tableView.delegate = self
         tableView.dataSource = self
@@ -54,15 +58,18 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
             
             cell.cityNameLabel.text = filteredCities[indexPath.row].name
             
-            let fmt = DateFormatter()
+            // let fmt = DateFormatter()
             
-            let timeZone = filteredCities[indexPath.row].timeZone
-            fmt.dateFormat = "ZZZZ"
+            //let timeZone = filteredCities[indexPath.row].timeZone
+            //fmt.dateFormat = "ZZZZ"
             //fmt.timeZone = TimeZone(abbreviation: timeZone)
-            fmt.timeZone = NSTimeZone(name: timeZone) as TimeZone!
+            //fmt.timeZone = NSTimeZone(name: timeZone) as TimeZone!
             
-            
-            cell.diffGMTLabel.text = fmt.string(from: Date())
+            cell.diffGMTLabel.text = DateUtils.stringFromDate(
+                date: Date(),
+                format: "ZZZZ",
+                tz: NSTimeZone(name: filteredCities[indexPath.row].timeZone) as TimeZone!
+            )
             
             if cell.diffGMTLabel.text == "GMT" {
                 cell.diffGMTLabel.text = "GMT ±00:00"
@@ -83,40 +90,44 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
         cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
         ////
-        var formatter = DateFormatter()
+        // var formatter = DateFormatter()
         
         // フォーマッタの初期設定
-        func setConfigToFormatter(fm: inout DateFormatter, cellIdx: Int) {
-            // タイムゾーン
+//        func setConfigToFormatter(fm: inout DateFormatter, cellIdx: Int) {
+//            // タイムゾーン
+//            
+//            let timeZone = cities[cellIdx].timeZone
+//            fm.dateFormat = "ZZZZ"
+//            
+//            // 3/1 修正！！
+//            // fm.timeZone = TimeZone(abbreviation: timeZone)
+//            fm.timeZone = NSTimeZone(name: timeZone) as TimeZone!
+//        }
+//        
+//        setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
+
+        
+        cell.diffGMTLabel.text = DateUtils.stringFromDate(
+            date: Date(),
+            format: "ZZZZ",
+            tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
+        )
             
-            let timeZone = cities[cellIdx].timeZone
-            fm.dateFormat = "ZZZZ"
-            
-            // 3/1 修正！！
-            // fm.timeZone = TimeZone(abbreviation: timeZone)
-            fm.timeZone = NSTimeZone(name: timeZone) as TimeZone!
-        }
+            //formatter.string(from: Date())
         
-        setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
-        
-        
-        let boke = formatter.string(from: Date())
-        
-        cell.diffGMTLabel.text = boke
-        
-        if boke == "GMT" {
+        if cell.diffGMTLabel.text == "GMT" {
             cell.diffGMTLabel.text = "GMT ±00:00"
         }
         
-        cell.diffGMTLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
         
+        cell.diffGMTLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
         cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
 
         return cell
     }
     
     
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         try! realm.write {
             

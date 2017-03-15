@@ -1,6 +1,4 @@
 
-初回起動時のデータ全保存の発動条件が、これではだめなので、変えろ→解決？
-
 スワイプで削除ボタンは、ここやればできるのかもしれないが、断念
 http://seeku.hateblo.jp/entry/2014/09/29/084248
 
@@ -15,23 +13,10 @@ http://seeku.hateblo.jp/entry/2014/09/29/084248
 
 //
 
-・時間表示のロジック
 
-viewWillAppear
+既知のバグ
 
-    adjustTimeStat = 0
-    GMT = Date()
-
-
-viewDidAppear
-
-
-
-cellForRowAt(つまりReloadされるたびに呼ばれる)
-    GMT = Date()
-
-
-
+どっかの都市、タイムゾーンがせっていされてない。同時に、この際もう一回ちゃんとCSV作り直せ。
 
 
 
