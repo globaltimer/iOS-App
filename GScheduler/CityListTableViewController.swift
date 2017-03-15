@@ -7,14 +7,12 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
         
-    let realm = try! Realm()
-    
+    var realm: Realm! // = try! Realm()
+
     var cities: Results<City>!
-        
-        = try! Realm().objects(City.self).sorted(byKeyPath: "name", ascending: true)
+        //= try! Realm().objects(City.self).sorted(byKeyPath: "name", ascending: true)
 
     var filteredCities: [City] = []
-    
     
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
@@ -25,9 +23,11 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        //
-        //cities = realm.objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
-        //
+        
+        realm = try! Realm()
+
+        cities = realm.objects(City.self).sorted(byKeyPath: "name", ascending: true)
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -43,6 +43,13 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
         }
+        
+        
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        navigationItem.leftBarButtonItem?.setTitleTextAttributes(
+            [NSFontAttributeName: UIFont(name: "quicksand", size: 18) as Any],
+            for: .normal
+        )
     }
     
     
@@ -79,9 +86,8 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
         
         let cities = self.cities.filter("name BEGINSWITH '\(head_character)'")
         
-        
         cell.cityNameLabel.text =  cities[indexPath.row].name
-        cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+        //cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
         
         cell.diffGMTLabel.text = DateUtils.stringFromDate(
@@ -96,7 +102,7 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         
-        cell.diffGMTLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
+        //cell.diffGMTLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
         cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
 
         return cell
@@ -113,13 +119,9 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 let selectedCityName = selectedCN!
                 
-                print("タッチされた都市名はーーー、\(selectedCityName)")
-                
                 let tmp_id = realm.objects(City.self).filter("name == '\(selectedCityName)'").first?.id
                 
                 let id = tmp_id!
-                
-                print("タッチされた都市名のIDはーーー、\(id)")
                 
                 let orderNo: Int
                 
@@ -140,16 +142,13 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 let orderNo = realm.objects(City.self).filter("isSelected == true").count
                 
-                
                 realm.create(City.self, value: ["id": id, "isSelected": true, "orderNo": orderNo], update: true)
                 
                 print("\(filteredCities[indexPath.row].name) was enrolled!")
-                
             }
         }
         
         //閉じる(ナビゲーションバーで遷移してきたなら、こうすれば戻れるんだよ)
-        // nav.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
     
@@ -186,8 +185,6 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         
-        //return sections.map { $0.title }
-        
         // searchBarに文字があればインデックスは表示しない
         if (searchBar.text?.characters.count)! > 0 {
             return nil
@@ -221,8 +218,6 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
         
         let searchWord = searchBar.text
         
-        // requiredCities = cities.filter{ $0.name.contains(searchWord!)} //$0が最初の引数を意味する。
-
         // 小文字・大文字を無視して検索
         filteredCities = cities.filter{ $0.name.lowercased().contains((searchWord?.lowercased())!) }
         

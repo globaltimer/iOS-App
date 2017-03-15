@@ -20,9 +20,9 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     // GMT標準時刻
-    var GMT = Date()
+    var GMT: Date! // = Date()
     
-    let realm = try! Realm()
+    var realm: Realm! // = try! Realm()
     
     var cities: Results<City>!
     //  = try! Realm().objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
@@ -143,7 +143,8 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // Realmのパス
         // print(Realm.Configuration.defaultConfiguration.fileURL!)
-
+        
+        realm = try! Realm()
     }
     
     
@@ -159,7 +160,6 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
         cities = realm.objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
         
         print("画面2: will appear まさか　こっちのほうが　速いのか！？")
-        
     }
     
 
@@ -184,8 +184,7 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
             let pin = "\u{1F4CC} "
             cityNameLabel.text = pin + cities[pinedCityCell].name.uppercased()
         }
-        cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-        
+
         renewAllTimeLabels(adjustType: .none)
         
     }
@@ -213,7 +212,6 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SetTimeViewCell
             
             cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
-            cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
             
             
             cell.yearAndMonthLabel.text = DateUtils.stringFromDate(
@@ -222,8 +220,6 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
                 tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
             )
             
-            cell.yearAndMonthLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
-            
             
             cell.timeLabel.text = DateUtils.stringFromDate(
                 date: newtral,
@@ -231,7 +227,7 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
                 tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
             )
             
-            cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+            //cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
             
             cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
             
@@ -244,10 +240,7 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SetTimeViewCell
         
-        
-        // 2017/1/25修正
         cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
-        cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
         cell.yearAndMonthLabel.text = DateUtils.stringFromDate(
             date: self.GMT,
@@ -255,17 +248,12 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
             tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
         )
 
-        cell.yearAndMonthLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
-        
-        
         cell.timeLabel.text = DateUtils.stringFromDate(
             date: self.GMT,
             format: "HH:mm",
             tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
         )
 
-        cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-        
         cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
 
         return cell
@@ -389,18 +377,6 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
                 
                 
                 self.renewAllTimeLabels(adjustType: .none)
-                
-                
-//                self.timeLabel.text = fm.string(from: self.GMT)
-//
-//                let before30m = Date(timeInterval:  TimeInterval(60 * -30), since: self.GMT)
-//                let newtral   = Date(timeInterval:  TimeInterval(0), since: self.GMT)
-//                let after30m  = Date(timeInterval:  TimeInterval(60 * 30), since: self.GMT)
-//                
-//                self.adjustTimeBeforeLabel.text = fm.string(from: before30m)
-//                self.adjustTimeNowLabel.text    = fm.string(from: newtral)
-//                self.adjustTimeAheadLabel.text  = fm.string(from: after30m)
-                
                 
             },
             

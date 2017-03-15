@@ -12,9 +12,9 @@ extension UILabel {
 class TimeNowViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // GMT標準時刻
-    var GMT = Date()
+    var GMT: Date! // = Date()
     
-    let realm = try! Realm()
+    var realm: Realm! // = try! Realm()
 
     // var cities = try! Realm().objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
     
@@ -39,6 +39,8 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
         
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
+        realm = try! Realm()
+        
         cities = realm.objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
         
         
@@ -54,14 +56,12 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
         // 編集ボタンを左上に配置
 //        if cities.count > 0 {
         
-            navigationItem.leftBarButtonItem = editButtonItem
-            navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        navigationItem.leftBarButtonItem = editButtonItem
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.white
         navigationItem.leftBarButtonItem?.setTitleTextAttributes(
-            [ NSFontAttributeName: UIFont(name: "quicksand", size: 18) as Any
-              //NSForegroundColorAttributeName: UIColor(red:0.13, green:0.55, blue:0.83, alpha:1.0) as Any
-            ]
-            , for: .normal)
-        
+        [NSFontAttributeName: UIFont(name: "quicksand", size: 18) as Any],
+            for: .normal
+        )
 //        }
         
         // 初回起動時のみ
@@ -119,8 +119,6 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
         if let vc = vc {
             self.present(vc, animated: true, completion: nil)
         }
-        
-        
     }
     
     
@@ -136,21 +134,9 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        var formatter = DateFormatter()
-//        // 左欄、日付と西暦を表示させるためのフォーマッタ
-//        var formatter2 = DateFormatter()
-//        
-//        // フォーマッタの初期設定
-//        setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
-//        setConfigToFormatter2(fm: &formatter2, cellIdx: indexPath.row)
-
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TimeNowViewCell
         
-
         cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
-        cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-        
         
         if indexPath.row == pinedCityCell {
             let a = "\u{1F4CC} "
@@ -163,16 +149,14 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
             format: "",
             tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
         )
-        cell.DayYearLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
+
         
-        
-       
         cell.timeLabel.text = DateUtils.stringFromDate(
             date: GMT,
             format: "HH:mm",
             tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
         )
-        cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
+
         cell.timeLabel.kern(kerningValue: 2)
 
         
@@ -312,7 +296,6 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
             
             print("ピン都市が、\(tmp) から \(pinedCityCell)になりました")
             
-            
             try! realm.write {
                 
                 for city in cities {
@@ -376,7 +359,6 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
                 City(id: id, name: cityDataArray[0], timeZone: cityDataArray[1], isSelected: false)
             )
             id += 1
-            
         })
         
         
