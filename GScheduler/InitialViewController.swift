@@ -6,6 +6,12 @@ import CoreActionSheetPicker
 
 class SetTimeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    enum AdjustTimeType {
+        case goBack
+        case ahead
+        case none
+    }
+    
     // ピンされた都市のID。 -1 = isSelectedな都市が1件もなく、テーブルセルが一行もない状態
     var pinedCityCell = -1
 
@@ -18,13 +24,8 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
     
     let realm = try! Realm()
     
-//    /* フォーマッタ */
-//    var formatter = DateFormatter()
-//    // 左欄、日付と西暦を表示させるためのフォーマッタ
-//    var formatter2 = DateFormatter()
-    
-    var cities: Results<City>! //  = try! Realm().objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
-    
+    var cities: Results<City>!
+    //  = try! Realm().objects(City.self).filter("isSelected == true").sorted(byKeyPath: "orderNo", ascending: true)
     
     
     /* UI Components */
@@ -36,19 +37,35 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView:      UITableView!
     
     @IBOutlet weak var adjustTimeBeforeLabel: UILabel!
-    @IBOutlet weak var adjustTimeNowLabel: UILabel!
-    @IBOutlet weak var adjustTimeAheadLabel: UILabel!
+    @IBOutlet weak var adjustTimeNowLabel:    UILabel!
+    @IBOutlet weak var adjustTimeAheadLabel:  UILabel!
     
     
-    // 2/23追加
     @IBAction func adjustTimeBeforeButton(_ sender: Any) {
+        renewAllTimeLabels(adjustType: .goBack)
+    }
+    
+    
+    @IBAction func adjustTimeAheadButton(_ sender: Any) {
+        renewAllTimeLabels(adjustType: .ahead)
+    }
+
+    
+    func renewAllTimeLabels(adjustType: AdjustTimeType) {
         
         if cities.isEmpty {
             print("なにもしない")
             return
         }
         
-        adjustTimeStat -= 1
+        switch adjustType {
+            case .goBack:
+                adjustTimeStat -= 1
+            case .ahead:
+                adjustTimeStat += 1
+            case .none:
+                adjustTimeStat += 0
+        }
         
         print("バフレベル: \(adjustTimeStat)")
         
@@ -96,7 +113,6 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
         )
         
         
-        
         let minusOrPlus  = adjustTimeStat > 0 ? "+ " : "- "
         let diffHour     = "\(abs(adjustTimeStat / 2)):"
         let diffMinutes  = adjustTimeStat % 2 == 0 ? "00 " : "30 "
@@ -112,61 +128,7 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.reloadData()
     }
     
-
-    @IBAction func adjustTimeAheadButton(_ sender: Any) {
-        
-        if cities.isEmpty {
-            print("なにもしない")
-            return
-        }
-        
-        adjustTimeStat += 1
-        
-        print("バフレベル: \(adjustTimeStat)")
-        
-        //var tmpFormat2 = DateFormatter()
-        
-        //setConfigToFormatter2(fm: &tmpFormat2, cellIdx: pinedCityCell)
-        
-        //tmpFormat2.dateFormat = "HH:mm"
-        
-        let bef30 = 60 * 30 * (adjustTimeStat-1)
-        let new   = 60 * 30 * (adjustTimeStat+0)
-        let aft30 = 60 * 30 * (adjustTimeStat+1)
-        
-        // let GMT = Date()
-        
-        let before30m = Date(timeInterval:  TimeInterval(bef30), since: GMT)
-        let newtral   = Date(timeInterval:  TimeInterval(new), since: GMT)
-        let after30m  = Date(timeInterval:  TimeInterval(aft30), since: GMT)
-        
-//        adjustTimeBeforeLabel.text = tmpFormat2.string(from: before30m)
-//        adjustTimeNowLabel.text = tmpFormat2.string(from: newtral)
-//        adjustTimeAheadLabel.text = tmpFormat2.string(from: after30m)
-//        
-//        timeLabel.text = tmpFormat2.string(from: newtral)
-//        
-//        tmpFormat2.dateStyle = .medium
-//        tmpFormat2.timeStyle = .none
-//        
-//        MDYLabel.text = tmpFormat2.string(from: newtral)
-        
-        let minusOrPlus  = adjustTimeStat > 0 ? "+ " : "- "
-        let diffHour     = "\(abs(adjustTimeStat / 2)):"
-        let diffMinutes  = adjustTimeStat % 2 == 0 ? "00 " : "30 "
-        let pastOrFuture = adjustTimeStat > 0 ? "in the future" : "in the past"
-        
-        timeAheadLabel.text = minusOrPlus + diffHour + diffMinutes + pastOrFuture
-        
-        if adjustTimeStat == 0 {
-            timeAheadLabel.text = "now"
-        }
-        
-        // テーブル再描画
-        tableView.reloadData()
-    }
     
-
     
     ////////////////////
     // MARK: Life Cycle
@@ -224,73 +186,8 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
+        renewAllTimeLabels(adjustType: .none)
         
-        
-        //var tmpFormat = DateFormatter()
-        
-//        if !cities.isEmpty {
-//            setConfigToFormatter2(fm: &tmpFormat, cellIdx: pinedCityCell)
-//        }
-        
-//        tmpFormat.dateStyle = .medium
-//      tmpFormat.timeStyle = .none
-        
-        //let GMT = Date()
-        
-        let before30m = Date(timeInterval: -60*30, since: Date())
-        let after30m  = Date(timeInterval:  60*30, since: Date())
-        
-        
-        if !cities.isEmpty {
-            MDYLabel.text = DateUtils.stringFromDate(
-                date:   Date(),
-                format: "",
-                tz:     NSTimeZone(name: cities[pinedCityCell].timeZone) as! TimeZone
-            )   //tmpFormat.string(from: GMT)
-            MDYLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-        }
-        
-        //tmpFormat.dateFormat = "HH:mm"
-        
-        if !cities.isEmpty {
-            timeLabel.text = DateUtils.stringFromDate(
-                date: Date(),
-                format: "HH:mm",
-                tz: NSTimeZone(name: cities[pinedCityCell].timeZone) as! TimeZone
-            )   //tmpFormat.string(from: GMT)
-            timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-        }
-        
-        
-        // 2/23追記
-        if !cities.isEmpty {
-            
-            adjustTimeBeforeLabel.text = DateUtils.stringFromDate(
-                date: before30m,
-                format: "HH:mm",
-                tz: NSTimeZone(name: cities[pinedCityCell].timeZone) as! TimeZone
-            )
-            //adjustTimeBeforeLabel.text = tmpFormat.string(from: before30m)
-            adjustTimeBeforeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-            
-            
-            adjustTimeNowLabel.text = DateUtils.stringFromDate(
-                date: Date(),
-                format: "HH:mm",
-                tz: NSTimeZone(name: cities[pinedCityCell].timeZone) as! TimeZone
-            )
-            //adjustTimeNowLabel.text = tmpFormat.string(from: GMT)
-            adjustTimeNowLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-            
-            
-            adjustTimeAheadLabel.text = DateUtils.stringFromDate(
-                date: after30m,
-                format: "HH:mm",
-                tz: NSTimeZone(name: cities[pinedCityCell].timeZone) as! TimeZone
-            )
-            //adjustTimeAheadLabel.text = tmpFormat.string(from: after30m)
-            adjustTimeAheadLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-        }
     }
     
     
@@ -309,20 +206,10 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
         
         if adjustTimeStat != 0 {
             
-            //var tmpFormat = DateFormatter()
-            
-            //setConfigToFormatter(fm: &tmpFormat, cellIdx: indexPath.row)
-            
-            //tmpFormat.dateFormat = "HH:mm"
-            
-            //let GMT = Date()
-            
             let interval = 60 * 30 * (adjustTimeStat+0)
             let newtral = Date(timeInterval:  TimeInterval(interval), since: self.GMT)
             
             
-            
-        
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! InitialTableViewCell
             
             cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
@@ -334,7 +221,7 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
                 format: "",
                 tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
             )
-            //cell.yearAndMonthLabel.text = tmpFormat.string(from: newtral)
+            
             cell.yearAndMonthLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
             
             
@@ -343,32 +230,17 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
                 format: "HH:mm",
                 tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
             )
-            //tmpFormat.string(from: newtral)
+            
             cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-            
-            
-//            tmpFormat.dateStyle = .medium
-//            tmpFormat.timeStyle = .none
             
             cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
             
             return cell
             
-            
         } // 特別時のセル設定 完了
         
         
         // case 2: バフ・デバフ == 0
-
-        // フォーマッタの初期設定
-        //setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
-        //setConfigToFormatter2(fm: &formatter2, cellIdx: indexPath.row)
-        
-        // 1/25追記
-        //formatter.dateFormat = "HH:mm"
-        
-        //formatter2.dateStyle = .medium
-        //formatter2.timeStyle = .none
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! InitialTableViewCell
         
@@ -378,22 +250,21 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
         cell.yearAndMonthLabel.text = DateUtils.stringFromDate(
-            date: Date(),
+            date: self.GMT,
             format: "",
             tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
         )
-        //formatter2.string(from: GMT)
+
         cell.yearAndMonthLabel.textColor = UIColor(red:0.77, green:0.42, blue:0.42, alpha:1.0)
         
         
         cell.timeLabel.text = DateUtils.stringFromDate(
-            date: Date(),
+            date: self.GMT,
             format: "HH:mm",
             tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
         )
-        //cell.timeLabel.text = formatter.string(from: GMT)
+
         cell.timeLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
-        
         
         cell.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
 
@@ -447,27 +318,6 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
-    // フォーマッタの初期設定
-//    func setConfigToFormatter(fm: inout DateFormatter, cellIdx: Int) {
-//        // タイムゾーン
-//        let timeZone = cities[cellIdx].timeZone
-//        
-//        //fm.timeZone = TimeZone(abbreviation: timeZone)
-//        fm.timeZone = NSTimeZone(name: timeZone) as TimeZone!
-//        
-//        fm.dateFormat = "MM/dd HH:mm"
-//    }
-//    
-//    
-//    // フォーマッタの初期設定
-//    func setConfigToFormatter2(fm: inout DateFormatter, cellIdx: Int) {
-//        // タイムゾーン
-//        let timeZone = cities[cellIdx].timeZone
-//        //fm.timeZone = TimeZone(abbreviation: timeZone)
-//        fm.timeZone = NSTimeZone(name: timeZone) as TimeZone!
-//    }
-    
-    
     // 3/10 タップアクション追加
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -495,50 +345,8 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let pickerMode = (view.tag == 1) ? UIDatePickerMode.date : UIDatePickerMode.dateAndTime
         
-//        let tz = NSTimeZone(name: cities[pinedCityCell].timeZone)
-//        
-//        let fm = DateFormatter()
-//        fm.dateFormat = "yyyy/MM/dd HH:mm:ss"   // "MM/dd HH:mm"
-//        // なんと、「タイムゾーンを明示的に指定しないとGMT標準時を出力する」という死ぬほどだるかった罠がある。
-//        // タイムゾーンをきちんと指定しよう
-//        // ちなみにこの1行がないと、PCの時間?(=バンクーバー)に標準になるっぽい
-//        fm.timeZone = tz as TimeZone!   // ここにバンクーバー(GMT-7)をセットしておけば。。。
-//        
-//        let s = fm.string(from: Date())
-//        
-//        // これで、ちゃんと、[バンクーバーが 3/12 22:00のときのGMT時間 (= 3/13 5:00)が出力される]
-//        let dateFromString = fm.date(from: s)!
-//        
-//        print("ゴルァ！！ \(fm.timeZone)")
-//        print("ゴルァ！！ \(dateFromString)")
-        
-        // ここまで来たらOK.それを ↓ の selecetedDateに渡してあげればよい。
-    
         let fm = DateFormatter()
-//        fm.locale = Locale(identifier: "ja_JP")
-//        fm.dateFormat = "yyyy-MM-dd' 'HH:mm"
-//        let theDate = fm.date(from: "2017/03/14 13:00")
-//        
-//        print("おら！！！ごら！")
-//        print(DateFormatter().string(from: theDate!))
-
-        // sinceNowの nowって、バンクーバーになってる。
-//        let d = Date(timeIntervalSinceNow: -(60*60*9))
-//        let fm = DateFormatter()
-//        //fm.timeZone = NSTimeZone(name: cities[pinedCityCell].timeZone) as TimeZone!
-//        fm.dateFormat = "yyyy-MM-dd HH:mm"
-
-//        
-//        let formatter: DateFormatter = DateFormatter()
-//        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss Z"
-//        let ddd = formatter.date(from: "2017/03/13 16:00:00 +09:00")
-//        print(ddd)
-        
-        // まず、端末のローカルの時間とピンした都市のIntervalを取得
-        
-        // let locale = NSLocale.current
-//         print("端末のロケール: \(locale)")  // en_JP
-        
+    
         let tz = NSTimeZone.system
         print("端末のtz: \(tz)")  // America/Vancouver (current)
         
@@ -551,9 +359,7 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
         
         print("差: \(diff)")
         
-        //let t = Date(timeIntervalSinceNow: 16 * 60 * 60)
         let t = Date(timeIntervalSinceNow: TimeInterval(diff))
-        
         
         let datePicker = ActionSheetDatePicker(
             title: "Select date.",
@@ -566,14 +372,12 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
                 print("value = \(value)"); print("index = \(index)"); print("picker = \(picker)")
                 
                 // ↑で作ったDate()をもとに生成されたvalue
-                //let tt = Date(timeInterval: -16*60*60, since: value as! Date)
                 let tt = Date(timeInterval: TimeInterval(-diff), since: value as! Date)
                 
-                
-                //self.GMT = value as! Date
+                // たぶん　ここまではいいんよな・・・
+                // cellForRowが問題
                 self.GMT = tt
-                
-
+            
                 self.tableView.reloadData()
                 
                 // 後始末　ここも慎重に書かないと即死だぞ
@@ -583,15 +387,21 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
                 fm.dateFormat = "HH:mm"
                 fm.timeZone = NSTimeZone(name: self.cities[self.pinedCityCell].timeZone) as TimeZone!
                 
-                self.timeLabel.text = fm.string(from: self.GMT)
-
-                let before30m = Date(timeInterval:  TimeInterval(60 * -30), since: self.GMT)
-                let newtral   = Date(timeInterval:  TimeInterval(0), since: self.GMT)
-                let after30m  = Date(timeInterval:  TimeInterval(60 * 30), since: self.GMT)
                 
-                self.adjustTimeBeforeLabel.text = fm.string(from: before30m)
-                self.adjustTimeNowLabel.text    = fm.string(from: newtral)
-                self.adjustTimeAheadLabel.text  = fm.string(from: after30m)
+                self.renewAllTimeLabels(adjustType: .none)
+                
+                
+//                self.timeLabel.text = fm.string(from: self.GMT)
+//
+//                let before30m = Date(timeInterval:  TimeInterval(60 * -30), since: self.GMT)
+//                let newtral   = Date(timeInterval:  TimeInterval(0), since: self.GMT)
+//                let after30m  = Date(timeInterval:  TimeInterval(60 * 30), since: self.GMT)
+//                
+//                self.adjustTimeBeforeLabel.text = fm.string(from: before30m)
+//                self.adjustTimeNowLabel.text    = fm.string(from: newtral)
+//                self.adjustTimeAheadLabel.text  = fm.string(from: after30m)
+                
+                
             },
             
             cancel: { ActionStringCancelBlock in return },
@@ -601,5 +411,3 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
         datePicker?.show()
     }
 }
-
-
