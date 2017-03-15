@@ -9,7 +9,9 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
         
     let realm = try! Realm()
     
-    var cities: Results<City> = try! Realm().objects(City.self).sorted(byKeyPath: "name", ascending: true)
+    var cities: Results<City>!
+        
+        = try! Realm().objects(City.self).sorted(byKeyPath: "name", ascending: true)
 
     var filteredCities: [City] = []
     
@@ -51,19 +53,12 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NeoCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CityListViewCell
         
         // リアルタイムサーチ時の挙動
         if (searchBar.text?.characters.count)! > 0 {
             
             cell.cityNameLabel.text = filteredCities[indexPath.row].name
-            
-            // let fmt = DateFormatter()
-            
-            //let timeZone = filteredCities[indexPath.row].timeZone
-            //fmt.dateFormat = "ZZZZ"
-            //fmt.timeZone = TimeZone(abbreviation: timeZone)
-            //fmt.timeZone = NSTimeZone(name: timeZone) as TimeZone!
             
             cell.diffGMTLabel.text = DateUtils.stringFromDate(
                 date: Date(),
@@ -78,7 +73,6 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
             return cell
         }
         
-        
         let head_character = sections[indexPath.section]
         
         print("都市のインデックスは、\(head_character)")
@@ -89,23 +83,6 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
         cell.cityNameLabel.text =  cities[indexPath.row].name
         cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
         
-        ////
-        // var formatter = DateFormatter()
-        
-        // フォーマッタの初期設定
-//        func setConfigToFormatter(fm: inout DateFormatter, cellIdx: Int) {
-//            // タイムゾーン
-//            
-//            let timeZone = cities[cellIdx].timeZone
-//            fm.dateFormat = "ZZZZ"
-//            
-//            // 3/1 修正！！
-//            // fm.timeZone = TimeZone(abbreviation: timeZone)
-//            fm.timeZone = NSTimeZone(name: timeZone) as TimeZone!
-//        }
-//        
-//        setConfigToFormatter(fm: &formatter, cellIdx: indexPath.row)
-
         
         cell.diffGMTLabel.text = DateUtils.stringFromDate(
             date: Date(),
@@ -113,7 +90,6 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
             tz: NSTimeZone(name: cities[indexPath.row].timeZone) as! TimeZone
         )
             
-            //formatter.string(from: Date())
         
         if cell.diffGMTLabel.text == "GMT" {
             cell.diffGMTLabel.text = "GMT ±00:00"
@@ -133,7 +109,7 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
             
             if (searchBar.text?.characters.count)! == 0 {
                 
-                let selectedCN = ((tableView.cellForRow(at: indexPath)) as! NeoCell).cityNameLabel.text
+                let selectedCN = ((tableView.cellForRow(at: indexPath)) as! CityListViewCell).cityNameLabel.text
                 
                 let selectedCityName = selectedCN!
                 

@@ -145,7 +145,7 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
 //        setConfigToFormatter2(fm: &formatter2, cellIdx: indexPath.row)
 
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TimeNowViewCell
         
 
         cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
@@ -349,34 +349,12 @@ class TimeNowViewController: UIViewController, UITableViewDataSource, UITableVie
         
         for cell in tableView.visibleCells {
             if tableView.isEditing {
-                (cell as! TableViewCell).timeLabel.isHidden = true
+                (cell as! TimeNowViewCell).timeLabel.isHidden = true
             } else {
-                (cell as! TableViewCell).timeLabel.isHidden = false
+                (cell as! TimeNowViewCell).timeLabel.isHidden = false
             }
         }
     }
-    
-    
-    // フォーマッタの初期設定
-//    func setConfigToFormatter(fm: inout DateFormatter, cellIdx: Int) {
-//        // タイムゾーン
-//        let timeZone = cities[cellIdx].timeZone
-//        fm.dateFormat = "HH:mm"
-//
-//        fm.timeZone =  NSTimeZone(name: timeZone) as TimeZone!
-//    }
-//    
-//    
-//    // フォーマッタの初期設定
-//    func setConfigToFormatter2(fm: inout DateFormatter, cellIdx: Int) {
-//        // タイムゾーン
-//        let timeZone = cities[cellIdx].timeZone
-//        fm.timeZone =  NSTimeZone(name: timeZone) as TimeZone!
-//        
-//        fm.dateStyle = .medium
-//        fm.timeStyle = .none
-//    }
-    
     
 
     func initialEnrollCities() {

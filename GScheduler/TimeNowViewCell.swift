@@ -1,7 +1,7 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class TimeNowViewCell: UITableViewCell {
     
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var DayYearLabel: UILabel!

@@ -210,7 +210,7 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
             let newtral = Date(timeInterval:  TimeInterval(interval), since: self.GMT)
             
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! InitialTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SetTimeViewCell
             
             cell.cityNameLabel.text = cities[indexPath.row].name.uppercased()
             cell.cityNameLabel.textColor = UIColor(red:0.22, green:0.62, blue:0.67, alpha:1.0)
@@ -242,7 +242,7 @@ class SetTimeViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // case 2: バフ・デバフ == 0
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! InitialTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SetTimeViewCell
         
         
         // 2017/1/25修正
